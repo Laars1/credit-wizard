@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace credit_wizard_api.Services
 {
     public class DegreeService : IDegreeService
-{
+    {
         private readonly ApplicationDbContext _dbContext;
 
         public DegreeService(ApplicationDbContext dbContext)
@@ -15,7 +15,7 @@ namespace credit_wizard_api.Services
 
         public async Task<List<Degree>> GetAsync()
         {
-            return await _dbContext.Degrees.ToListAsync();
+                return await _dbContext.Degrees.ToListAsync();
         }
 
         public async Task<Degree?> GetByIdAsync(Guid id)

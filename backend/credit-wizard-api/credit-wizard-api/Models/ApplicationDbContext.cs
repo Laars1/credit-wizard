@@ -1,20 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using System;
-using System.Reflection.Emit;
-using System.Security.Cryptography;
 
 namespace credit_wizard_api.Models
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
 
-        // TODO Add Classes
         public DbSet<Modul> Moduls { get; set; }
         public DbSet<Degree> Degrees { get; set; }
         public DbSet<Semester> Semesters { get; set; }
@@ -36,15 +32,40 @@ namespace credit_wizard_api.Models
             builder.Entity<DegreeModul>()
                 .HasKey(x => new { x.ModulId, x.DegreeId });
 
-            builder.Entity<User>().HasData(new List<User>
+            builder.Entity<Role>().HasData(new List<Role>
             {
                 new()
                 {
-                    Id = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
-                    Email = "hans.mustermann@email.ch",
-                    MatriculationNumber = "11-111-11",
-                    PasswordHash = "551a54b35aa91f347d223e0e19d114e0bacbafbf2e879dc839057b90efefbe6f" //Welcome$23
+                    Id = Guid.Parse("4c01b50b-3ece-4cdd-9e2e-a3594c14e928"),
+                    Name = "User"
+                },
+                new()
+                {
+                    Id = Guid.Parse("dcbcfcf5-69e7-430b-ae93-7611aa3ee7bb"),
+                    Name = "Admin"
                 }
+            });
+
+            var user = new User
+            {
+                Id = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
+                Email = "hans.mustermann@email.ch",
+                UserName = "hans.mustermann@email.ch",
+                NormalizedUserName = "hans.mustermann@email.ch".ToUpper(),
+                NormalizedEmail = "hans.mustermann@email.ch".ToUpper(),
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                MatriculationNumber = "11-111-11",
+            };
+
+            var passwordHasher = new PasswordHasher<User>();
+            user.PasswordHash = passwordHasher.HashPassword(user, "Welcome$23");
+            builder.Entity<User>().HasData(user);
+
+            builder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
+                RoleId = Guid.Parse("4c01b50b-3ece-4cdd-9e2e-a3594c14e928")
             });
 
             builder.Entity<Semester>().HasData(new List<Semester>()
