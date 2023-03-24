@@ -3,11 +3,7 @@ using credit_wizard_api.Models;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Claims;
-using System.Text;
 
 namespace credit_wizard_api.Controllers
 {

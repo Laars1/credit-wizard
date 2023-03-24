@@ -31,14 +31,12 @@ namespace credit_wizard_api.Services
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.JwtSecret));
 
-            var token = new JwtSecurityToken(
+            return new JwtSecurityToken(
                 issuer: _jwtSettings.ValidIssuer,
                 audience: _jwtSettings.ValidAudience,
                 expires: DateTime.Now.AddSeconds(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
-
-            return token;
         }
     }
 }

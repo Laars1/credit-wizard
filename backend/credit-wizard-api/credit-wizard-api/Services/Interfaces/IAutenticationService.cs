@@ -10,7 +10,7 @@ namespace credit_wizard_api.Services.Interfaces
         /// </summary>
         /// <param name="userId">id of the logged in user, this value is stored in the stoken</param>
         /// <param name="userRoles">roles of the user, this value is stored in the stoken</param>
-        /// <returns></returns>
+        /// <returns>The generated Jwt token</returns>
         public JwtSecurityToken GenerateToken(Guid userId, List<string> userRoles);
     }
 }

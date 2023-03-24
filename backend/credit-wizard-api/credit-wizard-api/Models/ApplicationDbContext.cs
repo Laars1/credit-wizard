@@ -32,6 +32,8 @@ namespace credit_wizard_api.Models
             builder.Entity<DegreeModul>()
                 .HasKey(x => new { x.ModulId, x.DegreeId });
 
+            #region SeedData
+
             builder.Entity<Role>().HasData(new List<Role>
             {
                 new()
@@ -298,8 +300,7 @@ namespace credit_wizard_api.Models
                     ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e")
                 },
             });
-
-
+            #endregion
         }
     }
 }

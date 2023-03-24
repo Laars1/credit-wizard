@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using credit_wizard_api.Dtos;
-using credit_wizard_api.Models;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +41,7 @@ namespace credit_wizard_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(_mapper.Map<Semester>(await _semesterService.GetByIdAsync(id)));
+            return Ok(_mapper.Map<SemesterDto>(await _semesterService.GetByIdAsync(id)));
         }
     }
 }
