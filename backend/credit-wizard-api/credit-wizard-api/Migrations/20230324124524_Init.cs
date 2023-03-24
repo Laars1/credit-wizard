@@ -28,32 +28,6 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MatriculationNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Degrees",
                 columns: table => new
                 {
@@ -73,7 +47,8 @@ namespace credit_wizard_api.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Abbreviation = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    EtcsPoints = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,6 +84,64 @@ namespace credit_wizard_api.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MatriculationNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Degrees_DegreeId",
+                        column: x => x.DegreeId,
+                        principalTable: "Degrees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DegreeModul",
+                columns: table => new
+                {
+                    ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsRequried = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DegreeModul", x => new { x.ModulId, x.DegreeId });
+                    table.ForeignKey(
+                        name: "FK_DegreeModul_Degrees_DegreeId",
+                        column: x => x.DegreeId,
+                        principalTable: "Degrees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DegreeModul_Moduls_ModulId",
+                        column: x => x.ModulId,
+                        principalTable: "Moduls",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -199,42 +232,16 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DegreeModul",
-                columns: table => new
-                {
-                    ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsRequried = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DegreeModul", x => new { x.ModulId, x.DegreeId });
-                    table.ForeignKey(
-                        name: "FK_DegreeModul_Degrees_DegreeId",
-                        column: x => x.DegreeId,
-                        principalTable: "Degrees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DegreeModul_Moduls_ModulId",
-                        column: x => x.ModulId,
-                        principalTable: "Moduls",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SemesterPlanners",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SemesterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Grade = table.Column<double>(type: "float", nullable: true)
+                    SemesterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SemesterPlanners", x => new { x.UserId, x.SemesterId });
+                    table.PrimaryKey("PK_SemesterPlanners", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SemesterPlanners_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -242,15 +249,34 @@ namespace credit_wizard_api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SemesterPlanners_Moduls_ModulId",
+                        name: "FK_SemesterPlanners_Semesters_SemesterId",
+                        column: x => x.SemesterId,
+                        principalTable: "Semesters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SemesterPlannerModul",
+                columns: table => new
+                {
+                    SemesterPlannerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Grade = table.Column<double>(type: "float", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SemesterPlannerModul", x => new { x.SemesterPlannerId, x.ModulId });
+                    table.ForeignKey(
+                        name: "FK_SemesterPlannerModul_Moduls_ModulId",
                         column: x => x.ModulId,
                         principalTable: "Moduls",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SemesterPlanners_Semesters_SemesterId",
-                        column: x => x.SemesterId,
-                        principalTable: "Semesters",
+                        name: "FK_SemesterPlannerModul_SemesterPlanners_SemesterPlannerId",
+                        column: x => x.SemesterPlannerId,
+                        principalTable: "SemesterPlanners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -265,33 +291,28 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "6c8be4fd-8f7c-4859-ba99-68fe05891cf7", "hans.mustermann@email.ch", true, false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEPFATJDrJJBgRADtkAU1hq+QfpyJgkFHAXWhWYL1IjSRygkBSxoPpU7bXxq1C3TRWw==", null, true, null, false, "hans.mustermann@email.ch" });
-
-            migrationBuilder.InsertData(
                 table: "Degrees",
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[] { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "This degree program is designed to equip students with a blend of business and IT skills, focusing on areas such as business strategy, data analysis, and software development. Graduates are prepared for careers in a variety of industries where technology plays a critical role in business operations.", "Bachelor of Science in Business Information Technology" });
 
             migrationBuilder.InsertData(
                 table: "Moduls",
-                columns: new[] { "Id", "Abbreviation", "Description", "Name" },
+                columns: new[] { "Id", "Abbreviation", "Description", "EtcsPoints", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"), "WWEN", "Web engineering is the process of designing, developing, testing, and maintaining web applications.", "Web Engineering" },
-                    { new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"), "BBCS", "Analysis and evaluation of real-world business cases to gain insights and develop problem-solving skills.", "Business Case Studies" },
-                    { new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"), "WDEN", "An exploration of the impact of digital technologies on business operations.", "Digital Enterprise" },
-                    { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), "WKOM", "Effective communication in a business environment.", "Kommunikation" },
-                    { new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), "WBWL", "Eine Einführung in die Betriebswirtschaftslehre.", "Grundlagen BWL" },
-                    { new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"), "WPR1", "Managing projects from start to finish with an emphasis on planning, execution, and control.", "Projektmanagement" },
-                    { new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"), "WDDD", "Domain Driven Design is an approach to software development that focuses on understanding and modeling the business domain of an application.", "Domain Driven Design" },
-                    { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), "WENG", "Developing proficiency in the English language for business communication.", "English" },
-                    { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), "WBIS", "An introduction to the role of information systems in modern organizations.", "Business Information Systems" },
-                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), "WGWI", "Introduction to the basics of business informatics.", "Grundlagen WI" },
-                    { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), "WDDA", "Eine Einführung in die Verwaltung und Analyse von Daten.", "Datenmanagement & Datenanalyse" },
-                    { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), "WIEN", "Innovation is the process of developing new ideas, products, services, or processes that create value for customers. ntrepreneurship is the process of creating or starting a new business venture in order to make a profit.", "Innovation & Entrepreneurship" },
-                    { new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"), "WACC", "An overview of financial accounting principles and practices.", "Accounting" }
+                    { new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"), "WWEN", "Web engineering is the process of designing, developing, testing, and maintaining web applications.", 6, "Web Engineering" },
+                    { new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"), "BBCS", "Analysis and evaluation of real-world business cases to gain insights and develop problem-solving skills.", 6, "Business Case Studies" },
+                    { new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"), "WDEN", "An exploration of the impact of digital technologies on business operations.", 6, "Digital Enterprise" },
+                    { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), "WKOM", "Effective communication in a business environment.", 3, "Kommunikation" },
+                    { new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), "WBWL", "Eine Einführung in die Betriebswirtschaftslehre.", 6, "Grundlagen BWL" },
+                    { new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"), "WPR1", "Managing projects from start to finish with an emphasis on planning, execution, and control.", 3, "Projektmanagement" },
+                    { new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"), "WDDD", "Domain Driven Design is an approach to software development that focuses on understanding and modeling the business domain of an application.", 6, "Domain Driven Design" },
+                    { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), "WENG", "Developing proficiency in the English language for business communication.", 6, "English" },
+                    { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), "WBIS", "An introduction to the role of information systems in modern organizations.", 6, "Business Information Systems" },
+                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), "WGWI", "Introduction to the basics of business informatics.", 6, "Grundlagen WI" },
+                    { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), "WDDA", "Eine Einführung in die Verwaltung und Analyse von Daten.", 6, "Datenmanagement & Datenanalyse" },
+                    { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), "WIEN", "Innovation is the process of developing new ideas, products, services, or processes that create value for customers. ntrepreneurship is the process of creating or starting a new business venture in order to make a profit.", 3, "Innovation & Entrepreneurship" },
+                    { new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"), "WACC", "An overview of financial accounting principles and practices.", 6, "Accounting" }
                 });
 
             migrationBuilder.InsertData(
@@ -310,9 +331,9 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("4c01b50b-3ece-4cdd-9e2e-a3594c14e928"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DegreeId", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "4d627049-bbfb-49a4-8b2a-0a2489697541", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEJkvkiupodCfskRDnBNc/7Xk6eaCEfgIpUVrK5VPfs3HeqGMElDS7vArTXk5jyjlvQ==", null, true, null, false, "hans.mustermann@email.ch" });
 
             migrationBuilder.InsertData(
                 table: "DegreeModul",
@@ -332,6 +353,26 @@ namespace credit_wizard_api.Migrations
                     { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), true },
                     { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), false },
                     { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"), true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("4c01b50b-3ece-4cdd-9e2e-a3594c14e928"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
+
+            migrationBuilder.InsertData(
+                table: "SemesterPlanners",
+                columns: new[] { "Id", "SemesterId", "UserId" },
+                values: new object[] { new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
+
+            migrationBuilder.InsertData(
+                table: "SemesterPlannerModul",
+                columns: new[] { "ModulId", "SemesterPlannerId", "Grade" },
+                values: new object[,]
+                {
+                    { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null },
+                    { new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null },
+                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -367,6 +408,11 @@ namespace credit_wizard_api.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_DegreeId",
+                table: "AspNetUsers",
+                column: "DegreeId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -385,14 +431,20 @@ namespace credit_wizard_api.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SemesterPlanners_ModulId",
-                table: "SemesterPlanners",
+                name: "IX_SemesterPlannerModul_ModulId",
+                table: "SemesterPlannerModul",
                 column: "ModulId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SemesterPlanners_SemesterId",
                 table: "SemesterPlanners",
                 column: "SemesterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SemesterPlanners_UserId_SemesterId",
+                table: "SemesterPlanners",
+                columns: new[] { "UserId", "SemesterId" },
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -417,22 +469,25 @@ namespace credit_wizard_api.Migrations
                 name: "DegreeModul");
 
             migrationBuilder.DropTable(
-                name: "SemesterPlanners");
+                name: "SemesterPlannerModul");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Degrees");
+                name: "Moduls");
+
+            migrationBuilder.DropTable(
+                name: "SemesterPlanners");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Moduls");
+                name: "Semesters");
 
             migrationBuilder.DropTable(
-                name: "Semesters");
+                name: "Degrees");
         }
     }
 }

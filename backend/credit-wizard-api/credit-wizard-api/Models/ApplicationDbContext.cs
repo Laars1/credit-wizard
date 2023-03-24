@@ -27,7 +27,11 @@ namespace credit_wizard_api.Models
             .IsUnique();
 
             builder.Entity<SemesterPlanner>()
-                .HasKey(x => new { x.UserId, x.SemesterId });
+                .HasIndex(x => new { x.UserId, x.SemesterId })
+                .IsUnique();
+
+            builder.Entity<SemesterPlannerModul>()
+                .HasKey(x => new { x.SemesterPlannerId, x.ModulId });
 
             builder.Entity<DegreeModul>()
                 .HasKey(x => new { x.ModulId, x.DegreeId });
@@ -58,6 +62,7 @@ namespace credit_wizard_api.Models
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 MatriculationNumber = "11-111-11",
+                DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce")
             };
 
             var passwordHasher = new PasswordHasher<User>();
@@ -131,91 +136,104 @@ namespace credit_wizard_api.Models
                     Id = Guid.Parse("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
                     Name = "Accounting",
                     Description = "An overview of financial accounting principles and practices.",
-                    Abbreviation = "WACC"
+                    Abbreviation = "WACC",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"),
                     Name = "Business Information Systems",
                     Description = "An introduction to the role of information systems in modern organizations.",
-                    Abbreviation  ="WBIS"
+                    Abbreviation  ="WBIS",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"),
                     Name = "Grundlagen BWL",
                     Description = "Eine Einführung in die Betriebswirtschaftslehre.",
-                    Abbreviation = "WBWL"
+                    Abbreviation = "WBWL",
+                    EtcsPoints= 6
                 },
                 new()
                 {
                     Id = Guid.Parse("e0a6f205-64b7-42ab-bce3-39f0b3841c71"),
                     Name = "Datenmanagement & Datenanalyse",
                     Description = "Eine Einführung in die Verwaltung und Analyse von Daten.",
-                    Abbreviation = "WDDA"
+                    Abbreviation = "WDDA",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("480cc771-16a7-4176-8c2b-9a73c1df7b34"),
                     Name = "Digital Enterprise",
                     Description = "An exploration of the impact of digital technologies on business operations.",
-                    Abbreviation = "WDEN"
+                    Abbreviation = "WDEN",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("8f0680b7-68c2-4157-aafc-78c72f63a16f"),
                     Name = "English",
                     Description = "Developing proficiency in the English language for business communication.",
-                    Abbreviation = "WENG"
+                    Abbreviation = "WENG",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"),
                     Name = "Grundlagen WI",
                     Description = "Introduction to the basics of business informatics.",
-                    Abbreviation = "WGWI"
+                    Abbreviation = "WGWI",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("686e6a0c-7f51-4c9d-b968-f6ba201df221"),
                     Name = "Kommunikation",
                     Description = "Effective communication in a business environment.",
-                    Abbreviation ="WKOM"
+                    Abbreviation ="WKOM",
+                    EtcsPoints = 3
                 },
                 new()
                 {
                     Id = Guid.Parse("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"),
                     Name = "Projektmanagement",
                     Description = "Managing projects from start to finish with an emphasis on planning, execution, and control.",
-                    Abbreviation = "WPR1"
+                    Abbreviation = "WPR1",
+                    EtcsPoints = 3
                 },
                 new()
                 {
                     Id = Guid.Parse("2aa07a0c-7f51-4c9d-b968-f6ba201df221"),
                     Name = "Business Case Studies",
                     Description = "Analysis and evaluation of real-world business cases to gain insights and develop problem-solving skills.",
-                    Abbreviation = "BBCS"
+                    Abbreviation = "BBCS",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("eb2dbecc-d0d6-44ef-82eb-34284633ef19"),
                     Name = "Innovation & Entrepreneurship",
                     Description = "Innovation is the process of developing new ideas, products, services, or processes that create value for customers. ntrepreneurship is the process of creating or starting a new business venture in order to make a profit.",
-                    Abbreviation = "WIEN"
+                    Abbreviation = "WIEN",
+                    EtcsPoints = 3
                 },
                 new()
                 {
                     Id = Guid.Parse("7eaf3d1c-f214-4115-892b-8e1f1675897b"),
                     Name = "Domain Driven Design",
                     Description = "Domain Driven Design is an approach to software development that focuses on understanding and modeling the business domain of an application.",
-                    Abbreviation = "WDDD"
+                    Abbreviation = "WDDD",
+                    EtcsPoints = 6
                 },
                 new()
                 {
                     Id = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e"),
                     Name = "Web Engineering",
                     Description = "Web engineering is the process of designing, developing, testing, and maintaining web applications.",
-                    Abbreviation = "WWEN"
+                    Abbreviation = "WWEN",
+                    EtcsPoints = 6
                 }
             });
 
@@ -299,6 +317,34 @@ namespace credit_wizard_api.Models
                     IsRequried = false,
                     ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e")
                 },
+            });
+
+            builder.Entity<SemesterPlanner>().HasData(new List<SemesterPlanner>
+            {
+                new()
+                {
+                    Id = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                    UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
+                    SemesterId = Guid.Parse("7879d617-ca43-482e-9377-fbd55e2976fa")                    
+                }
+            });
+
+            builder.Entity<SemesterPlannerModul>().HasData(new List<SemesterPlannerModul>() {
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                    ModulId = Guid.Parse("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), // WBWL
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                    ModulId = Guid.Parse("686e6a0c-7f51-4c9d-b968-f6ba201df221"), // WKOM
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                    ModulId = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864") // WGWI
+                }
             });
             #endregion
         }

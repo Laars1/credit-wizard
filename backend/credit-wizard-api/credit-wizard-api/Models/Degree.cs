@@ -15,5 +15,6 @@ namespace credit_wizard_api.Models
         public string Description { get; set; }
 
         public ICollection<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

@@ -12,6 +12,6 @@ namespace credit_wizard_api.Dtos
         [Range(1, 100)]
         public int Number { get; set; }
 
-        public ICollection<SemesterPlanner> SemesterPlanners { get; set; } = new List<SemesterPlanner>();
+        public ICollection<SemesterPlanner> SemesterPlannersDto { get; set; } = new List<SemesterPlanner>();
     }
 }

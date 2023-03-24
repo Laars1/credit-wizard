@@ -275,6 +275,9 @@ namespace credit_wizard_api.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<int>("EtcsPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -293,6 +296,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
                             Abbreviation = "WACC",
                             Description = "An overview of financial accounting principles and practices.",
+                            EtcsPoints = 6,
                             Name = "Accounting"
                         },
                         new
@@ -300,6 +304,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"),
                             Abbreviation = "WBIS",
                             Description = "An introduction to the role of information systems in modern organizations.",
+                            EtcsPoints = 6,
                             Name = "Business Information Systems"
                         },
                         new
@@ -307,6 +312,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"),
                             Abbreviation = "WBWL",
                             Description = "Eine Einführung in die Betriebswirtschaftslehre.",
+                            EtcsPoints = 6,
                             Name = "Grundlagen BWL"
                         },
                         new
@@ -314,6 +320,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"),
                             Abbreviation = "WDDA",
                             Description = "Eine Einführung in die Verwaltung und Analyse von Daten.",
+                            EtcsPoints = 6,
                             Name = "Datenmanagement & Datenanalyse"
                         },
                         new
@@ -321,6 +328,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"),
                             Abbreviation = "WDEN",
                             Description = "An exploration of the impact of digital technologies on business operations.",
+                            EtcsPoints = 6,
                             Name = "Digital Enterprise"
                         },
                         new
@@ -328,6 +336,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"),
                             Abbreviation = "WENG",
                             Description = "Developing proficiency in the English language for business communication.",
+                            EtcsPoints = 6,
                             Name = "English"
                         },
                         new
@@ -335,6 +344,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"),
                             Abbreviation = "WGWI",
                             Description = "Introduction to the basics of business informatics.",
+                            EtcsPoints = 6,
                             Name = "Grundlagen WI"
                         },
                         new
@@ -342,6 +352,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"),
                             Abbreviation = "WKOM",
                             Description = "Effective communication in a business environment.",
+                            EtcsPoints = 3,
                             Name = "Kommunikation"
                         },
                         new
@@ -349,6 +360,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"),
                             Abbreviation = "WPR1",
                             Description = "Managing projects from start to finish with an emphasis on planning, execution, and control.",
+                            EtcsPoints = 3,
                             Name = "Projektmanagement"
                         },
                         new
@@ -356,6 +368,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"),
                             Abbreviation = "BBCS",
                             Description = "Analysis and evaluation of real-world business cases to gain insights and develop problem-solving skills.",
+                            EtcsPoints = 6,
                             Name = "Business Case Studies"
                         },
                         new
@@ -363,6 +376,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"),
                             Abbreviation = "WIEN",
                             Description = "Innovation is the process of developing new ideas, products, services, or processes that create value for customers. ntrepreneurship is the process of creating or starting a new business venture in order to make a profit.",
+                            EtcsPoints = 3,
                             Name = "Innovation & Entrepreneurship"
                         },
                         new
@@ -370,6 +384,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"),
                             Abbreviation = "WDDD",
                             Description = "Domain Driven Design is an approach to software development that focuses on understanding and modeling the business domain of an application.",
+                            EtcsPoints = 6,
                             Name = "Domain Driven Design"
                         },
                         new
@@ -377,6 +392,7 @@ namespace credit_wizard_api.Migrations
                             Id = new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"),
                             Abbreviation = "WWEN",
                             Description = "Web engineering is the process of designing, developing, testing, and maintaining web applications.",
+                            EtcsPoints = 6,
                             Name = "Web Engineering"
                         });
                 });
@@ -479,25 +495,67 @@ namespace credit_wizard_api.Migrations
 
             modelBuilder.Entity("credit_wizard_api.Models.SemesterPlanner", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SemesterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double?>("Grade")
-                        .HasColumnType("float");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SemesterId");
+
+                    b.HasIndex("UserId", "SemesterId")
+                        .IsUnique();
+
+                    b.ToTable("SemesterPlanners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                            SemesterId = new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"),
+                            UserId = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5")
+                        });
+                });
+
+            modelBuilder.Entity("credit_wizard_api.Models.SemesterPlannerModul", b =>
+                {
+                    b.Property<Guid>("SemesterPlannerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ModulId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "SemesterId");
+                    b.Property<double?>("Grade")
+                        .HasColumnType("float");
+
+                    b.HasKey("SemesterPlannerId", "ModulId");
 
                     b.HasIndex("ModulId");
 
-                    b.HasIndex("SemesterId");
+                    b.ToTable("SemesterPlannerModul");
 
-                    b.ToTable("SemesterPlanners");
+                    b.HasData(
+                        new
+                        {
+                            SemesterPlannerId = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                            ModulId = new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277")
+                        },
+                        new
+                        {
+                            SemesterPlannerId = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                            ModulId = new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221")
+                        },
+                        new
+                        {
+                            SemesterPlannerId = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
+                            ModulId = new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864")
+                        });
                 });
 
             modelBuilder.Entity("credit_wizard_api.Models.User", b =>
@@ -512,6 +570,9 @@ namespace credit_wizard_api.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DegreeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -560,6 +621,8 @@ namespace credit_wizard_api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DegreeId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -575,14 +638,15 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c8be4fd-8f7c-4859-ba99-68fe05891cf7",
+                            ConcurrencyStamp = "4d627049-bbfb-49a4-8b2a-0a2489697541",
+                            DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPFATJDrJJBgRADtkAU1hq+QfpyJgkFHAXWhWYL1IjSRygkBSxoPpU7bXxq1C3TRWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJkvkiupodCfskRDnBNc/7Xk6eaCEfgIpUVrK5VPfs3HeqGMElDS7vArTXk5jyjlvQ==",
                             PhoneNumberConfirmed = true,
                             TwoFactorEnabled = false,
                             UserName = "hans.mustermann@email.ch"
@@ -661,12 +725,6 @@ namespace credit_wizard_api.Migrations
 
             modelBuilder.Entity("credit_wizard_api.Models.SemesterPlanner", b =>
                 {
-                    b.HasOne("credit_wizard_api.Models.Modul", "Modul")
-                        .WithMany("SemesterPlanners")
-                        .HasForeignKey("ModulId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("credit_wizard_api.Models.Semester", "Semester")
                         .WithMany("SemesterPlanners")
                         .HasForeignKey("SemesterId")
@@ -679,16 +737,46 @@ namespace credit_wizard_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Modul");
-
                     b.Navigation("Semester");
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("credit_wizard_api.Models.SemesterPlannerModul", b =>
+                {
+                    b.HasOne("credit_wizard_api.Models.Modul", "Modul")
+                        .WithMany("SemesterPlanners")
+                        .HasForeignKey("ModulId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("credit_wizard_api.Models.SemesterPlanner", "SemesterPlanner")
+                        .WithMany("SemesterPlannerModuls")
+                        .HasForeignKey("SemesterPlannerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Modul");
+
+                    b.Navigation("SemesterPlanner");
+                });
+
+            modelBuilder.Entity("credit_wizard_api.Models.User", b =>
+                {
+                    b.HasOne("credit_wizard_api.Models.Degree", "Degree")
+                        .WithMany("Users")
+                        .HasForeignKey("DegreeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Degree");
+                });
+
             modelBuilder.Entity("credit_wizard_api.Models.Degree", b =>
                 {
                     b.Navigation("DegreeModuls");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("credit_wizard_api.Models.Modul", b =>
@@ -701,6 +789,11 @@ namespace credit_wizard_api.Migrations
             modelBuilder.Entity("credit_wizard_api.Models.Semester", b =>
                 {
                     b.Navigation("SemesterPlanners");
+                });
+
+            modelBuilder.Entity("credit_wizard_api.Models.SemesterPlanner", b =>
+                {
+                    b.Navigation("SemesterPlannerModuls");
                 });
 
             modelBuilder.Entity("credit_wizard_api.Models.User", b =>

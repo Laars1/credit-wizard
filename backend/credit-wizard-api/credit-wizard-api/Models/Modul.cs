@@ -18,8 +18,12 @@ namespace credit_wizard_api.Models
         [StringLength (1000)]
         public string Description { get; set; }
 
+        [Required]
+        [Range(1,15)]
+        public int EtcsPoints { get; set; }
+
         public List<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
 
-        public ICollection<SemesterPlanner> SemesterPlanners { get; set; } = new List<SemesterPlanner>();
+        public ICollection<SemesterPlannerModul> SemesterPlanners { get; set; } = new List<SemesterPlannerModul>();
     }
 }

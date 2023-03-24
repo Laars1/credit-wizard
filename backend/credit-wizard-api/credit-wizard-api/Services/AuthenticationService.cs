@@ -34,7 +34,7 @@ namespace credit_wizard_api.Services
             return new JwtSecurityToken(
                 issuer: _jwtSettings.ValidIssuer,
                 audience: _jwtSettings.ValidAudience,
-                expires: DateTime.Now.AddSeconds(3),
+                expires: DateTime.Now.AddDays(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
         }

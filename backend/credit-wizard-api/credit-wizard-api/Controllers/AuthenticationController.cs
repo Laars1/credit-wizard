@@ -13,7 +13,6 @@ namespace credit_wizard_api.Controllers
     {
 
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IAutenticationService _autenticationService;
 
         public AuthenticationController(UserManager<User> userManager, IAutenticationService autenticationService)
