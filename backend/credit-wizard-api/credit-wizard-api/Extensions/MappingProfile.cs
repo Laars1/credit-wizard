@@ -14,7 +14,9 @@ namespace credit_wizard_api.Extensions
         public MappingProfile()
         {
             CreateMap<Degree, DegreeDto>().ReverseMap();
+            
             CreateMap<Modul, ModulDto>().ReverseMap();
+
             CreateMap<Semester, SemesterDto>()
                 .ForMember(dest => dest.SemesterPlannerDtos, act => act.MapFrom(src => src.SemesterPlanners))
                 .ReverseMap();
