@@ -21,6 +21,6 @@ namespace credit_wizard_api.Dtos
 
         public List<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
 
-        public ICollection<SemesterPlannerDto> SemesterPlanners { get; set; } = new List<SemesterPlannerDto>();
+        public ICollection<SemesterPlannerDto> SemesterPlannerDtos { get; set; } = new List<SemesterPlannerDto>();
     }
 }

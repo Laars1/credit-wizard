@@ -15,16 +15,19 @@ namespace credit_wizard_api.Extensions
         {
             CreateMap<Degree, DegreeDto>().ReverseMap();
             CreateMap<Modul, ModulDto>().ReverseMap();
-            CreateMap<Semester, SemesterDto>().ReverseMap();
-            //CreateMap<SemesterPlannerModul, SemesterPlannerModulDto>()
-            //    .ForMember(dest => dest.SemesterPlannerDto, act => act.MapFrom(src => src.SemesterPlanner))
-            //    .ForMember(dest => dest.ModulDto, act => act.MapFrom(src => src.Modul))
-            //    .ReverseMap();
+            CreateMap<Semester, SemesterDto>()
+                .ForMember(dest => dest.SemesterPlannerDtos, act => act.MapFrom(src => src.SemesterPlanners))
+                .ReverseMap();
 
-            //CreateMap<SemesterPlanner, SemesterPlannerDto>()
-            //    .ForMember(dest => dest.SemesterDto, act => act.MapFrom(src => src.Semester))
-            //    .ForMember(dest => dest.SemesterPlannerModulDtos, act => act.MapFrom(src => src.SemesterPlannerModuls))
-            //    .ReverseMap();
+            CreateMap<SemesterPlannerModul, SemesterPlannerModulDto>()
+                .ForMember(dest => dest.SemesterPlannerDto, act => act.MapFrom(src => src.SemesterPlanner))
+                .ForMember(dest => dest.ModulDto, act => act.MapFrom(src => src.Modul))
+                .ReverseMap();
+
+            CreateMap<SemesterPlanner, SemesterPlannerDto>()
+                .ForMember(dest => dest.SemesterDto, act => act.MapFrom(src => src.Semester))
+                .ForMember(dest => dest.SemesterPlannerModulDtos, act => act.MapFrom(src => src.SemesterPlannerModuls))
+                .ReverseMap();
 
         }
     }

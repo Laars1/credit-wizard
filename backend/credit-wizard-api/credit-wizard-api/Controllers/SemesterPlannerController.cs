@@ -34,30 +34,7 @@ namespace credit_wizard_api.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var data = await _semesterPlannerService.GetByUserIdAsync(Guid.Parse(userId));
             
-            return Ok(data.Select(x => new SemesterPlannerDto
-            {
-                Id = x.Id,
-                SemesterId = x.Semester.Id,
-                SemesterDto = new SemesterDto
-                {
-                    Id = x.Semester.Id,
-                    Number = x.Semester.Number
-                },
-                SemesterPlannerModulDtos = x.SemesterPlannerModuls.Select(y => new SemesterPlannerModulDto
-                {
-                    SemesterPlannerId = y.SemesterPlannerId,
-                    ModulId = y.ModulId,
-                    ModulDto = new ModulDto
-                    {
-                        Id = y.ModulId,
-                        Name = y.Modul.Name,
-                        Abbreviation = y.Modul.Abbreviation,
-                        Description = y.Modul.Description
-                    },
-                    Grade = y.Grade
-                }).ToList(),
-                UserId = x.UserId
-            }));
+            return Ok(_mapper.Map<List<SemesterPlannerDto>>(data));
         }
 
         [HttpGet("{semesterId:Guid}")]
@@ -69,30 +46,7 @@ namespace credit_wizard_api.Controllers
 
             if (data == null) return NotFound("There is no matching entry");
 
-            return Ok(new SemesterPlannerDto
-            {
-                Id = data.Id,
-                SemesterId = data.Semester.Id,
-                SemesterDto = new SemesterDto
-                {
-                    Id = data.Semester.Id,
-                    Number = data.Semester.Number
-                },
-                SemesterPlannerModulDtos = data.SemesterPlannerModuls.Select(y => new SemesterPlannerModulDto
-                {
-                    SemesterPlannerId = y.SemesterPlannerId,
-                    ModulId = y.ModulId,
-                    ModulDto = new ModulDto
-                    {
-                        Id = y.ModulId,
-                        Name = y.Modul.Name,
-                        Abbreviation = y.Modul.Abbreviation,
-                        Description = y.Modul.Description
-                    },
-                    Grade = y.Grade
-                }).ToList(),
-                UserId = data.UserId
-            });
+            return Ok(_mapper.Map<SemesterPlannerDto>(data));
         }
 
         [HttpGet("{semesterNumber:int}")]
@@ -106,30 +60,7 @@ namespace credit_wizard_api.Controllers
 
             if (data == null) return NotFound("There is no matching entry");
 
-            return Ok(new SemesterPlannerDto
-            {
-                Id = data.Id,
-                SemesterId = data.Semester.Id,
-                SemesterDto = new SemesterDto
-                {
-                    Id = data.Semester.Id,
-                    Number = data.Semester.Number
-                },
-                SemesterPlannerModulDtos = data.SemesterPlannerModuls.Select(y => new SemesterPlannerModulDto
-                {
-                    SemesterPlannerId = y.SemesterPlannerId,
-                    ModulId = y.ModulId,
-                    ModulDto = new ModulDto
-                    {
-                        Id = y.ModulId,
-                        Name = y.Modul.Name,
-                        Abbreviation = y.Modul.Abbreviation,
-                        Description = y.Modul.Description
-                    },
-                    Grade = y.Grade
-                }).ToList(),
-                UserId = data.UserId
-            });
+            return Ok(_mapper.Map<SemesterPlannerDto>(data));
         }
     }
 }
