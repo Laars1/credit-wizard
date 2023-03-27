@@ -19,7 +19,6 @@ namespace credit_wizard_api.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
             base.OnModelCreating(builder);
 
             builder.Entity<Modul>()
@@ -349,6 +348,7 @@ namespace credit_wizard_api.Models
                 }
             });
             #endregion
+
         }
     }
 }

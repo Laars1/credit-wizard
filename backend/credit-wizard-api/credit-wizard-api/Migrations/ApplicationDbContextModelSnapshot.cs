@@ -648,7 +648,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8a718d9c-2fb5-492e-b479-d9e935a05ff2",
+                            ConcurrencyStamp = "14c4984c-bd3f-40f4-9fca-fc93007c0cea",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
@@ -657,7 +657,7 @@ namespace credit_wizard_api.Migrations
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG/rJ4+QKdBXH6lqkh/6yfGQn5QA9Byx8OnEmOvXY1zsqL09i9dlD57HFXL1MG1KmQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF3h+tUWTWcg5LhE1gCqXCSyQ/u5m8imCIE3v7d+TSk0t4CUI7SmAC2MUBTgj47F0g==",
                             PhoneNumberConfirmed = true,
                             Prename = "Hans",
                             TwoFactorEnabled = false,

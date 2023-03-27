@@ -50,6 +50,7 @@ builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+
 // Adding JWT Authentication  
 builder.Services.AddAuthentication(options =>
     {

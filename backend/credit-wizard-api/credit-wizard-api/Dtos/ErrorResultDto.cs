@@ -2,7 +2,7 @@
 
 namespace credit_wizard_api.Dtos
 {
-    public class ErrorResult
+    public class ErrorResultDto
     {
         public int StatusCode { get; set; }
         public string Message { get; set; }

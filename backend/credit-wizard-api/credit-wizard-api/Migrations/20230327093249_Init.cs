@@ -335,7 +335,7 @@ namespace credit_wizard_api.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DegreeId", "Email", "EmailConfirmed", "Lastname", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Prename", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "8a718d9c-2fb5-492e-b479-d9e935a05ff2", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEG/rJ4+QKdBXH6lqkh/6yfGQn5QA9Byx8OnEmOvXY1zsqL09i9dlD57HFXL1MG1KmQ==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
+                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "14c4984c-bd3f-40f4-9fca-fc93007c0cea", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEF3h+tUWTWcg5LhE1gCqXCSyQ/u5m8imCIE3v7d+TSk0t4CUI7SmAC2MUBTgj47F0g==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
 
             migrationBuilder.InsertData(
                 table: "DegreeModul",

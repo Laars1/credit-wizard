@@ -56,7 +56,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     {
         var statusCode = StatusCodes.Status500InternalServerError;
         
-        context.Result = new ObjectResult(new ErrorResult()
+        context.Result = new ObjectResult(new ErrorResultDto()
         {
             StatusCode = statusCode,
             Message = context.Exception.Message
@@ -104,9 +104,9 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     /// <param name="statusCode">Status code of response.</param>
     /// <param name="exception">Thrown exception for message and generation of data object.</param>
     /// <returns>ProblemDetails object with all details specified.</returns>
-    private ErrorResult GenerateProblemDetails(int statusCode, Exception exception)
+    private ErrorResultDto GenerateProblemDetails(int statusCode, Exception exception)
     {
-        return new ErrorResult()
+        return new ErrorResultDto()
         {
             StatusCode = statusCode,
             Message = exception.Message,
