@@ -12,12 +12,12 @@ namespace credit_wizard_api.Controllers
     public class AuthenticationController : Controller
     {
 
-        private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
         private readonly IAutenticationService _autenticationService;
 
-        public AuthenticationController(UserManager<User> userManager, IAutenticationService autenticationService)
+        public AuthenticationController(IUserService userService, IAutenticationService autenticationService)
         {
-            _userManager = userManager;
+            _userService = userService;
             _autenticationService = autenticationService;
         }
 
@@ -33,11 +33,11 @@ namespace credit_wizard_api.Controllers
 
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            var user = await _userManager.FindByNameAsync(model.Username);
+            var user = await _userService.GetByNameAsync(model.Username);
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            if (user != null && await _autenticationService.CheckPasswordAsync(user, model.Password))
             {
-                var userRoles = await _userManager.GetRolesAsync(user);
+                var userRoles = await _userService.GetRolesFromUserAsync(user.UserName);
                 var token = _autenticationService.GenerateToken(user.Id, userRoles.ToList() ?? new List<string>());
                 return Ok(new
                 {

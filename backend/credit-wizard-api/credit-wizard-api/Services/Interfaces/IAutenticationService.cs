@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using credit_wizard_api.Models;
 
 namespace credit_wizard_api.Services.Interfaces
 {
@@ -12,5 +13,7 @@ namespace credit_wizard_api.Services.Interfaces
         /// <param name="userRoles">roles of the user, this value is stored in the stoken</param>
         /// <returns>The generated Jwt token</returns>
         public JwtSecurityToken GenerateToken(Guid userId, List<string> userRoles);
+
+        public Task<bool> CheckPasswordAsync(User user, string password);
     }
 }

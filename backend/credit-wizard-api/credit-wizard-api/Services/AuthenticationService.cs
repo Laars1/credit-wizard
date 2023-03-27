@@ -8,16 +8,19 @@ using System.Security.Claims;
 using System.Text;
 using System.Linq;
 using credit_wizard_api.Exceptions;
+using Microsoft.AspNetCore.Identity;
 
 namespace credit_wizard_api.Services
 {
     public class AuthenticationService : IAutenticationService
     {
         private readonly JwtSettings _jwtSettings;
+        private readonly UserManager<User> _userManager;
 
-        public AuthenticationService(IOptions<JwtSettings> options)
+        public AuthenticationService(IOptions<JwtSettings> options, UserManager<User> userManager)
         {
             _jwtSettings = options.Value;
+            _userManager = userManager;
         }
 
         public JwtSecurityToken GenerateToken(Guid userId, List<string> userRoles)
@@ -38,6 +41,11 @@ namespace credit_wizard_api.Services
                 expires: DateTime.Now.AddDays(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
+        }
+
+        public async Task<bool> CheckPasswordAsync(User user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
         }
     }
 }

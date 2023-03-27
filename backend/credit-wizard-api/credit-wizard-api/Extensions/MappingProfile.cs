@@ -31,6 +31,10 @@ namespace credit_wizard_api.Extensions
                 .ForMember(dest => dest.SemesterPlannerModulDtos, act => act.MapFrom(src => src.SemesterPlannerModuls))
                 .ReverseMap();
 
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.DegreeDto, act => act.MapFrom(src => src.Degree))
+                .ForMember(dest => dest.SemesterPlannersDtos, act => act.MapFrom(src => src.SemesterPlanners));
+
         }
     }
 }

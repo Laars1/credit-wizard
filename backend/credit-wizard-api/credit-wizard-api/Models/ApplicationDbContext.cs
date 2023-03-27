@@ -62,7 +62,9 @@ namespace credit_wizard_api.Models
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 MatriculationNumber = "11-111-11",
-                DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce")
+                DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
+                Prename = "Hans",
+                Lastname = "Mustermann"
             };
 
             var passwordHasher = new PasswordHasher<User>();

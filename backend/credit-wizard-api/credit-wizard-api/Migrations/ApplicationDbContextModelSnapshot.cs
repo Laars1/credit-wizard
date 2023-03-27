@@ -581,6 +581,11 @@ namespace credit_wizard_api.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -608,6 +613,11 @@ namespace credit_wizard_api.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Prename")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -638,16 +648,18 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d627049-bbfb-49a4-8b2a-0a2489697541",
+                            ConcurrencyStamp = "8a718d9c-2fb5-492e-b479-d9e935a05ff2",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
+                            Lastname = "Mustermann",
                             LockoutEnabled = false,
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJkvkiupodCfskRDnBNc/7Xk6eaCEfgIpUVrK5VPfs3HeqGMElDS7vArTXk5jyjlvQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG/rJ4+QKdBXH6lqkh/6yfGQn5QA9Byx8OnEmOvXY1zsqL09i9dlD57HFXL1MG1KmQ==",
                             PhoneNumberConfirmed = true,
+                            Prename = "Hans",
                             TwoFactorEnabled = false,
                             UserName = "hans.mustermann@email.ch"
                         });
