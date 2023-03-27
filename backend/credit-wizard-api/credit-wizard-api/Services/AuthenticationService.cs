@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Linq;
+using credit_wizard_api.Exceptions;
 
 namespace credit_wizard_api.Services
 {
