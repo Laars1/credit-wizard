@@ -34,7 +34,7 @@ namespace credit_wizard_api.Services
             authClaims.AddRange(userRoles.Select(x => new Claim(ClaimTypes.Role, x)));
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.JwtSecret));
-
+            
             return new JwtSecurityToken(
                 issuer: _jwtSettings.ValidIssuer,
                 audience: _jwtSettings.ValidAudience,

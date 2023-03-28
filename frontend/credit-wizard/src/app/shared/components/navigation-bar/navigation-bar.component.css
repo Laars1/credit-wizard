@@ -1,0 +1,27 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active{
+    color: lightgray;
+}
+
+li{
+    float: left;
+}
+
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-user-div{
+    text-align: right;
+}
+
+.navigation-img{
+    width: 40px;
+    height: 40px;
+}
