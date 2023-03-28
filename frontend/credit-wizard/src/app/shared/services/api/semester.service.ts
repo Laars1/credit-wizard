@@ -1,4 +1,4 @@
-import { ISemesterDto } from './../dtos/semesterDto';
+import { ISemesterDto } from '../../dtos/semesterDto';
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, Observable } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/base/api.service';
@@ -31,7 +31,7 @@ export class SemesterService {
       );
   }
 
-  public getBySemesterINumber(semesterNumber: Number): Observable<ISemesterDto> {
+  public getBySemesterNumber(semesterNumber: Number): Observable<ISemesterDto> {
     return this.apiService
       .get<ISemesterDto>(this.apiUrl + '/semesterNumber' + semesterNumber)
       .pipe(

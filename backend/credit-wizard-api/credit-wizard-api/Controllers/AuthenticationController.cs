@@ -39,10 +39,10 @@ namespace credit_wizard_api.Controllers
             {
                 var userRoles = await _userService.GetRolesFromUserAsync(user.UserName);
                 var token = _autenticationService.GenerateToken(user.Id, userRoles.ToList() ?? new List<string>());
-                return Ok(new
+                return Ok(new TokenDto()
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    ExpirationDate = token.ValidTo
                 });
             }
             return Unauthorized();

@@ -1,4 +1,4 @@
-import { SemesterService } from './../../../shared/services/semester.service';
+import { SemesterService } from '../../../shared/services/api/semester.service';
 import { ISemesterDto } from './../../../shared/dtos/semesterDto';
 import { Component, OnInit } from '@angular/core';
 
