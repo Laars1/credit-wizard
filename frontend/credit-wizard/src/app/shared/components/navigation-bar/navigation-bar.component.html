@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <div class="col-2">
         <img src="../../../../assets/images/Navigation_Logo.png" alt="Logo Zauberer Navigation" class="navigation-img">
-        <a routerLink="/" class="p-3">CreditWizard</a>
+        <a routerLink="/" class="p-3 header-title">CreditWizard</a>
     </div>
     <div class="navigation-items-div col-9">
         <ul class="navigation-items" *ngIf="this.authService.isLoggedIn">
@@ -11,9 +11,9 @@
         </ul>
     </div>
     <div class="navigation-user-div col-1">
-        <a *ngIf="!this.authService.isLoggedIn" class="btn btn-outline-primary" routerLinkActive="active"
-            routerLinkActive="active" routerLink="/login">Login</a>
-        <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button"
-            class="btn btn-danger">Logout</button>
+            <button mat-raised-button color="accent" routerLink="/login" *ngIf="!this.authService.isLoggedIn"
+            type="button">Login</button>
+        <button mat-raised-button color="accent" (click)="logout()" *ngIf="this.authService.isLoggedIn"
+            type="button">Logout</button>
     </div>
 </mat-toolbar>

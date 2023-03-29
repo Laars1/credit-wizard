@@ -26,3 +26,7 @@ li{
     width: 40px;
     height: 40px;
 }
+
+.header-title{
+    vertical-align: middle;
+}
