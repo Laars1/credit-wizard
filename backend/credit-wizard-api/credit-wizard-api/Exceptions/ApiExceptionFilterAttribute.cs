@@ -58,6 +58,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         
         context.Result = new ObjectResult(new ErrorResultDto()
         {
+            ErrorType = "Internal Server Error",
             StatusCode = statusCode,
             Message = context.Exception.Message
         })
@@ -79,6 +80,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 
         context.Result = new NotFoundObjectResult(
             GenerateProblemDetails(
+                "Not Found",
                 StatusCodes.Status404NotFound,
                 exception!));
     }
@@ -94,6 +96,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 
         context.Result = new BadRequestObjectResult(
             GenerateProblemDetails(
+                "Bad Request",
                 StatusCodes.Status400BadRequest,
                 exception!));
     }
@@ -104,10 +107,11 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     /// <param name="statusCode">Status code of response.</param>
     /// <param name="exception">Thrown exception for message and generation of data object.</param>
     /// <returns>ProblemDetails object with all details specified.</returns>
-    private ErrorResultDto GenerateProblemDetails(int statusCode, Exception exception)
+    private ErrorResultDto GenerateProblemDetails(string errorName,int statusCode, Exception exception)
     {
         return new ErrorResultDto()
         {
+            ErrorType = errorName,
             StatusCode = statusCode,
             Message = exception.Message,
         };

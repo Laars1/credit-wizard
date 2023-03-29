@@ -22,3 +22,6 @@
     transform: translate(-50%, -50%);
   }
   
+  .low-z-index{
+    z-index: -1;
+  }

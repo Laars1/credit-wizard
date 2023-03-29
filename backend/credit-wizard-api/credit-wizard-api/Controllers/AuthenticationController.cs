@@ -45,7 +45,12 @@ namespace credit_wizard_api.Controllers
                     ExpirationDate = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new ErrorResultDto()
+            {
+                ErrorType = nameof(Unauthorized),
+                StatusCode = Unauthorized().StatusCode,
+                Message = "Bentzername oder Passwort falsch",
+            });
         }
     }
 }

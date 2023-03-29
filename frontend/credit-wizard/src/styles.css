@@ -10,3 +10,11 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 .float-left{
     float: left;
 }
+
+.view-content{
+    min-height: 100vh;
+}
+
+footer{
+    background-color: #3C4048;
+}

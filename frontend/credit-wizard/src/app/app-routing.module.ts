@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SemesterListComponent } from './core/semester/semester-list/semester-list.component';
 import { SigninComponent } from './core/sign-in/sign-in.component';
-import { AuthGuard } from './shared/auth/auth.guard';
+import { AuthGuard } from './shared/security/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
