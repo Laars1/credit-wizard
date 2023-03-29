@@ -1,12 +1,9 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
-    <!--this is a place for us to add side-nav code-->
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-navigation-bar></app-navigation-bar>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<section class="layout-container header-big">
+	<app-navigation-bar></app-navigation-bar>
+	<div class="container-fluid">
+			<main role="main" class="container mt-5">
+				<router-outlet></router-outlet>
+			</main>
+	</div>
+</section>
 

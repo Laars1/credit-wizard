@@ -21,7 +21,6 @@ import { SemesterListComponent } from './core/semester/semester-list/semester-li
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgbModule,
     ReactiveFormsModule,
     FormsModule
   ],
