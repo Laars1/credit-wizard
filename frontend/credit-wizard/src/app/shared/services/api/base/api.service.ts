@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -11,8 +11,12 @@ import {environment} from 'src/environments/environment';
 })
 export class ApiService {
 	private readonly baseApiUrl = environment.baseUrl;
-
-	constructor(private http: HttpClient) {}
+	private readonly httpOptions = {
+		headers: new HttpHeaders({
+		  'Content-Type':  'application/json',
+		})}
+	constructor(private http: HttpClient) {
+	}
 
 	/**
 	 * Get request to api
@@ -20,7 +24,7 @@ export class ApiService {
 	 * @returns Observable with response of api
 	 */
 	public get<TResponse>(path: string): Observable<TResponse> {
-		return this.http.get<TResponse>(this.baseApiUrl + path);
+		return this.http.get<TResponse>(this.baseApiUrl + path, this.httpOptions);
 	}
 
 	/**
@@ -33,7 +37,7 @@ export class ApiService {
 		path: string,
 		body: TBody
 	): Observable<TResponse> {
-		return this.http.post<TResponse>(this.baseApiUrl + path, body);
+		return this.http.post<TResponse>(this.baseApiUrl + path, body, this.httpOptions);
 	}
 
 	/**
@@ -46,11 +50,11 @@ export class ApiService {
 		path: string,
 		body: TBody
 	): Observable<TResponse> {
-		return this.http.patch<TResponse>(this.baseApiUrl + path, body);
+		return this.http.patch<TResponse>(this.baseApiUrl + path, body, this.httpOptions);
 	}
 
 	public put<type>(url: string, body: any): Observable<type> {
-		return this.http.put<type>(this.baseApiUrl + url, body);
+		return this.http.put<type>(this.baseApiUrl + url, body, this.httpOptions);
 	}
 
 	/**
@@ -63,10 +67,10 @@ export class ApiService {
 		path: string,
 		formData: FormData
 	): Observable<TResponse> {
-		return this.http.post<TResponse>(this.baseApiUrl + path, formData);
+		return this.http.post<TResponse>(this.baseApiUrl + path, formData, this.httpOptions);
 	}
 
 	public delete<type>(url: string): Observable<type> {
-		return this.http.delete<type>(this.baseApiUrl + url);
+		return this.http.delete<type>(this.baseApiUrl + url, this.httpOptions);
 	}
 }

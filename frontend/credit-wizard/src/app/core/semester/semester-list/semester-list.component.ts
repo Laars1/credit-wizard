@@ -1,6 +1,6 @@
-import { SemesterService } from '../../../shared/services/api/semester.service';
-import { ISemesterDto } from './../../../shared/dtos/semesterDto';
 import { Component, OnInit } from '@angular/core';
+import { ISemesterDto } from 'src/app/shared/dtos/semesterDto';
+import { SemesterService } from 'src/app/shared/services/api/semester.service';
 
 @Component({
   selector: 'app-semester-list',

@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SemesterListComponent } from './semester/components/semester-list/semester-list.component';
+import { SemesterListComponent } from './core/semester/semester-list/semester-list.component';
+import { SigninComponent } from './core/sign-in/sign-in.component';
+import { AuthGuard } from './shared/auth/auth.guard';
 
 const routes: Routes = [
-  {path: 'semester', component: SemesterListComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: SigninComponent },
+  { path: 'semester', component: SemesterListComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

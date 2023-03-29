@@ -4,13 +4,16 @@
         <a routerLink="/" class="p-3">CreditWizard</a>
     </div>
     <div class="navigation-items-div col-9">
-        <ul class="navigation-items">
+        <ul class="navigation-items" *ngIf="this.authService.isLoggedIn">
             <li>
                 <a routerLink="/semester" routerLinkActive="active" class="p-3">Semester</a>
             </li>
         </ul>
     </div>
     <div class="navigation-user-div col-1">
-        <a routerLink="/">Login</a>
+        <a *ngIf="!this.authService.isLoggedIn" class="btn btn-outline-primary" routerLinkActive="active"
+            routerLinkActive="active" routerLink="/login">Login</a>
+        <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button"
+            class="btn btn-danger">Logout</button>
     </div>
-  </mat-toolbar>
+</mat-toolbar>

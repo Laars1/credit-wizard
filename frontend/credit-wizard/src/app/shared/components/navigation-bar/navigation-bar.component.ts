@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/api/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -7,8 +8,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.logout()
   }
 }
