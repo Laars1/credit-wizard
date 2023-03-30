@@ -15,7 +15,11 @@ namespace credit_wizard_api.Extensions
         {
             CreateMap<Degree, DegreeDto>().ReverseMap();
             
-            CreateMap<Modul, ModulDto>().ReverseMap();
+            CreateMap<Modul, ModulDto>()
+                .ForMember(dest => dest.SemesterTimeSlotDtos, act => act.MapFrom(src => src.SemesterTimeSlot))
+                .ReverseMap();
+
+            CreateMap<SemesterTimeSlot, SemesterTimeSlotDto>().ReverseMap();
 
             CreateMap<Semester, SemesterDto>()
                 .ForMember(dest => dest.SemesterPlannerDtos, act => act.MapFrom(src => src.SemesterPlanners))
@@ -29,6 +33,7 @@ namespace credit_wizard_api.Extensions
             CreateMap<SemesterPlanner, SemesterPlannerDto>()
                 .ForMember(dest => dest.SemesterDto, act => act.MapFrom(src => src.Semester))
                 .ForMember(dest => dest.SemesterPlannerModulDtos, act => act.MapFrom(src => src.SemesterPlannerModuls))
+                .ForMember(dest => dest.SemesterTimeSlotDto, act => act.MapFrom(src => src.SemesterTimeSlot))
                 .ReverseMap();
 
             CreateMap<User, UserDto>()

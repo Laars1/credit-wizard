@@ -8,7 +8,7 @@ namespace credit_wizard_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    // [Authorize]
+    [Authorize]
     public class SemesterController : Controller
     {
 

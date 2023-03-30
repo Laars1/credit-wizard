@@ -12,8 +12,40 @@ namespace credit_wizard_api.Services
             _dbContext = dbContext;
         }
 
-        public async Task<List<Modul>> GetAsync() => await _dbContext.Moduls.ToListAsync();
+        public async Task<List<Modul>> GetAsync()
+        {
+            return await _dbContext.Moduls
+                .Include(x => x.SemesterTimeSlot)
+                .Include(x => x.DegreeModuls).ThenInclude(x => x.Degree)
+                .Select(x => new Modul
+                {
+                    Id = x.Id,
+                    SemesterTimeSlot = x.SemesterTimeSlot.Select(y => new SemesterTimeSlot { Id = y.Id, Timeslot = y.Timeslot }).ToList(),
+                    Abbreviation = x.Abbreviation,
+                    Description = x.Description,
+                    EtcsPoints = x.EtcsPoints,
+                    Name = x.Name,
+                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequried = y.IsRequried, Degree = y.Degree }).ToList(),
+                })
+                .ToListAsync();
+        }
 
-        public async Task<Modul?> GetByIdAsync(Guid id) => await _dbContext.Moduls.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<Modul?> GetByIdAsync(Guid id)
+        {
+            return await _dbContext.Moduls
+                .Include(x => x.SemesterTimeSlot)
+                .Include(x => x.DegreeModuls).ThenInclude(x => x.Degree)
+                .Select(x => new Modul
+                {
+                    Id = x.Id,
+                    SemesterTimeSlot = x.SemesterTimeSlot.Select(y => new SemesterTimeSlot { Id = y.Id, Timeslot = y.Timeslot }).ToList(),
+                    Abbreviation = x.Abbreviation,
+                    Description = x.Description,
+                    EtcsPoints = x.EtcsPoints,
+                    Name = x.Name,
+                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequried = y.IsRequried, Degree = y.Degree }).ToList(),
+                })
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

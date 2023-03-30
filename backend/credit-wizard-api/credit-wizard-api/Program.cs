@@ -81,6 +81,7 @@ builder.Services.AddScoped<IModulService, ModulService>();
 builder.Services.AddScoped<ISemesterService, SemesterService>();
 builder.Services.AddScoped<ISemesterPlannerService, SemesterPlannerService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISemesterTimeSlotService, SemesterTimeSlotService>();
 
 // Register Settings
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
