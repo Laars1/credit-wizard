@@ -21,13 +21,16 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        var errorDto = error.error as ErrorResultDto;
-        var title = errorDto.statusCode.toString() + ' ' + errorDto.errorType;
-        this.messageService.error(errorDto.message, title);
-        return throwError(
-          () => new Error(title)
-        );
+        try {
+          // Try convert defined errordto from server
+          var errorDto = error.error as ErrorResultDto;
+          var title = errorDto.statusCode.toString() + ' ' + errorDto.errorType;
+          this.messageService.error(errorDto.message, title);
+        } catch {
+          // Catch when errorDto cannot be converted, this happens when the server is not available
+          this.messageService.error(error.message, "Unbekannter Fehler");
+        }
+        return throwError(() => new Error(title));
       })
     );
   }
