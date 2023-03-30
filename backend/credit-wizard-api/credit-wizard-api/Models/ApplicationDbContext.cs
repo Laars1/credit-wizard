@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace credit_wizard_api.Models
 {
@@ -15,6 +16,7 @@ namespace credit_wizard_api.Models
         public DbSet<Degree> Degrees { get; set; }
         public DbSet<Semester> Semesters { get; set; }
         public DbSet<SemesterPlanner> SemesterPlanners { get; set; }
+        public DbSet<SemesterTimeSlot> SemesterTimeSlots { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,6 +38,19 @@ namespace credit_wizard_api.Models
                 .HasKey(x => new { x.ModulId, x.DegreeId });
 
             #region SeedData
+
+            builder.Entity<SemesterTimeSlot>().HasData(new List<SemesterTimeSlot> {
+                new()
+                {
+                    Id = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"),
+                    Timeslot = "Herbstsemester"
+                },
+                new()
+                {
+                    Id = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"),
+                    Timeslot = "Frühlingssemester",
+                }
+            });
 
             builder.Entity<Role>().HasData(new List<Role>
             {
@@ -234,8 +249,41 @@ namespace credit_wizard_api.Models
                     Name = "Web Engineering",
                     Description = "Web engineering is the process of designing, developing, testing, and maintaining web applications.",
                     Abbreviation = "WWEN",
-                    EtcsPoints = 6
+                    EtcsPoints = 6,
                 }
+            });
+
+            builder.Entity("ModulSemesterTimeSlot").HasData(new object[] {
+                // WACC -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("f8ccaae7-014d-4ba7-8c24-4249be07b1c1") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("f8ccaae7-014d-4ba7-8c24-4249be07b1c1") },
+                // WBIS -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f") },
+                // WBWL -> Only Autumn Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("6c381c6f-9d9a-4b69-aa13-33a8a94a1277") },
+                // WDDA -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("e0a6f205-64b7-42ab-bce3-39f0b3841c71") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("e0a6f205-64b7-42ab-bce3-39f0b3841c71") },
+                // WDEN -> Only Spring Semester
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("480cc771-16a7-4176-8c2b-9a73c1df7b34") },
+                // WENG -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("8f0680b7-68c2-4157-aafc-78c72f63a16f") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("8f0680b7-68c2-4157-aafc-78c72f63a16f") },
+                // WGWI -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("686e6a0c-7f51-4c9d-b968-f6ba201df221") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("686e6a0c-7f51-4c9d-b968-f6ba201df221") },
+                // WPR1 -> Only Autumn Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68") },
+                // BBCS -> Only Spring Semester
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("2aa07a0c-7f51-4c9d-b968-f6ba201df221") },
+                // WIEN -> Every Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("eb2dbecc-d0d6-44ef-82eb-34284633ef19") },
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("eb2dbecc-d0d6-44ef-82eb-34284633ef19") },
+                // WDDD -> Only Autumn Semester
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("7eaf3d1c-f214-4115-892b-8e1f1675897b") },
+                // BBCS -> Only Spring Semester
+                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e") },
             });
 
             builder.Entity<DegreeModul>().HasData(new List<DegreeModul>()
@@ -326,7 +374,8 @@ namespace credit_wizard_api.Models
                 {
                     Id = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
                     UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
-                    SemesterId = Guid.Parse("7879d617-ca43-482e-9377-fbd55e2976fa")                    
+                    SemesterId = Guid.Parse("7879d617-ca43-482e-9377-fbd55e2976fa"),
+                    SemesterTimeslotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835")
                 }
             });
 

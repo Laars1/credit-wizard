@@ -25,5 +25,7 @@ namespace credit_wizard_api.Models
         public List<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
 
         public ICollection<SemesterPlannerModul> SemesterPlanners { get; set; } = new List<SemesterPlannerModul>();
+
+        public ICollection<SemesterTimeSlot> SemesterTimeSlot { get; set; } = new List<SemesterTimeSlot>();
     }
 }

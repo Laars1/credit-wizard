@@ -68,6 +68,18 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SemesterTimeSlots",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Timeslot = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SemesterTimeSlots", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -144,6 +156,30 @@ namespace credit_wizard_api.Migrations
                         name: "FK_DegreeModul_Moduls_ModulId",
                         column: x => x.ModulId,
                         principalTable: "Moduls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ModulSemesterTimeSlot",
+                columns: table => new
+                {
+                    ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SemesterTimeSlotId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ModulSemesterTimeSlot", x => new { x.ModulId, x.SemesterTimeSlotId });
+                    table.ForeignKey(
+                        name: "FK_ModulSemesterTimeSlot_Moduls_ModulId",
+                        column: x => x.ModulId,
+                        principalTable: "Moduls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ModulSemesterTimeSlot_SemesterTimeSlots_SemesterTimeSlotId",
+                        column: x => x.SemesterTimeSlotId,
+                        principalTable: "SemesterTimeSlots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -239,7 +275,8 @@ namespace credit_wizard_api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SemesterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SemesterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SemesterTimeslotId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,6 +285,12 @@ namespace credit_wizard_api.Migrations
                         name: "FK_SemesterPlanners_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SemesterPlanners_SemesterTimeSlots_SemesterTimeslotId",
+                        column: x => x.SemesterTimeslotId,
+                        principalTable: "SemesterTimeSlots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -318,6 +361,15 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "SemesterTimeSlots",
+                columns: new[] { "Id", "Timeslot" },
+                values: new object[,]
+                {
+                    { new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658"), "Frühlingssemester" },
+                    { new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"), "Herbstsemester" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Semesters",
                 columns: new[] { "Id", "Number" },
                 values: new object[,]
@@ -335,7 +387,7 @@ namespace credit_wizard_api.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DegreeId", "Email", "EmailConfirmed", "Lastname", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Prename", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "14c4984c-bd3f-40f4-9fca-fc93007c0cea", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEF3h+tUWTWcg5LhE1gCqXCSyQ/u5m8imCIE3v7d+TSk0t4CUI7SmAC2MUBTgj47F0g==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
+                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "45a87b70-c0ca-4b53-8016-00b5b72ceb6e", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEEqotivY3CCo6h0f3USxHvr7i/o9iwt1BWkrDQ//AuB0Ff4z/t4iaGAj6/75Pdyphw==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
 
             migrationBuilder.InsertData(
                 table: "DegreeModul",
@@ -358,14 +410,39 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ModulSemesterTimeSlot",
+                columns: new[] { "ModulId", "SemesterTimeSlotId" },
+                values: new object[,]
+                {
+                    { new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") }
+                });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { new Guid("4c01b50b-3ece-4cdd-9e2e-a3594c14e928"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
 
             migrationBuilder.InsertData(
                 table: "SemesterPlanners",
-                columns: new[] { "Id", "SemesterId", "UserId" },
-                values: new object[] { new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
+                columns: new[] { "Id", "SemesterId", "SemesterTimeslotId", "UserId" },
+                values: new object[] { new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
 
             migrationBuilder.InsertData(
                 table: "SemesterPlannerModul",
@@ -433,6 +510,11 @@ namespace credit_wizard_api.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ModulSemesterTimeSlot_SemesterTimeSlotId",
+                table: "ModulSemesterTimeSlot",
+                column: "SemesterTimeSlotId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SemesterPlannerModul_ModulId",
                 table: "SemesterPlannerModul",
                 column: "ModulId");
@@ -441,6 +523,11 @@ namespace credit_wizard_api.Migrations
                 name: "IX_SemesterPlanners_SemesterId",
                 table: "SemesterPlanners",
                 column: "SemesterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SemesterPlanners_SemesterTimeslotId",
+                table: "SemesterPlanners",
+                column: "SemesterTimeslotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SemesterPlanners_UserId_SemesterId",
@@ -471,6 +558,9 @@ namespace credit_wizard_api.Migrations
                 name: "DegreeModul");
 
             migrationBuilder.DropTable(
+                name: "ModulSemesterTimeSlot");
+
+            migrationBuilder.DropTable(
                 name: "SemesterPlannerModul");
 
             migrationBuilder.DropTable(
@@ -484,6 +574,9 @@ namespace credit_wizard_api.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "SemesterTimeSlots");
 
             migrationBuilder.DropTable(
                 name: "Semesters");
