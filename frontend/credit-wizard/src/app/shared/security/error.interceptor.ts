@@ -26,11 +26,12 @@ export class ErrorInterceptor implements HttpInterceptor {
           var errorDto = error.error as ErrorResultDto;
           var title = errorDto.statusCode.toString() + ' ' + errorDto.errorType;
           this.messageService.error(errorDto.message, title);
+          return throwError(() => new Error(title));
         } catch {
           // Catch when errorDto cannot be converted, this happens when the server is not available
-          this.messageService.error(error.message, "Unbekannter Fehler");
+          this.messageService.error(error.message, 'Unbekannter Fehler');
+          return throwError(() => new Error(error.message));
         }
-        return throwError(() => new Error(title));
       })
     );
   }
