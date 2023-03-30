@@ -39,10 +39,6 @@ import { FooterComponent } from './shared/components/footer/footer.component';
   ],
   bootstrap: [
     AppComponent,
-    SemesterListComponent,
-    NavigationBarComponent,
-    SigninComponent,
-    FooterComponent,
   ],
 })
 export class AppModule {}

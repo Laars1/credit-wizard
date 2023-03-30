@@ -3,7 +3,7 @@
         <h1>Semesterübersicht</h1>
         <p>Hier sind die zur Verfügungstehenden Semester. Diese können nicht selbst erfasst und editiert werden</p>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="semesters">
         <table mat-table [dataSource]="semesters" class="mat-elevation-z8 col-12">
 
             <ng-container matColumnDef="id">
