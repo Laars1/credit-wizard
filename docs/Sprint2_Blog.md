@@ -13,5 +13,5 @@ Im zweiten Sprint unseres Software-Projekts im Rahmen des WSEG-Moduls haben wir 
 ## Durchgeführte Arbeiten
 
 ## Ergebnisse
-
+Das MockUp sieht bereits sehr ansprechend aus.
 ## Fazit
