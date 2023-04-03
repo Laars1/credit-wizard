@@ -19,26 +19,4 @@ export class SemesterService {
       })
     );
   }
-
-  public getBySemesterId(semesterId: Guid): Observable<ISemesterDto> {
-    return this.apiService
-      .get<ISemesterDto>(this.apiUrl + '/semesterId' + semesterId)
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
-      );
-  }
-
-  public getBySemesterNumber(semesterNumber: Number): Observable<ISemesterDto> {
-    return this.apiService
-      .get<ISemesterDto>(this.apiUrl + '/semesterNumber' + semesterNumber)
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
-      );
-  }
 }

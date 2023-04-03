@@ -19,7 +19,11 @@ namespace credit_wizard_api.Dtos
         [StringLength(1000)]
         public string Description { get; set; }
 
-        public List<DegreeModul> DegreeModulDtos { get; set; } = new List<DegreeModul>();
+        [Required]
+        [Range(1, 15)]
+        public int EtcsPoints { get; set; }
+
+        public List<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
 
         public ICollection<SemesterPlannerDto> SemesterPlannerDtos { get; set; } = new List<SemesterPlannerDto>();
 
