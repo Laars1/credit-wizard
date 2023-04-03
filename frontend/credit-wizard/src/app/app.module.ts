@@ -13,6 +13,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SemesterListComponent } from './core/semester/semester-list/semester-list.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     NavigationBarComponent,
     SigninComponent,
     FooterComponent,
+    ModulesListComponent
   ],
   imports: [
     BrowserModule,
