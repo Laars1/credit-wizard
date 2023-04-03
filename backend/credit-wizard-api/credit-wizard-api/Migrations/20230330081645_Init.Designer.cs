@@ -12,7 +12,7 @@ using credit_wizard_api.Models;
 namespace credit_wizard_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230327093249_Init")]
+    [Migration("20230330081645_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -133,6 +133,113 @@ namespace credit_wizard_api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ModulSemesterTimeSlot", b =>
+                {
+                    b.Property<Guid>("ModulId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SemesterTimeSlotId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ModulId", "SemesterTimeSlotId");
+
+                    b.HasIndex("SemesterTimeSlotId");
+
+                    b.ToTable("ModulSemesterTimeSlot");
+
+                    b.HasData(
+                        new
+                        {
+                            ModulId = new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"),
+                            SemesterTimeSlotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                        },
+                        new
+                        {
+                            ModulId = new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"),
+                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                        });
                 });
 
             modelBuilder.Entity("credit_wizard_api.Models.Degree", b =>
@@ -505,12 +612,17 @@ namespace credit_wizard_api.Migrations
                     b.Property<Guid>("SemesterId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("SemesterTimeslotId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SemesterId");
+
+                    b.HasIndex("SemesterTimeslotId");
 
                     b.HasIndex("UserId", "SemesterId")
                         .IsUnique();
@@ -522,6 +634,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
                             SemesterId = new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"),
+                            SemesterTimeslotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"),
                             UserId = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5")
                         });
                 });
@@ -558,6 +671,33 @@ namespace credit_wizard_api.Migrations
                         {
                             SemesterPlannerId = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
                             ModulId = new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864")
+                        });
+                });
+
+            modelBuilder.Entity("credit_wizard_api.Models.SemesterTimeSlot", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Timeslot")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SemesterTimeSlots");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"),
+                            Timeslot = "Herbstsemester"
+                        },
+                        new
+                        {
+                            Id = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658"),
+                            Timeslot = "Frühlingssemester"
                         });
                 });
 
@@ -651,7 +791,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14c4984c-bd3f-40f4-9fca-fc93007c0cea",
+                            ConcurrencyStamp = "45a87b70-c0ca-4b53-8016-00b5b72ceb6e",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
@@ -660,7 +800,7 @@ namespace credit_wizard_api.Migrations
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF3h+tUWTWcg5LhE1gCqXCSyQ/u5m8imCIE3v7d+TSk0t4CUI7SmAC2MUBTgj47F0g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEqotivY3CCo6h0f3USxHvr7i/o9iwt1BWkrDQ//AuB0Ff4z/t4iaGAj6/75Pdyphw==",
                             PhoneNumberConfirmed = true,
                             Prename = "Hans",
                             TwoFactorEnabled = false,
@@ -719,6 +859,21 @@ namespace credit_wizard_api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ModulSemesterTimeSlot", b =>
+                {
+                    b.HasOne("credit_wizard_api.Models.Modul", null)
+                        .WithMany()
+                        .HasForeignKey("ModulId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("credit_wizard_api.Models.SemesterTimeSlot", null)
+                        .WithMany()
+                        .HasForeignKey("SemesterTimeSlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("credit_wizard_api.Models.DegreeModul", b =>
                 {
                     b.HasOne("credit_wizard_api.Models.Degree", "Degree")
@@ -746,6 +901,12 @@ namespace credit_wizard_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("credit_wizard_api.Models.SemesterTimeSlot", "SemesterTimeSlot")
+                        .WithMany("SemesterPlanners")
+                        .HasForeignKey("SemesterTimeslotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("credit_wizard_api.Models.User", "User")
                         .WithMany("SemesterPlanners")
                         .HasForeignKey("UserId")
@@ -753,6 +914,8 @@ namespace credit_wizard_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Semester");
+
+                    b.Navigation("SemesterTimeSlot");
 
                     b.Navigation("User");
                 });
@@ -809,6 +972,11 @@ namespace credit_wizard_api.Migrations
             modelBuilder.Entity("credit_wizard_api.Models.SemesterPlanner", b =>
                 {
                     b.Navigation("SemesterPlannerModuls");
+                });
+
+            modelBuilder.Entity("credit_wizard_api.Models.SemesterTimeSlot", b =>
+                {
+                    b.Navigation("SemesterPlanners");
                 });
 
             modelBuilder.Entity("credit_wizard_api.Models.User", b =>

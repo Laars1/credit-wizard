@@ -32,6 +32,7 @@ public class UserService : IUserService
             .Include(x => x.SemesterPlanners)
             .ThenInclude(x => x.SemesterPlannerModuls)
             .ThenInclude(x => x.Modul)
+            .ThenInclude(x => x.SemesterTimeSlot)
             .FirstOrDefaultAsync(x => x.Id == id);
 
     }

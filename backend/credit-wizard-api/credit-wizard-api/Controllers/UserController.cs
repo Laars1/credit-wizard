@@ -27,7 +27,7 @@ public class UserController : Controller
     /// </summary>
     /// <returns>User object with its data</returns>
     [HttpGet("current")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
     public async Task<IActionResult> GetCurrentUserAsync()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

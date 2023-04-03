@@ -18,5 +18,10 @@ namespace credit_wizard_api.Dtos
         public SemesterDto SemesterDto { get; set; }
 
         public List<SemesterPlannerModulDto> SemesterPlannerModulDtos { get; set; } = new List<SemesterPlannerModulDto>();
+
+        [Required]
+        public Guid SemesterTimeslotId { get; set; }
+
+        public SemesterTimeSlotDto SemesterTimeSlotDto { get; set; }
     }
 }

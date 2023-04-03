@@ -33,7 +33,6 @@ namespace credit_wizard_api.Controllers
         /// <returns>List ofSemesterPlannerDto with the provided data</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<SemesterPlannerDto>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByUserAsync()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
@@ -50,13 +49,13 @@ namespace credit_wizard_api.Controllers
         /// <returns>SemesterPlannerDto with the provided data</returns>
         [HttpGet("{semesterId:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerDto))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
         public async Task<IActionResult> GetByUserAndSemesterIdAsync(Guid semesterId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var data = await _semesterPlannerService.GetByUserIdAndSemesterIdAsync(Guid.Parse(userId), semesterId);
 
-            if (data == null) return NotFound("There is no matching entry");
+            if (data == null) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
 
             return Ok(_mapper.Map<SemesterPlannerDto>(data));
         }
@@ -68,7 +67,7 @@ namespace credit_wizard_api.Controllers
         /// <returns>SemesterPlannerDto with the provided data</returns>
         [HttpGet("{semesterNumber:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerDto))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
         public async Task<IActionResult> GetByUserAndSemesterNumberAsync(int semesterNumber)
         {
             if (semesterNumber == 0 || semesterNumber > 100) return BadRequest("Die eingegebene Semester Nummer ist ungültig");
@@ -76,7 +75,7 @@ namespace credit_wizard_api.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var data = await _semesterPlannerService.GetByUserIdAndSemesterNumberAsync(Guid.Parse(userId), semesterNumber);
 
-            if (data == null) return NotFound("There is no matching entry");
+            if (data == null) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
 
             return Ok(_mapper.Map<SemesterPlannerDto>(data));
         }

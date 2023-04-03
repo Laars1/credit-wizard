@@ -26,10 +26,11 @@ namespace credit_wizard_api.Controllers
         /// </summary>
         /// <returns>A List of all Modules form of a ModulDto List</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ModulDto>))]
         public async Task<IActionResult> GetAsync()
         {
             return Ok(_mapper.Map<List<ModulDto>>(await _modulService.GetAsync()));
+            //return Ok(await _modulService.GetAsync());
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace credit_wizard_api.Controllers
         /// <param name="id">Id of the searched Modul</param>
         /// <returns>A Modul in form of a ModulDto</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ModulDto))]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             return Ok(_mapper.Map<ModulDto>(await _modulService.GetByIdAsync(id)));

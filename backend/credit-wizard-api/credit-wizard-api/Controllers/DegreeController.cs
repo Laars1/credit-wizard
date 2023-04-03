@@ -26,7 +26,7 @@ namespace credit_wizard_api.Controllers
         /// </summary>
         /// <returns>All Degress in from of a List DegreeDto</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<DegreeDto>))]
         public async Task<IActionResult> GetAsync()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -39,7 +39,7 @@ namespace credit_wizard_api.Controllers
         /// <param name="id">Id of the searched Degree</param>
         /// <returns>A Degree in form of a DegreeDto</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DegreeDto))]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             return Ok(_mapper.Map<DegreeDto>(await _degreeService.GetByIdAsync(id)));

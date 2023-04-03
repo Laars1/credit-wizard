@@ -28,8 +28,8 @@ namespace credit_wizard_api.Controllers
         /// <returns>When valid token, otherwise an error</returns>
         [HttpPost]
         [Route("login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TokenDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResultDto))]
 
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
