@@ -72,6 +72,15 @@ Folgende Logik wurden dazu implementiert:
 - [HTTP Error Interceptor](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/app/shared/security/error.interceptor.ts), welcher jede Fehlerhafte HTTP-Response anfängt und anschliessend den Benutzer benachrichtigt. Simpel gesagt werden so alle Fehlerhaften anfragen von der API abgefangen.
 - [ErrorResultDto](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/app/shared/dtos/errorResultDto.ts), pendant zum ErrorResultDto in der API
 
+Im Error Interceptor wird anschliessend die Response Message in das ErrorResultDto umgewandelt und mittels Message Service angezeigt.
+```typescript
+var errorDto = error.error as ErrorResultDto;
+var title = errorDto.statusCode.toString() + ' ' + errorDto.errorType;
+this.messageService.error(errorDto.message, title);
+return throwError(() => new Error(title));
+```
+
+
 Somit alle Exceptions im Backend abgefangen, aufbereitet und als ErrorResultDto zurückgegeben.
 Im Frontend wird jeder HTTP Error (welcher von der API erhalten wird) abgefangen und als Toast Message dem Benutzer angezeigt.
 
