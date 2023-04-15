@@ -12,11 +12,16 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using credit_wizard_api.Exceptions;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen(c =>
 {
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
