@@ -14,6 +14,7 @@ import { SemesterListComponent } from './core/semester/semester-list/semester-li
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
     NavigationBarComponent,
     SigninComponent,
     FooterComponent,
-    ModulesListComponent
+    ModulesListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

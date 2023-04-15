@@ -19,26 +19,4 @@ export class ModuleService {
       })
     );
   }
-
-  //public getByModuleId(id: Guid): Observable<IModulDto> {
-  //  return this.apiService
-  //    .get<IModulDto>(this.apiUrl + '/id' + id)
-  //    .pipe(
-  //      catchError((err) => {
-  //        console.error(err);
-  //        return EMPTY;
-  //      })
-  //    );
-  //}
-//
-  //public getByModuleName(Modulename: Number): Observable<IModulDto> {
-  //  return this.apiService
-  //    .get<IModulDto>(this.apiUrl + '/Modulename' + Modulename)
-  //    .pipe(
-  //      catchError((err) => {
-  //        console.error(err);
-  //        return EMPTY;
-  //      })
-  //    );
-  //}
 }

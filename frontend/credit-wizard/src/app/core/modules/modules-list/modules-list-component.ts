@@ -14,7 +14,7 @@ export class ModulesListComponent implements OnInit {
   constructor(private moduleService: ModuleService) { }
 
   ngOnInit(): void {
-    this.moduleService.get().subscribe((s: any) => {
+    this.moduleService.get().subscribe((s: IModulDto[]) => {
       this.modules = s;
     })
    }

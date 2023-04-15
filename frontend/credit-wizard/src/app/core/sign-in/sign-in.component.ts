@@ -1,4 +1,4 @@
-import { LoginDto } from './../../shared/dtos/loginDto';
+import { ILoginDto } from './../../shared/dtos/loginDto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
   ngOnInit() {}
 
   loginUser() {
-    const data = this.formGroup.getRawValue() as LoginDto;
+    const data = this.formGroup.getRawValue() as ILoginDto;
     this.authService.signIn(data);
   }
 }
