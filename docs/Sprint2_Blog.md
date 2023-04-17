@@ -11,16 +11,23 @@ Im zweiten Sprint unseres Software-Projekts im Rahmen des WSEG-Moduls haben wir 
 - JWT-Authentifizierung im Backend wie im Frontend implementieren
 - Errorhandling Konzept in beiden Projekten implementieren
 
-# Durchgeführte Arbeiten
+# Technologien
+Für dieses Projekt werden zwei verschiedene Technologien verwendet.
 
-## Hindernisse und Schwierigkeiten
+Das Frontend wird mit Angular implementiert.
 
-### Login
+Im Backend wird eine (C#) .NET Core Web API verwendet.
+
+Für die Umsetzung des Code First Ansatzes wird das C# Frameword Entity Framework Core verwendet.
+
+# Hindernisse und Schwierigkeiten
+
+## Login
 
 Wir haben uns als Ziel gesetzt dass nur der angemeldete Anwender seine Daten einsehen kann. Um dies sicherzustellen haben wir mussten wir ein Login implementieren. Wir haben uns dabei für ein Login via [JWT-Token](https://jwt.io/) entschieden.
 Die Authentisierung wurde folgendermassen implementiert:
 
-#### Backend
+### Backend
 
 - Registrierung der JWT-Authentisierung im [Program](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Program.cs)
 - [Business Logik der Authentisierung](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Services/AuthenticationService.cs) (Aufbereiten des JWT-Tokens & Überprüfung des Passworts)
@@ -39,7 +46,7 @@ Um einen Controller (API Schnittstelle) für nur angemeldete Benutzer zur Verfü
 public class UserController : Controller{}
 ```
 
-#### Frontend
+### Frontend
 
 Damit sich der Endbenutzer nun auf via das UI anmelden kann und anschliessend sichergestellt werden kann das die Daten dementsprechend geschützt sind, wurden folgende Funktionalitäten implementiert:
 
@@ -55,19 +62,19 @@ Um eine Seite nun für unangemeldete Benutzer zu sperren kann einfach im app-mod
 { path: 'xy', component: xy, canActivate: [AuthGuard] },
 ```
 
-### Effizientes Errorhandling im Frontend und Backend
+## Effizientes Errorhandling im Frontend und Backend
 
 Wie können Errors sowohl im Backend wie auch im Frontend effizient und schnell abgefangen werden ohne einen grossen Mehraufwand zu generieren. Diese Frage haben wir uns im Team gestellt und sind dabei auf eine einfache und einheitliche Lösung gekommen. Exceptionfilter in beiden Projekten inkl. Dem selben ErrorDto.
 Folgende Logik wurden dazu implementiert:
 
-#### Backend
+### Backend
 
 - [ApiExceptionFilterAttribute](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Exceptions/ApiExceptionFilterAttribute.cs) welches alle Errors auf der API filtert und anschliessend eine HTTP-Response an an Frontend zurück gibt
 - [Custom Exceptions](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/tree/main/backend/credit-wizard-api/credit-wizard-api/Exceptions) um die Art der verschiedenen Errors besser zu identifizieren (Alle Files in diesem Ordner)
 - Request validierung auf den jeweiligen [Controllern](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/tree/main/backend/credit-wizard-api/credit-wizard-api/Controllers). Diese Validierung ist von Schnittstelle zu Schnittstelle unterschiedlich, da sich diese mit den mitgesendeten Daten befassen
 - [ErrorResultDto](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Dtos/ErrorResultDto.cs) Standartisiertes Data Transfer Object, welches bei jedem Fehler zurückgegeben wird
 
-#### Frontend
+### Frontend
 
 - [HTTP Error Interceptor](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/app/shared/security/error.interceptor.ts), welcher jede Fehlerhafte HTTP-Response anfängt und anschliessend den Benutzer benachrichtigt. Simpel gesagt werden so alle Fehlerhaften anfragen von der API abgefangen.
 - [ErrorResultDto](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/app/shared/dtos/errorResultDto.ts), pendant zum ErrorResultDto in der API
@@ -84,7 +91,7 @@ return throwError(() => new Error(title));
 Somit alle Exceptions im Backend abgefangen, aufbereitet und als ErrorResultDto zurückgegeben.
 Im Frontend wird jeder HTTP Error (welcher von der API erhalten wird) abgefangen und als Toast Message dem Benutzer angezeigt.
 
-### Anzeigen von Benachrichtigungen für den Benutzer
+## Anzeigen von Benachrichtigungen für den Benutzer
 
 In beiden der oben erwähnten Themen muss der Benutzer teilweise Informiert werden.
 Dazu wurde im Angular Projekt ein [MessageService](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/app/shared/services/common/message.service.ts) implementiert, welcher in dem gesamten Projekt verwendet werden kann. Dieser verwendet die Java-Script Library [ngx-Toaster](https://www.npmjs.com/package/ngx-toastr)
@@ -99,7 +106,7 @@ Anzeigen eines Benachrichtigung
 
 ![alt text](./pictures/Success.jpg "Anzeigen eines Benachrichtigung")
 
-## Datenmodell und Testdaten
+# Datenmodell und Testdaten
 
 Für die Datenverwaltung wurde auf Backendseite ein Code First Ansatz verfolgt. Umgesetzt wurde dies mit Entity Framework Core. Entity Framework Core ist ein ORM, welches im C# Umfeld angewendet werden kann. Weitere Informationen zum Entity Framework sind in der [offiziellen Dokumentation](https://learn.microsoft.com/en-us/ef/core/) hinterlegt.
 Unten ist das aktuelle Datenmodell ersichtlich. Da ein Code First Ansatz verfolgt wird, können auch in Zukunft noch Änderungen auftreten. Zusätzlich wurde für das User Management eine Erweiterungs-Bibliothek vom Entity Framework verwendet. Daher wurden einige der Tabellen inkl. Attribute automatisch generiert. Alle Tabellen haben einen automatisch generierten Primary Key.
@@ -146,6 +153,7 @@ Für das allgemeine Design und für die Datenanzeige wurde das Styling Framework
 ![alt text](./pictures/Modules-component.png "Modules component")
 
 # Arbeitsaufteilung
+In diesem Kapitel ist niedergeschrieben, wer bis jetzt welche Tätigkeiten übernommen hat. Dies kann sich im Verlauf des Projektes natürlich noch ändern.
 
 | Aufgabe                                     | Verantwortlich                        |
 | ------------------------------------------- | ------------------------------------- |
