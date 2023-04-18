@@ -9,5 +9,11 @@ namespace credit_wizard_api.Services.Interfaces
         public Task<SemesterPlanner?> GetByUserIdAndSemesterIdAsync(Guid userId, Guid semesterId);
 
         public Task<SemesterPlanner?> GetByUserIdAndSemesterNumberAsync(Guid userId, int semesterNumber);
+        public int GetCompletedEctsPointsByUserAsync(List<SemesterPlanner> data);
+
+        public int GetOpenEctsPointsByUserAsync(List<SemesterPlanner> data);
+        public int GetMissedEctsPointsByUserAsync(List<SemesterPlanner> data);
+
+        public Task<int> GetPercentageFinishedRequiredModulsByUserAsync(List<SemesterPlanner> data, Guid degreeId);
     }
 }

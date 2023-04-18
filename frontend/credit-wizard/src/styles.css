@@ -18,3 +18,9 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 footer{
     background-color: #3C4048;
 }
+
+.spinner{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}

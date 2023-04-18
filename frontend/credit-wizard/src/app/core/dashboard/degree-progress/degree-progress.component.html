@@ -1,23 +1,52 @@
-<h1>
-  Übersicht
-</h1>
 <div class="etcs-progress">
+  <h1>
+    Übersicht
+  </h1>
   <table class="table">
     <tr>
       <td>Zu erreichende ETCs Punkte</td>
-      <td>{{totalEtcsPoints}}</td>
+      <td>{{data.totalDegreeEtcsPoints}}</td>
     </tr>
     <tr>
       <td>Erreichte ETCs Punkte</td>
-      <td></td>
+      <td>{{data.reachedEtcsPoints}}</td>
     </tr>
     <tr>
       <td>Offene ETCs Punkte</td>
-      <td></td>
+      <td>{{data.openEtcsPoints}}</td>
     </tr>
     <tr class="table-conclusion">
       <td>Fehlende ETCs Punkte</td>
-      <td></td>
+      <td>{{data.missingEtcsPoints}}</td>
+    </tr>
+    <tr>
+      <td>Verlorene Ects Punkte (nicht bestanden)</td>
+      <td>{{data.missedEctsPoints}}</td>
     </tr>
   </table>
+</div>
+
+<div class="etcs-progress-bars">
+  <h1>Fancy Progressbars</h1>
+  <div>
+    <h3 class="m-0 mt-1">Abgeschlossene Pflichtmodule</h3>
+    <p>Prozentsatz wie viele der Pflichtmodule bereits abgeschlossen wurden. Beachte hier werden nur Daten aus abgeschlossenen Semestern und bestandenen Modulen berücksichtigt</p>
+    <div class="row">
+      <div class="col-10">
+        <mat-progress-bar [value]="data.percentageFinishedRequiredModuls" [color]="color" class="progress-bar-height"></mat-progress-bar>
+      </div>
+      <div class="col-2">{{data.percentageFinishedRequiredModuls}}%</div>
+    </div>
+  </div>
+  <div>
+    <h3 class="m-0 mt-1">Progress Studium</h3>
+    <p>Prozentsatz wie weit du bereits bist im Studium - Verhältnis erreichte + offene ECTs Punkte zu Total
+      erforderlichen ETCs Punkten ({{data.totalDegreeEtcsPoints}})</p>
+    <div class="row">
+      <div class="col-10">
+        <mat-progress-bar [value]="getProgress()" [color]="color" class="progress-bar-height"></mat-progress-bar>
+      </div>
+      <div class="col-2">{{getProgress()}}%</div>
+    </div>
+  </div>
 </div>

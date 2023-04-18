@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using credit_wizard_api.Models;
 
@@ -11,9 +12,11 @@ using credit_wizard_api.Models;
 namespace credit_wizard_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230418091144_AddedTotalEtcePoints")]
+    partial class AddedTotalEtcePoints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -610,9 +613,6 @@ namespace credit_wizard_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("SemesterId")
                         .HasColumnType("uniqueidentifier");
 
@@ -637,7 +637,6 @@ namespace credit_wizard_api.Migrations
                         new
                         {
                             Id = new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
-                            Completed = false,
                             SemesterId = new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"),
                             SemesterTimeslotId = new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"),
                             UserId = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5")
@@ -796,7 +795,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "172206ea-19e3-4edd-8c7e-1c383459507c",
+                            ConcurrencyStamp = "e1d28d68-3f96-4597-9321-93544a3fab7d",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
@@ -805,7 +804,7 @@ namespace credit_wizard_api.Migrations
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP6688WRuWIRtHEdbpXc/9d/NvCREApioBlZb62x6FxrfZdGihI4wqd55Bb6Qg9kXQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKQq6bNkm3E0AY/WF8qbJHoAMOgRN12Iy+XRfsFM64A34AvTGomHAiChLcSrKmW59Q==",
                             PhoneNumberConfirmed = true,
                             Prename = "Hans",
                             TwoFactorEnabled = false,

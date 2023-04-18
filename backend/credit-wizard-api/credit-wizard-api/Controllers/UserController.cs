@@ -33,4 +33,13 @@ public class UserController : Controller
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         return Ok(_mapper.Map<UserDto>(await _userService.GetByIdAsync(Guid.Parse(userId))));
     }
+    
+    [HttpGet("current/degreeprogress")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+    public async Task<IActionResult> GetCurrentDegreeProgress()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var data = await _userService.GetCurrentDegreeProgress(Guid.Parse(userId));
+        return Ok(data);
+    }
 }

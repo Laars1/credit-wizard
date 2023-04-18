@@ -14,6 +14,9 @@ namespace credit_wizard_api.Models
         [StringLength(5000)]
         public string Description { get; set; }
 
+        [Required]
+        public int TotalEtcsPoints { get; set; } = 180;
+
         public ICollection<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
         public ICollection<User> Users { get; set; } = new List<User>();
     }

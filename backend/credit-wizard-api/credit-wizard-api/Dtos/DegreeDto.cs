@@ -14,6 +14,8 @@ namespace credit_wizard_api.Dtos
         [Required]
         [StringLength(5000)]
         public string Description { get; set; }
+        
+        public int TotalEtcsPoints { get; set; } = 180;
 
         public ICollection<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
     }
