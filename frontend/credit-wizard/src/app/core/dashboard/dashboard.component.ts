@@ -10,13 +10,12 @@ import { UserService } from 'src/app/shared/services/api/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: IUserDto | undefined;
+  user = {} as IUserDto;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.getCurrentUser().subscribe((u: IUserDto) => {
-      console.log(u)
       this.user = u;
     })
   }

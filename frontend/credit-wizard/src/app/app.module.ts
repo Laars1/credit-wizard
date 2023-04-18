@@ -15,6 +15,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { UserInformationComponent } from './core/dashboard/user-information/user-information.component';
+import { DegreeProgressComponent } from './core/dashboard/degree-progress/degree-progress.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DashboardComponent } from './core/dashboard/dashboard.component';
     SigninComponent,
     FooterComponent,
     ModulesListComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserInformationComponent,
+    DegreeProgressComponent
   ],
   imports: [
     BrowserModule,

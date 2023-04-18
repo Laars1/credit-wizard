@@ -1,23 +1,21 @@
-<div class="m-5">
-    <div class="col-12">
-        <h1>Semesterübersicht</h1>
-        <p>Hier sind die zur Verfügungstehenden Semester. Diese können nicht selbst erfasst und editiert werden</p>
-    </div>
-    <div class="col-12" *ngIf="semesters">
-        <table mat-table [dataSource]="semesters" class="mat-elevation-z8 col-12">
+<div class="col-12">
+    <h1>Semesterübersicht</h1>
+    <p>Hier sind die zur Verfügungstehenden Semester. Diese können nicht selbst erfasst und editiert werden</p>
+</div>
+<div class="col-12" *ngIf="semesters">
+    <table mat-table [dataSource]="semesters" class="mat-elevation-z8 col-12">
 
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="number">
-                <th mat-header-cell *matHeaderCellDef> Semester </th>
-                <td mat-cell *matCellDef="let element"> Semester {{element.number}} </td>
-            </ng-container>
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef> Semester </th>
+            <td mat-cell *matCellDef="let element"> Semester {{element.number}} </td>
+        </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>
