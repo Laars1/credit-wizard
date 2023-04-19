@@ -27,6 +27,9 @@ namespace credit_wizard_api.Services
                 .Include(x => x.SemesterPlannerModuls)
                 .ThenInclude(x => x.Modul)
                 .ThenInclude(x => x.SemesterTimeSlot)
+                .Include(x => x.SemesterPlannerModuls)
+                .ThenInclude(x => x.Modul)
+                .ThenInclude(x => x.DegreeModuls)
                 .ToListAsync();
         }
 

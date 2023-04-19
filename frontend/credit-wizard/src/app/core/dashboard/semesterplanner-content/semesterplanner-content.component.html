@@ -19,8 +19,9 @@
           <thead>
             <tr>
               <th class="col-4">Modul</th>
-              <th class="col-3">Abkürzung</th>
-              <th class="col-2">ETCs Punkte</th>
+              <th class="col-2">Abkürzung</th>
+              <th class="col-2">Für Abschluss notwendig</th>
+              <th class="col-1">ETCs Punkte</th>
               <th class="col-2">Note</th>
               <th class="col-1">Bestanden</th>
             </tr>
@@ -29,6 +30,10 @@
             <tr *ngFor="let row of item.semesterPlannerModulDtos">
               <td>{{row.modulDto.name}}</td>
               <td>{{row.modulDto.abbreviation}}</td>
+              <td>
+                <mat-icon *ngIf="!isModulRequiredForDegree(row)" matTooltip="Ja" matTooltipPosition="right">check_box</mat-icon>
+                <mat-icon *ngIf="isModulRequiredForDegree(row)" matTooltip="Nein" matTooltipPosition="right">indeterminate_check_box</mat-icon>
+              </td>
               <td>{{row.modulDto.etcsPoints}}</td>
               <td>{{row.grade}}</td>
               <td class="text-left">

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Guid } from 'guid-typescript';
 import { ISemesterPlannnerDto } from 'src/app/shared/dtos/semesterPlannerDto';
 import { SemesterplannerService } from 'src/app/shared/services/api/semesterplanner.service';
 
@@ -8,6 +9,7 @@ import { SemesterplannerService } from 'src/app/shared/services/api/semesterplan
   styleUrls: ['./semesterplanner-overview.component.css']
 })
 export class SemesterplannerOverviewComponent implements OnInit {
+  @Input() degreeId = {} as Guid
   @Output() loaded = new EventEmitter<boolean>();
   data = [] as ISemesterPlannnerDto[]
 

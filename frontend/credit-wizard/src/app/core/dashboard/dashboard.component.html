@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="col-9">
-    <app-semesterplanner-overview (loaded)="setLoadedSemesterPlanner($event)"></app-semesterplanner-overview>
+    <app-semesterplanner-overview  [degreeId]="user.degreeId" (loaded)="setLoadedSemesterPlanner($event)"></app-semesterplanner-overview>
   </div>
 
 </div>

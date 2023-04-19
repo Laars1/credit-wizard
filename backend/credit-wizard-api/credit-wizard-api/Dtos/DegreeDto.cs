@@ -17,6 +17,6 @@ namespace credit_wizard_api.Dtos
         
         public int TotalEtcsPoints { get; set; } = 180;
 
-        public ICollection<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
+        public ICollection<DegreeModulDto> DegreeModulDtos { get; set; } = new List<DegreeModulDto>();
     }
 }

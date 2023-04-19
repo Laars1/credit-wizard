@@ -29,5 +29,6 @@ namespace credit_wizard_api.Dtos
 
         public ICollection<SemesterTimeSlotDto> SemesterTimeSlotDtos { get; set; } = new List<SemesterTimeSlotDto>();
 
+        public ICollection<DegreeModulDto> DegreeModulDtos { get; set; } = new List<DegreeModulDto>();
     }
 }

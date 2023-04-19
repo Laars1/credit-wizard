@@ -1,5 +1,5 @@
 import { Guid } from "guid-typescript";
-import { DegreeDto } from "./degreeDto";
+import { IDegreeDto } from "./degreeDto";
 
 export interface IUserDto {
     id: Guid,
@@ -8,5 +8,5 @@ export interface IUserDto {
     lastname: string,
     matriculationNumber: string,
     degreeId: Guid,
-    degreeDto: DegreeDto,
+    degreeDto: IDegreeDto,
 }
