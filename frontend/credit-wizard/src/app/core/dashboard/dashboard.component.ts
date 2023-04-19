@@ -32,12 +32,7 @@ export class DashboardComponent implements OnInit {
   }
 
   checkSpinner() {
-    if(this.userInformationLoaded && this.userProgressLoaded){
-      this.spinnerVisible = false;
-    }
-    else{
-      this.spinnerVisible = true;
-    }
+      this.spinnerVisible = this.userInformationLoaded && this.userProgressLoaded ? false : true;
   }
 
 }

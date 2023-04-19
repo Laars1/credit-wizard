@@ -17,6 +17,7 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { UserInformationComponent } from './core/dashboard/user-information/user-information.component';
 import { DegreeProgressComponent } from './core/dashboard/degree-progress/degree-progress.component';
+import { DashboardProgressBarComponent } from './core/dashboard/dashboard-progress-bar/dashboard-progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DegreeProgressComponent } from './core/dashboard/degree-progress/degree
     ModulesListComponent,
     DashboardComponent,
     UserInformationComponent,
-    DegreeProgressComponent
+    DegreeProgressComponent,
+    DashboardProgressBarComponent
   ],
   imports: [
     BrowserModule,

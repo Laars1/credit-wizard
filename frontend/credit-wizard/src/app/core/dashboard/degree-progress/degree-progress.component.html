@@ -29,24 +29,17 @@
 <div class="etcs-progress-bars">
   <h1>Fancy Progressbars</h1>
   <div>
-    <h3 class="m-0 mt-1">Abgeschlossene Pflichtmodule</h3>
-    <p>Prozentsatz wie viele der Pflichtmodule bereits abgeschlossen wurden. Beachte hier werden nur Daten aus abgeschlossenen Semestern und bestandenen Modulen berücksichtigt</p>
-    <div class="row">
-      <div class="col-10">
-        <mat-progress-bar [value]="data.percentageFinishedRequiredModuls" [color]="color" class="progress-bar-height"></mat-progress-bar>
-      </div>
-      <div class="col-2">{{data.percentageFinishedRequiredModuls}}%</div>
-    </div>
+    <app-dashboard-progress-bar
+    [title]="'Abgeschlossene Pflichtmodule'"
+    [description]="'Prozentsatz wie viele der Pflichtmodule bereits abgeschlossen wurden. Beachte hier werden nur Daten aus abgeschlossenen Semestern und bestandenen Modulen berücksichtigt'"
+    [value]="data.percentageFinishedRequiredModuls"
+    ></app-dashboard-progress-bar>
   </div>
   <div>
-    <h3 class="m-0 mt-1">Progress Studium</h3>
-    <p>Prozentsatz wie weit du bereits bist im Studium - Verhältnis erreichte + offene ECTs Punkte zu Total
-      erforderlichen ETCs Punkten ({{data.totalDegreeEtcsPoints}})</p>
-    <div class="row">
-      <div class="col-10">
-        <mat-progress-bar [value]="getProgress()" [color]="color" class="progress-bar-height"></mat-progress-bar>
-      </div>
-      <div class="col-2">{{getProgress()}}%</div>
-    </div>
+    <app-dashboard-progress-bar
+    [title]="'Progress Studium'"
+    [description]="descriptionProgressDegree"
+    [value]="getProgress()"
+    ></app-dashboard-progress-bar>
   </div>
 </div>
