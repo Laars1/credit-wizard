@@ -11,28 +11,37 @@ import { UserService } from 'src/app/shared/services/api/user.service';
 })
 export class DashboardComponent implements OnInit {
   user = {} as IUserDto;
-  spinnerVisible = false;
+  spinnerVisible = true;
   userInformationLoaded = false;
+  semesterPlannerInformationLoaded = false;
   userProgressLoaded = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.spinnerVisible = true
     this.userService.getCurrentUser().subscribe((u: IUserDto) => {
       this.user = u;
     })
     this.userInformationLoaded = true;
-    this.checkSpinner()
   }
 
   setLoadedDegreeProgress(loaded: boolean){
     this.userProgressLoaded = loaded;
-    this.checkSpinner()
+    this.checkSpinner();
+  }
+
+  setLoadedSemesterPlanner(loaded: boolean){
+    this.semesterPlannerInformationLoaded = loaded;
+    this.checkSpinner();
   }
 
   checkSpinner() {
-      this.spinnerVisible = this.userInformationLoaded && this.userProgressLoaded ? false : true;
+    if(this.userInformationLoaded && this.userProgressLoaded && this.semesterPlannerInformationLoaded){
+      this.spinnerVisible = false;
+    }
+    else{
+      this.spinnerVisible = true;
+    }
   }
 
 }

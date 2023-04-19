@@ -1,0 +1,53 @@
+<div>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Semester {{item.semesterDto.number}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <div class="col-6">
+          Semester Abgeschlossen: {{item.completed ? "Ja" : "Nein"}}
+        </div>
+        <div class="col-6">
+          Anz. Etcs: {{currentEtcsPoints}}*/{{totalEtcsPoints}}
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-4">Modul</th>
+              <th class="col-3">Abkürzung</th>
+              <th class="col-2">ETCs Punkte</th>
+              <th class="col-2">Note</th>
+              <th class="col-1">Bestanden</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of item.semesterPlannerModulDtos">
+              <td>{{row.modulDto.name}}</td>
+              <td>{{row.modulDto.abbreviation}}</td>
+              <td>{{row.modulDto.etcsPoints}}</td>
+              <td>{{row.grade}}</td>
+              <td class="text-left">
+                <mat-icon *ngIf="row.grade >= 4" matTooltip="Ja" matTooltipPosition="right">check_box</mat-icon>
+                <mat-icon *ngIf="row.grade < 4 && row.grade != undefined" matTooltip="Nein" matTooltipPosition="right">indeterminate_check_box</mat-icon>
+                <mat-icon *ngIf="row.grade == undefined" matTooltip="Keine Note vorhanden" matTooltipPosition="right">check_box_outline_blank</mat-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="disclaimer"
+      matTooltip="Sofern das Semester noch nicht abgeschlossen ist, sind die errechneten ETCs Punkte nur eine vorübergehende Zusammenrechnung. Daher sind diese auch nnocht auf der linken Seite auf de Dashboard ersichtlich.">
+      *Disclaimer ECTs Punkte
+    </div>
+    <div class="actions float-right">
+      <button mat-raised-button color="primary"><mat-icon>edit</mat-icon>Bearbeiten</button>
+      <button mat-raised-button color="accent"><mat-icon>delete</mat-icon>Löschen</button>
+    </div>
+  </mat-expansion-panel>
+</div>

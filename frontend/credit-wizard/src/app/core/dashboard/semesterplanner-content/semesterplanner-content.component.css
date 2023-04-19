@@ -1,0 +1,8 @@
+.disclaimer{
+    display: inline;
+}
+
+.actions > button{
+    margin: 5px;
+    vertical-align: middle;
+}

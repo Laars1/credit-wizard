@@ -19,8 +19,8 @@ export class DegreeProgressComponent implements OnInit {
     this.userService.getCurrentUserDegreeProgress().subscribe((d: IDegreeProgressDto) => {
       this.data = d;
       this.descriptionProgressDegree = "Prozentsatz wie weit du bereits bist im Studium - Verhältnis erreichte + offene ECTs Punkte zu Total erforderlichen ETCs Punkten ("+this.data.totalDegreeEtcsPoints+")";
+      this.loaded.emit(true)
     });
-    this.loaded.emit(true)
   }
 
   getProgress(){
