@@ -3,7 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Guid } from 'guid-typescript';
 import { ISemesterPlannnerDto } from 'src/app/shared/dtos/semesterPlannerDto';
 import { ISemesterPlannerModulDto } from 'src/app/shared/dtos/semesterPlannerModulDto';
-import { ModulDialogComponent } from '../../modules/modul-dialog/modul-dialog.component';
+import { ModulDetailDialogComponent } from '../../modules/modul-detail-dialog/modul-detail-dialog.component';
+import { SemesterplannerEditDialogComponent } from '../../semesterplanner/semesterplanner-edit-dialog/semesterplanner-edit-dialog.component';
 
 @Component({
   selector: 'app-semesterplanner-content',
@@ -51,13 +52,21 @@ export class SemesterplannerContentComponent implements OnInit {
     return entry!.isRequired;
   }
 
-  openModulInformationModal(modulId: Guid){
+  openModulInformationDialog(modulId: Guid){
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {modulId: modulId}
 
-    this.dialogService.open(ModulDialogComponent, dialogConfig);
+    this.dialogService.open(ModulDetailDialogComponent, dialogConfig);
+  }
+
+  openEditFormDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.item;
+
+    this.dialogService.open(SemesterplannerEditDialogComponent, dialogConfig);
   }
 }

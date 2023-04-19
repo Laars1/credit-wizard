@@ -20,7 +20,8 @@ import { DegreeProgressComponent } from './core/dashboard/degree-progress/degree
 import { DashboardProgressBarComponent } from './core/dashboard/dashboard-progress-bar/dashboard-progress-bar.component';
 import { SemesterplannerOverviewComponent } from './core/dashboard/semesterplanner-overview/semesterplanner-overview.component';
 import { SemesterplannerContentComponent } from './core/dashboard/semesterplanner-content/semesterplanner-content.component';
-import { ModulDialogComponent } from './core/modules/modul-dialog/modul-dialog.component';
+import { ModulDetailDialogComponent } from './core/modules/modul-detail-dialog/modul-detail-dialog.component';
+import { SemesterplannerEditDialogComponent } from './core/semesterplanner/semesterplanner-edit-dialog/semesterplanner-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModulDialogComponent } from './core/modules/modul-dialog/modul-dialog.c
     DashboardProgressBarComponent,
     SemesterplannerOverviewComponent,
     SemesterplannerContentComponent,
-    ModulDialogComponent
+    ModulDetailDialogComponent,
+    SemesterplannerEditDialogComponent
   ],
   imports: [
     BrowserModule,

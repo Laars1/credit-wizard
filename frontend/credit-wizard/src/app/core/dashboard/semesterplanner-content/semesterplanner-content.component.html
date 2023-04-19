@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let row of item.semesterPlannerModulDtos">
-              <td (click)="openModulInformationModal(row.modulId)" class="name">{{row.modulDto.name}}</td>
+              <td (click)="openModulInformationDialog(row.modulId)" class="name">{{row.modulDto.name}}</td>
               <td>{{row.modulDto.abbreviation}}</td>
               <td>
                 <mat-icon *ngIf="!isModulRequiredForDegree(row)" matTooltip="Ja" matTooltipPosition="right">check_box</mat-icon>
@@ -51,7 +51,7 @@
       *Disclaimer ECTs Punkte
     </div>
     <div class="actions float-right">
-      <button mat-raised-button color="primary"><mat-icon>edit</mat-icon>Bearbeiten</button>
+      <button mat-raised-button color="primary" (click)="openEditFormDialog()"><mat-icon>edit</mat-icon>Bearbeiten</button>
       <button mat-raised-button color="accent"><mat-icon>delete</mat-icon>Löschen</button>
     </div>
   </mat-expansion-panel>
