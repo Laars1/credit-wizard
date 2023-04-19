@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let row of item.semesterPlannerModulDtos">
-              <td>{{row.modulDto.name}}</td>
+              <td (click)="openModulInformationModal(row.modulId)" class="name">{{row.modulDto.name}}</td>
               <td>{{row.modulDto.abbreviation}}</td>
               <td>
                 <mat-icon *ngIf="!isModulRequiredForDegree(row)" matTooltip="Ja" matTooltipPosition="right">check_box</mat-icon>

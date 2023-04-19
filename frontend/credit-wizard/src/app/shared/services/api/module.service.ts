@@ -19,4 +19,13 @@ export class ModuleService {
       })
     );
   }
+
+  public getById(id: Guid): Observable<IModulDto> {
+    return this.apiService.get<IModulDto>(this.apiUrl+"/"+id).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
 }

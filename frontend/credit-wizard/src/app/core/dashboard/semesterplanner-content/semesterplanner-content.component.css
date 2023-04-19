@@ -6,3 +6,8 @@
     margin: 5px;
     vertical-align: middle;
 }
+
+.name{
+    text-decoration: underline;
+    cursor: pointer;
+}

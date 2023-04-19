@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Guid } from 'guid-typescript';
 import { ISemesterPlannnerDto } from 'src/app/shared/dtos/semesterPlannerDto';
 import { ISemesterPlannerModulDto } from 'src/app/shared/dtos/semesterPlannerModulDto';
+import { ModulDialogComponent } from '../../modules/modul-dialog/modul-dialog.component';
 
 @Component({
   selector: 'app-semesterplanner-content',
@@ -20,7 +22,7 @@ export class SemesterplannerContentComponent implements OnInit {
     'modulDto.abbreviation',
     'grade',
   ];
-  constructor() {}
+  constructor(private dialogService: MatDialog) {}
 
   ngOnInit() {
     this.totalEtcsPoints = this.getTotalEtcs();
@@ -47,5 +49,15 @@ export class SemesterplannerContentComponent implements OnInit {
   isModulRequiredForDegree(dto: ISemesterPlannerModulDto) {
     let entry = dto.modulDto.degreeModulDtos.find(x => x.degreeId == this.degreeId);
     return entry!.isRequired;
+  }
+
+  openModulInformationModal(modulId: Guid){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {modulId: modulId}
+
+    this.dialogService.open(ModulDialogComponent, dialogConfig);
   }
 }
