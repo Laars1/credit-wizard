@@ -17,7 +17,5 @@ namespace credit_wizard_api.Dtos
 
         [Range(1, 6)]
         public double? Grade { get; set; }
-
-        public bool IsRequriedForDegree { get; set; }
     }
 }

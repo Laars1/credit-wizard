@@ -25,7 +25,7 @@ namespace credit_wizard_api.Services
                     Description = x.Description,
                     EtcsPoints = x.EtcsPoints,
                     Name = x.Name,
-                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequried = y.IsRequried, Degree = y.Degree }).ToList(),
+                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequired = y.IsRequired, Degree = y.Degree }).ToList(),
                 })
                 .ToListAsync();
         }
@@ -43,7 +43,7 @@ namespace credit_wizard_api.Services
                     Description = x.Description,
                     EtcsPoints = x.EtcsPoints,
                     Name = x.Name,
-                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequried = y.IsRequried, Degree = y.Degree }).ToList(),
+                    DegreeModuls = x.DegreeModuls.Select(y => new DegreeModul { DegreeId = y.DegreeId, IsRequired = y.IsRequired, Degree = y.Degree }).ToList(),
                 })
                 .FirstOrDefaultAsync(x => x.Id == id);
         }

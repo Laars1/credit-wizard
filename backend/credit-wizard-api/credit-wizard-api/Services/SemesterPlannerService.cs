@@ -93,7 +93,7 @@ namespace credit_wizard_api.Services
 
             if (degree == null)
                 throw new EntityNotFoundException(nameof(Degree), nameof(Degree.Id), degreeId.ToString());
-            var requiredModulIds = degree.DegreeModuls.Where(x => x.IsRequried).Select(x => x.Modul.Id).ToList();
+            var requiredModulIds = degree.DegreeModuls.Where(x => x.IsRequired).Select(x => x.Modul.Id).ToList();
             var finishedSemesterPlannerModuls = data.Where(x => x.Completed).SelectMany(x => x.SemesterPlannerModuls).ToList();
             var finishedModulesId = finishedSemesterPlannerModuls.Where(x => x.Grade >= 4).Select(x => x.ModulId);
             var completed = finishedModulesId.Count(x => requiredModulIds.Contains(x));

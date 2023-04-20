@@ -9,5 +9,5 @@ public class DegreeModulDto
     public ModulDto ModulDto { get; set; }
     public DegreeDto DegreeDto { get; set; }
 
-    public bool IsRequried { get; set; } = false;
+    public bool IsRequired { get; set; } = false;
 }

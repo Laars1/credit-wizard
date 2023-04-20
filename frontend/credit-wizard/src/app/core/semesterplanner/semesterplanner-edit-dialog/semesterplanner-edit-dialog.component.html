@@ -1,8 +1,46 @@
-<h2 mat-dialog-title>Semester {{data.semesterDto.number}} - Bearbeiten</h2>
+<h2 mat-dialog-title>Semester {{ data.semesterDto.number }} - Bearbeiten</h2>
 
 <mat-dialog-content>
   <div>
-    
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Semester</mat-label>
+          <input matInput formControlName="semester" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="completed"
+          >Semester Abgeschlossen</mat-slide-toggle
+        >
+      </div>
+      <div formArrayName="moduls" *ngFor="let item of test; let i = index">
+        <div class="form-group">
+          <div class="row" [formGroupName]="i">
+            <div class="col-6">
+              <input
+                formControlName="name"
+                id="{{ 'name' + i }}"
+                type="text"
+                class="form-control mb-4"
+                placeholder="Enter Name"
+              />
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Note</mat-label>
+                <input
+                  matInput
+                  formControlName="grade"
+                  id="{{ 'grade' + i }}"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </mat-dialog-content>
 

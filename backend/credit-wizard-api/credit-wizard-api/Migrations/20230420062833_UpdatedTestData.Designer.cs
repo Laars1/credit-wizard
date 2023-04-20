@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using credit_wizard_api.Models;
 
@@ -11,9 +12,11 @@ using credit_wizard_api.Models;
 namespace credit_wizard_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230420062833_UpdatedTestData")]
+    partial class UpdatedTestData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,7 +283,7 @@ namespace credit_wizard_api.Migrations
                     b.Property<Guid>("DegreeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsRequired")
+                    b.Property<bool>("IsRequried")
                         .HasColumnType("bit");
 
                     b.HasKey("ModulId", "DegreeId");
@@ -294,79 +297,79 @@ namespace credit_wizard_api.Migrations
                         {
                             ModulId = new Guid("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("480cc771-16a7-4176-8c2b-9a73c1df7b34"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("2aa07a0c-7f51-4c9d-b968-f6ba201df221"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = true
+                            IsRequried = true
                         },
                         new
                         {
                             ModulId = new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = false
+                            IsRequried = false
                         },
                         new
                         {
                             ModulId = new Guid("7eaf3d1c-f214-4115-892b-8e1f1675897b"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = false
+                            IsRequried = false
                         },
                         new
                         {
                             ModulId = new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"),
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                            IsRequired = false
+                            IsRequried = false
                         });
                 });
 
@@ -824,7 +827,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "edd9e4cf-73d2-4fc3-a794-41fb7aec324f",
+                            ConcurrencyStamp = "8f0e02c7-06fe-4955-9f58-2a489329329e",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
@@ -833,7 +836,7 @@ namespace credit_wizard_api.Migrations
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBIWTE1LmS1zEj2RKJbfO5ZrBc56JcQyHh1RL8G8xhekQi1+1yDN7CP3ucf/zV11Jw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELRdM0YwQh0yKCbQsLmPMFPg1OILt/zVTZIEKA4fbdeDdSCsG3i0D06WEMLxvcwbyw==",
                             PhoneNumberConfirmed = true,
                             Prename = "Hans",
                             TwoFactorEnabled = false,
