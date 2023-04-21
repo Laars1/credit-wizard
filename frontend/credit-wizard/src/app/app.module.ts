@@ -14,6 +14,16 @@ import { SemesterListComponent } from './core/semester/semester-list/semester-li
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { UserInformationComponent } from './core/dashboard/user-information/user-information.component';
+import { DegreeProgressComponent } from './core/dashboard/degree-progress/degree-progress.component';
+import { DashboardProgressBarComponent } from './core/dashboard/dashboard-progress-bar/dashboard-progress-bar.component';
+import { SemesterplannerOverviewComponent } from './core/dashboard/semesterplanner-overview/semesterplanner-overview.component';
+import { SemesterplannerContentComponent } from './core/dashboard/semesterplanner-content/semesterplanner-content.component';
+import { ModulDetailDialogComponent } from './core/modules/modul-detail-dialog/modul-detail-dialog.component';
+import { SemesterplannerEditDialogComponent } from './core/semesterplanner/semesterplanner-edit-dialog/semesterplanner-edit-dialog.component';
+import { SemesterplannerDeleteDialogComponent } from './core/semesterplanner/semesterplanner-delete-dialog/semesterplanner-delete-dialog.component';
+import { InformationsModule } from './shared/components/informations/informations.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +32,16 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
     NavigationBarComponent,
     SigninComponent,
     FooterComponent,
-    ModulesListComponent
+    ModulesListComponent,
+    DashboardComponent,
+    UserInformationComponent,
+    DegreeProgressComponent,
+    DashboardProgressBarComponent,
+    SemesterplannerOverviewComponent,
+    SemesterplannerContentComponent,
+    ModulDetailDialogComponent,
+    SemesterplannerEditDialogComponent,
+    SemesterplannerDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +52,7 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    InformationsModule
   ],
   exports: [],
   providers: [

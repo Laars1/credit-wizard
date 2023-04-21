@@ -9,6 +9,6 @@
         public Modul Modul { get; set; }
         public Degree Degree { get; set; }
 
-        public bool IsRequried { get; set; } = false;
+        public bool IsRequired { get; set; } = false;
     }
 }

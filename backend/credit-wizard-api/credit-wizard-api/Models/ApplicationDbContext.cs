@@ -292,78 +292,78 @@ namespace credit_wizard_api.Models
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                     ModulId = Guid.Parse("f8ccaae7-014d-4ba7-8c24-4249be07b1c1"),
-                    IsRequried = true,
+                    IsRequired = true,
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("6c381c6f-9d9a-4b69-aa13-33a8a94a1277")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("e0a6f205-64b7-42ab-bce3-39f0b3841c71")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("480cc771-16a7-4176-8c2b-9a73c1df7b34")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("8f0680b7-68c2-4157-aafc-78c72f63a16f")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("686e6a0c-7f51-4c9d-b968-f6ba201df221")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("6cb76b54-5f27-4b6d-936d-8f6d7b77ce68")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = true,
+                    IsRequired = true,
                     ModulId = Guid.Parse("2aa07a0c-7f51-4c9d-b968-f6ba201df221")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = false,
+                    IsRequired = false,
                     ModulId = Guid.Parse("eb2dbecc-d0d6-44ef-82eb-34284633ef19")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = false,
+                    IsRequired = false,
                     ModulId = Guid.Parse("7eaf3d1c-f214-4115-892b-8e1f1675897b")
                 },
                 new()
                 {
                     DegreeId = Guid.Parse("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
-                    IsRequried = false,
+                    IsRequired = false,
                     ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e")
                 },
             });
@@ -376,6 +376,13 @@ namespace credit_wizard_api.Models
                     UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                     SemesterId = Guid.Parse("7879d617-ca43-482e-9377-fbd55e2976fa"),
                     SemesterTimeslotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                },
+                new()
+                {
+                    Id = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
+                    UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
+                    SemesterId = Guid.Parse("26082676-ac5f-4a34-bfea-cebba3889b1f"),
+                    SemesterTimeslotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658")
                 }
             });
 
@@ -394,6 +401,26 @@ namespace credit_wizard_api.Models
                 {
                     SemesterPlannerId = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
                     ModulId = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864") // WGWI
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
+                    ModulId = Guid.Parse("e0a6f205-64b7-42ab-bce3-39f0b3841c71") // WDDA
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
+                    ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e") // WWEN
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
+                    ModulId = Guid.Parse("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f") // WBIS
+                },
+                new()
+                {
+                    SemesterPlannerId = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
+                    ModulId = Guid.Parse("8f0680b7-68c2-4157-aafc-78c72f63a16f") // WENG
                 }
             });
             #endregion

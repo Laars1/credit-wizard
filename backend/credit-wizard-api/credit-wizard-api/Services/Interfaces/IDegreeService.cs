@@ -4,5 +4,6 @@ namespace credit_wizard_api.Services.Interfaces
 {
     public interface IDegreeService : IBaseService<Degree>
     {
+        public Task<Degree?> GetByIdWithModulesAsync(Guid id);
     }
 }

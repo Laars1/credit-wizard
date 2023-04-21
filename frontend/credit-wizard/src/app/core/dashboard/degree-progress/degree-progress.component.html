@@ -1,0 +1,45 @@
+<div class="etcs-progress">
+  <h1>
+    Übersicht
+  </h1>
+  <table class="table">
+    <tr>
+      <td>Zu erreichende ETCs Punkte</td>
+      <td>{{data.totalDegreeEtcsPoints}}</td>
+    </tr>
+    <tr>
+      <td>Erreichte ETCs Punkte</td>
+      <td>{{data.reachedEtcsPoints}}</td>
+    </tr>
+    <tr>
+      <td>Offene ETCs Punkte</td>
+      <td>{{data.openEtcsPoints}}</td>
+    </tr>
+    <tr class="table-conclusion">
+      <td>Fehlende ETCs Punkte</td>
+      <td>{{data.missingEtcsPoints}}</td>
+    </tr>
+    <tr>
+      <td>Verlorene Ects Punkte (nicht bestanden)</td>
+      <td>{{data.missedEctsPoints}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="etcs-progress-bars">
+  <h1>Fancy Progressbars</h1>
+  <div>
+    <app-dashboard-progress-bar
+    [title]="'Abgeschlossene Pflichtmodule'"
+    [description]="'Prozentsatz wie viele der Pflichtmodule bereits abgeschlossen wurden. Beachte hier werden nur Daten aus abgeschlossenen Semestern und bestandenen Modulen berücksichtigt'"
+    [value]="data.percentageFinishedRequiredModuls"
+    ></app-dashboard-progress-bar>
+  </div>
+  <div>
+    <app-dashboard-progress-bar
+    [title]="'Progress Studium'"
+    [description]="descriptionProgressDegree"
+    [value]="getProgress()"
+    ></app-dashboard-progress-bar>
+  </div>
+</div>

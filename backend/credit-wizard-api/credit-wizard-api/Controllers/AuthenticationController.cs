@@ -49,7 +49,7 @@ namespace credit_wizard_api.Controllers
             {
                 ErrorType = nameof(Unauthorized),
                 StatusCode = Unauthorized().StatusCode,
-                Message = "Bentzername oder Passwort falsch",
+                Message = "Benutzername oder Passwort falsch",
             });
         }
     }

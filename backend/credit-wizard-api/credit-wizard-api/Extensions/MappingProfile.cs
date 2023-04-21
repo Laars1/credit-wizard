@@ -13,10 +13,18 @@ namespace credit_wizard_api.Extensions
         /// </summary>
         public MappingProfile()
         {
-            CreateMap<Degree, DegreeDto>().ReverseMap();
+            CreateMap<Degree, DegreeDto>()
+                .ForMember(dest => dest.DegreeModulDtos, act => act.MapFrom(src => src.DegreeModuls))
+                .ReverseMap();
+
+            CreateMap<DegreeModul, DegreeModulDto>()
+                .ForMember(dest => dest.DegreeDto, act => act.MapFrom(src => src.Degree))
+                .ForMember(dest => dest.ModulDto, act => act.MapFrom(src => src.Modul))
+                .ReverseMap();
             
             CreateMap<Modul, ModulDto>()
                 .ForMember(dest => dest.SemesterTimeSlotDtos, act => act.MapFrom(src => src.SemesterTimeSlot))
+                .ForMember(dest => dest.DegreeModulDtos, act => act.MapFrom(src => src.DegreeModuls))
                 .ReverseMap();
 
             CreateMap<SemesterTimeSlot, SemesterTimeSlotDto>().ReverseMap();

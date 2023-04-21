@@ -1,8 +1,8 @@
-import { LoginDto } from './../../dtos/loginDto';
+import { ILoginDto } from './../../dtos/loginDto';
 import { Injectable, Type } from '@angular/core';
 import { ApiService } from './base/api.service';
 import { LocalStorageService } from '../common/local-storage.service';
-import { TokenDto } from '../../dtos/tokenDto';
+import { ITokenDto } from '../../dtos/tokenDto';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private readonly apiUrl = 'authentication';
-  constructor(private apiService: ApiService, private localStorageService: LocalStorageService, public router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private localStorageService: LocalStorageService,
+    public router: Router
+  ) {}
 
-  signIn(user: LoginDto) {
+  signIn(user: ILoginDto) {
     return this.apiService
-      .post<TokenDto, LoginDto>(this.apiUrl + '/login', user)
+      .post<ITokenDto, ILoginDto>(this.apiUrl + '/login', user)
       .subscribe((res: any) => {
         this.localStorageService.set('access_token', res.token);
+        this.router.navigate(['dashboard']);
       });
   }
 

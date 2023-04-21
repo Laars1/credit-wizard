@@ -1,5 +1,5 @@
 import { MessageService } from './../services/common/message.service';
-import { ErrorResultDto } from './../dtos/errorResultDto';
+import { IErrorResultDto } from './../dtos/errorResultDto';
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         try {
           // Try convert defined errordto from server
-          var errorDto = error.error as ErrorResultDto;
+          var errorDto = error.error as IErrorResultDto;
           var title = errorDto.statusCode.toString() + ' ' + errorDto.errorType;
           this.messageService.error(errorDto.message, title);
           return throwError(() => new Error(title));

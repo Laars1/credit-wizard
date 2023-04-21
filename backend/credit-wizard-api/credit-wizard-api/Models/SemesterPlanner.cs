@@ -11,6 +11,9 @@ namespace credit_wizard_api.Models
 
         [Required]
         public User User { get; set; }
+        
+        [Required]
+        public bool Completed { get; set; }
 
         [Required]
         public Guid SemesterId { get; set; }
