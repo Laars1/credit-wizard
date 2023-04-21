@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private readonly apiUrl = 'authentication';
-  constructor(private apiService: ApiService, private localStorageService: LocalStorageService, public router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private localStorageService: LocalStorageService,
+    public router: Router
+  ) {}
 
   signIn(user: ILoginDto) {
     return this.apiService
       .post<ITokenDto, ILoginDto>(this.apiUrl + '/login', user)
       .subscribe((res: any) => {
         this.localStorageService.set('access_token', res.token);
+        this.router.navigate(['dashboard']);
       });
   }
 

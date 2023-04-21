@@ -7,7 +7,7 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: SigninComponent },
   { path: 'semester', component: SemesterListComponent, canActivate: [AuthGuard] },
   { path: 'modules', component: ModulesListComponent, canActivate: [AuthGuard] },
@@ -15,7 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

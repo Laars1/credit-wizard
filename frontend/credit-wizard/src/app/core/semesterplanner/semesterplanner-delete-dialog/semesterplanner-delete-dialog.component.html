@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Persönliches Semester löschen</h2>
+
+<mat-dialog-content>
+  <div>
+    <dl>
+      <dt>Persönliches Semester Id</dt>
+      <dd>{{ data.id }}</dd>
+      <dt>Name</dt>
+      <dd>Semester {{ data.semesterDto.number }}</dd>
+      <dt>Semester Zeitslot</dt>
+      <dd>{{ data.semesterTimeSlotDto.timeslot }}</dd>
+      <dt>Selektierte Module</dt>
+      <dd>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Modul</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data.semesterPlannerModulDtos">
+              <td>{{ item.modulDto.name }}</td>
+              <td>{{ item.grade }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </dd>
+    </dl>
+  </div>
+  <app-danger
+    [title]="'Achtung'"
+    [message]="
+      'Wenn diese Ihr geplantes Semester löschen, werden alle dazugehörigen Daten mitgelöscht. Diese können auch nicht wiederhergestellt werden'
+    "
+  ></app-danger>
+  <mat-checkbox
+    class="example-margin"
+    [checked]="accept"
+    (change)="checkAccept($event.checked)"
+  >
+    Ich bin mir die konsequenzen vom löschen bewusst!
+  </mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions class="actions float-right">
+  <button mat-raised-button (click)="close()">Schliessen</button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="delete()"
+    [disabled]="!accept"
+  >
+    Löschen
+  </button>
+</mat-dialog-actions>

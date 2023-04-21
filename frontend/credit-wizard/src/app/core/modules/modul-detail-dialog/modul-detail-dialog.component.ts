@@ -18,6 +18,7 @@ export class ModulDetailDialogComponent implements OnInit {
     {}
 
   ngOnInit() {
+    this.dialogRef.updateSize("30%")
     this.moduleService.getById(this.data.modulId).subscribe((x: IModulDto) => {
       this.item = x;
       this.loaded = true;

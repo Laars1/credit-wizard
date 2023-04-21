@@ -41,43 +41,25 @@ namespace credit_wizard_api.Controllers
             return Ok(_mapper.Map<List<SemesterPlannerDto>>(data));
         }
 
-
         /// <summary>
-        /// Get planned semester for logged in user by semesterid
+        /// Delete planned Semester from usser
         /// </summary>
-        /// <param name="semesterId">semesterid from which the data should be loaded</param>
-        /// <returns>SemesterPlannerDto with the provided data</returns>
-        [HttpGet("{semesterId:Guid}")]
+        /// <param name="id">Id of the deleted SemesterPlanner</param>
+        /// <returns>integer of success</returns>
+        [HttpDelete("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
-        public async Task<IActionResult> GetByUserAndSemesterIdAsync(Guid semesterId)
+        public async Task<IActionResult> DeleteSemesterPlannerAsync(Guid id)
         {
+            var validId = Guid.Empty;
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var data = await _semesterPlannerService.GetByUserIdAndSemesterIdAsync(Guid.Parse(userId), semesterId);
+            var data = await _semesterPlannerService.GetByIdAndUserIdAsync(id, Guid.Parse(userId));
 
             if (data == null) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
 
-            return Ok(_mapper.Map<SemesterPlannerDto>(data));
-        }
-
-        /// <summary>
-        /// Get planned semester for logged in user by semesternumber
-        /// </summary>
-        /// <param name="semesterNumber">Semesternumer from which the data should be loaded</param>
-        /// <returns>SemesterPlannerDto with the provided data</returns>
-        [HttpGet("{semesterNumber:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerDto))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
-        public async Task<IActionResult> GetByUserAndSemesterNumberAsync(int semesterNumber)
-        {
-            if (semesterNumber == 0 || semesterNumber > 100) return BadRequest("Die eingegebene Semester Nummer ist ungültig");
-
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var data = await _semesterPlannerService.GetByUserIdAndSemesterNumberAsync(Guid.Parse(userId), semesterNumber);
-
-            if (data == null) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
-
-            return Ok(_mapper.Map<SemesterPlannerDto>(data));
+            var delete = await _semesterPlannerService.DeleteAsync(data.Id);
+            return Ok(delete);
         }
     }
 }

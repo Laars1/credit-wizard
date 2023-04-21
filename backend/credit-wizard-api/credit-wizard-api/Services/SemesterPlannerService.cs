@@ -33,22 +33,9 @@ namespace credit_wizard_api.Services
                 .ToListAsync();
         }
 
-        public async Task<SemesterPlanner?> GetByUserIdAndSemesterIdAsync(Guid userId, Guid semesterId)
+        public async Task<SemesterPlanner?> GetByIdAndUserIdAsync(Guid id,Guid userId)
         {
-            return await _dbContext.SemesterPlanners
-                .Include(x => x.Semester)
-                .Include(x => x.SemesterPlannerModuls)
-                .ThenInclude(x => x.Modul)
-                .FirstOrDefaultAsync(x => x.UserId == userId && x.SemesterId == semesterId);
-        }
-
-        public async Task<SemesterPlanner?> GetByUserIdAndSemesterNumberAsync(Guid userId, int semesterNumber)
-        {
-            return await _dbContext.SemesterPlanners
-                .Include(x => x.Semester)
-                .Include(x => x.SemesterPlannerModuls)
-                .ThenInclude(x => x.Modul)
-                .FirstOrDefaultAsync(x => x.UserId == userId && x.Semester.Number == semesterNumber);
+            return await _dbContext.SemesterPlanners.FirstOrDefaultAsync(x => id == x.Id && x.UserId == userId);
         }
 
         public int GetCompletedEctsPointsByUserAsync(List<SemesterPlanner> data)
@@ -99,6 +86,15 @@ namespace credit_wizard_api.Services
             var completed = finishedModulesId.Count(x => requiredModulIds.Contains(x));
             return 100 / requiredModulIds.Count * completed;
 
+        }
+
+        public async Task<int> DeleteAsync(Guid id)
+        {
+            var deleted = await _dbContext.SemesterPlanners.Include(x => x.SemesterPlannerModuls).FirstOrDefaultAsync(x => x.Id == id);
+            if(deleted == null) throw new EntityNotFoundException(nameof(SemesterPlanner), nameof(SemesterPlanner.Id), id.ToString());
+
+            _dbContext.SemesterPlanners.Remove(deleted);
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }

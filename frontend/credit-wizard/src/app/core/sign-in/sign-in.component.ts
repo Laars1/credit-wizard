@@ -20,7 +20,11 @@ export class SigninComponent implements OnInit {
       password: [''],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.authService.isLoggedIn){
+      this.router.navigate(['dashboard'])
+    }
+  }
 
   loginUser() {
     const data = this.formGroup.getRawValue() as ILoginDto;

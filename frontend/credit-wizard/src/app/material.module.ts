@@ -12,6 +12,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatProgressBarModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   exports: [
     MatTableModule,
@@ -42,7 +45,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatExpansionModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

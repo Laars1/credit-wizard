@@ -2,12 +2,29 @@
     display: inline;
 }
 
-.actions > button{
-    margin: 5px;
+
+
+.middle{
     vertical-align: middle;
 }
 
 .name{
     text-decoration: underline;
     cursor: pointer;
+}
+
+.expansion-panel{
+    background-color: #fafafa;
+}
+
+.failed{
+    color: #bf3630;
+}
+
+.passed{
+    color: #51a351
+}
+
+.panel-desc{
+    text-align: right;
 }

@@ -3,13 +3,13 @@
 </div>
 <div class="row">
   <div class="col-3 container-dashboard-left">
-    <div>
+    <div [hidden]="spinnerVisible">
         <app-user-information [item]="user"></app-user-information>
         <hr>
         <app-degree-progress (loaded)="setLoadedDegreeProgress($event)"></app-degree-progress>
     </div>
   </div>
-  <div class="col-9">
+  <div class="col-9" [hidden]="spinnerVisible">
     <app-semesterplanner-overview  [degreeId]="user.degreeId" (loaded)="setLoadedSemesterPlanner($event)"></app-semesterplanner-overview>
   </div>
 
