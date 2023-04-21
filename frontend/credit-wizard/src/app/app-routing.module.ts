@@ -5,6 +5,7 @@ import { SigninComponent } from './core/sign-in/sign-in.component';
 import { AuthGuard } from './shared/security/auth.guard';
 import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'semester', component: SemesterListComponent, canActivate: [AuthGuard] },
   { path: 'modules', component: ModulesListComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({
