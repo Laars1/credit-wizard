@@ -29,6 +29,15 @@ export class SemesterplannerService {
     );
   }
 
+  public edit(id: Guid, data: ISemesterPlannnerDto) {
+    return this.apiService.put<number>(this.apiUrl + '/' + id, data).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
+
   public delete(id: Guid): Observable<number> {
     return this.apiService.delete<number>(this.apiUrl + '/' + id).pipe(
       catchError((err) => {

@@ -22,7 +22,7 @@ namespace credit_wizard_api.Models
         public ICollection<SemesterPlannerModul> SemesterPlannerModuls { get; set; } = new List<SemesterPlannerModul>();
 
         [Required]
-        public Guid SemesterTimeslotId { get; set; }
+        public Guid SemesterTimeSlotId { get; set; }
 
         public SemesterTimeSlot SemesterTimeSlot { get; set; }
 

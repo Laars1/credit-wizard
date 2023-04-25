@@ -375,14 +375,14 @@ namespace credit_wizard_api.Models
                     Id = Guid.Parse("efc28c5e-8908-492e-a6f5-1c7396ab6f02"),
                     UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                     SemesterId = Guid.Parse("7879d617-ca43-482e-9377-fbd55e2976fa"),
-                    SemesterTimeslotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835")
+                    SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835")
                 },
                 new()
                 {
                     Id = Guid.Parse("ee8cdf72-5bea-43c2-a905-3c80192782d1"),
                     UserId = Guid.Parse("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                     SemesterId = Guid.Parse("26082676-ac5f-4a34-bfea-cebba3889b1f"),
-                    SemesterTimeslotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658")
+                    SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658")
                 }
             });
 

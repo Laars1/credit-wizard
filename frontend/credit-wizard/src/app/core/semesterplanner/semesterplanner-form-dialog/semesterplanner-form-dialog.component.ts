@@ -32,13 +32,12 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: ISemesterPlannnerDto
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.isCreating = this.data?.id == undefined;
     this.title += this.data?.id != undefined ? 'bearbeiten' : 'erstellen';
-    console.log(this.data.userId);
+    console.log(this.data);
     this.loadData();
     this.initForm();
   }
@@ -51,6 +50,7 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
       .get()
       .subscribe((x: ISemesterTimeSlotDto[]) => {
         this.semesterTimeSlots = x;
+        console.log(x)
       });
   }
 
@@ -61,41 +61,70 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
       completed: [false],
     });
 
-    if(!this.isCreating){
-      this.form.controls['completed'].addValidators(Validators.required)
-    }
-    else{
+    if (!this.isCreating) {
+      this.form.controls['completed'].addValidators(Validators.required);
+
+      this.form.patchValue({
+        semesterId: this.data.semesterId,
+        semesterTimeSlotId: this.data.semesterTimeSlotId,
+        completed: this.data.completed,
+      });
+    } else {
       this.form.controls['completed'].disable();
     }
   }
 
   save() {
-    console.log(this.form)
-    if(this.form.valid){
-      this.showError = false
+    console.log(this.form);
+    if (this.form.valid) {
+      this.showError = false;
       let data = {
+        id: this.data.id,
         userId: this.data.userId,
         semesterId: this.form.get('semesterId')?.value,
         semesterTimeSlotId: this.form.get('semesterTimeSlotId')?.value,
-        completed: this.form.get('completed')?.value
+        completed: this.form.get('completed')?.value,
       } as ISemesterPlannnerDto;
 
-      this.semesterPlannerService.create(data).subscribe((x: number) => {
-        this.messageService.success(
-          'Ihr geplantes Semester wurde erstellt. Insgesamt wurden ' +
-            x +
-            ' Elemente hinzugefügt',
-          'Erstellen erfolgreich'
-        );
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => this.router.navigate(['']));
-        this.close();
-      });
+      if(this.isCreating){
+        this.createItem(data)
+      }
+      else{
+        this.editItem(data)
+      }
+    } else {
+      this.showError = true;
     }
-    else{
-      this.showError = true
-    }
+  }
+
+  createItem(data: ISemesterPlannnerDto){
+    this.semesterPlannerService.create(data).subscribe((x: number) => {
+      this.messageService.success(
+        'Ihr geplantes Semester wurde erstellt. Insgesamt wurden ' +
+          x +
+          ' Elemente hinzugefügt',
+        'Erstellen erfolgreich'
+      );
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['']));
+      this.close();
+    });
+  }
+
+  editItem(data: ISemesterPlannnerDto){
+    this.semesterPlannerService.edit(data.id, data).subscribe((x: number) => {
+      this.messageService.success(
+        'Ihr geplantes Semester wurde editiert. Insgesamt wurden ' +
+          x +
+          ' Elemente bearbeitet',
+        'Bearbeiten erfolgreich'
+      );
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['']));
+      this.close();
+    });
   }
 
   close() {
