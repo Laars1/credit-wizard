@@ -37,7 +37,6 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
   ngOnInit() {
     this.isCreating = this.data?.id == undefined;
     this.title += this.data?.id != undefined ? 'bearbeiten' : 'erstellen';
-    console.log(this.data);
     this.loadData();
     this.initForm();
   }
@@ -50,7 +49,6 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
       .get()
       .subscribe((x: ISemesterTimeSlotDto[]) => {
         this.semesterTimeSlots = x;
-        console.log(x)
       });
   }
 
