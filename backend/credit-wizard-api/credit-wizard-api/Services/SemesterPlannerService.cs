@@ -88,6 +88,19 @@ namespace credit_wizard_api.Services
 
         }
 
+        public async Task<int> CreateAsync(SemesterPlanner semesterPlanner)
+        {
+            if (await _dbContext.SemesterPlanners.AnyAsync(x =>
+                    x.UserId == semesterPlanner.UserId && x.SemesterId == semesterPlanner.SemesterId))
+            {
+                throw new ReferenceAlreadyExistsException(nameof(SemesterPlanner), nameof(Semester),
+                    semesterPlanner.SemesterId.ToString());
+            }
+            
+            _dbContext.SemesterPlanners.Add(semesterPlanner);
+            return await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<int> DeleteAsync(Guid id)
         {
             var deleted = await _dbContext.SemesterPlanners.Include(x => x.SemesterPlannerModuls).FirstOrDefaultAsync(x => x.Id == id);

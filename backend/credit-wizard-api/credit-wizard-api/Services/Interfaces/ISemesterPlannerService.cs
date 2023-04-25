@@ -15,6 +15,8 @@ namespace credit_wizard_api.Services.Interfaces
 
         public Task<int> GetPercentageFinishedRequiredModulsByUserAsync(List<SemesterPlanner> data, Guid degreeId);
 
+        public Task<int> CreateAsync(SemesterPlanner semesterPlanner);
+
         public Task<int> DeleteAsync(Guid id);
     }
 }

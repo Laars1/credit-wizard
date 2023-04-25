@@ -100,6 +100,17 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 StatusCodes.Status400BadRequest,
                 exception!));
     }
+    
+    private void HandlReferenceAlreadyExistsException(ExceptionContext context)
+    {
+        var exception = context.Exception as ReferenceAlreadyExistsException;
+
+        context.Result = new ConflictObjectResult(
+            GenerateProblemDetails(
+                "Conflict",
+                StatusCodes.Status409Conflict,
+                exception!));
+    }
 
     /// <summary>
     /// Generates problem details for a specific exception.
