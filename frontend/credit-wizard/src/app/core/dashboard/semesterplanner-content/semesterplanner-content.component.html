@@ -23,7 +23,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12" *ngIf="item.semesterPlannerModulDtos.length">
         <table class="table">
           <thead>
             <tr>
@@ -85,6 +85,9 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div *ngIf="!item.semesterPlannerModulDtos.length">
+        <app-warning [title]="'Keine Module erfasst'" [message]="'Für dieses Semester sind keine Module erfasst'"></app-warning>  
       </div>
     </div>
     <div

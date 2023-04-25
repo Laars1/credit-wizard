@@ -10,20 +10,19 @@ namespace credit_wizard_api.Dtos
         [Required]
         public Guid UserId { get; set; }
 
-        [Required]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         public bool Completed { get; set; }
 
         [Required]
         public Guid SemesterId { get; set; }
-        public SemesterDto SemesterDto { get; set; }
+        public SemesterDto? SemesterDto { get; set; }
 
         public List<SemesterPlannerModulDto> SemesterPlannerModulDtos { get; set; } = new List<SemesterPlannerModulDto>();
 
         [Required]
         public Guid SemesterTimeslotId { get; set; }
 
-        public SemesterTimeSlotDto SemesterTimeSlotDto { get; set; }
+        public SemesterTimeSlotDto? SemesterTimeSlotDto { get; set; }
     }
 }

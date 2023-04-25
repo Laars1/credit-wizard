@@ -18,13 +18,13 @@ namespace credit_wizard_api.Controllers
     {
         private readonly ISemesterPlannerService _semesterPlannerService;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
 
-        public SemesterPlannerController(ISemesterPlannerService semesterPlannerService, UserManager<User> userManager, IMapper mapper)
+        public SemesterPlannerController(ISemesterPlannerService semesterPlannerService, IUserService userService, IMapper mapper)
         {
             _semesterPlannerService = semesterPlannerService;
             _mapper = mapper;
-            _userManager = userManager;
+            _userService = userService;
         }
 
         /// <summary>
@@ -41,13 +41,41 @@ namespace credit_wizard_api.Controllers
             return Ok(_mapper.Map<List<SemesterPlannerDto>>(data));
         }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        public async Task<IActionResult> CreateSemesterPlannerAsync(SemesterPlannerDto dto)
+        {
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            var data = await _userService.UserExistsAsync(Guid.Parse(userId));
+            if (!data) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
+
+            var created = await _semesterPlannerService.CreateAsync(_mapper.Map<SemesterPlanner>(dto));
+            return Ok(created);
+        }
+
+        [HttpPut("{id:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
+        public async Task<IActionResult> UpdateSemesterPlannerAsync(Guid id, SemesterPlannerDto dto)
+        {
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            var data = await _semesterPlannerService.GetByIdAndUserIdAsync(id, Guid.Parse(userId));
+            if (data == null) return NotFound(new ErrorResultDto { ErrorType = nameof(NotFound), Message = "There is no matching entry", StatusCode = 404 });
+
+            var updated = await _semesterPlannerService.UpdateAsync(_mapper.Map<SemesterPlanner>(dto));
+            return Ok(updated);
+        }
+
+
         /// <summary>
         /// Delete planned Semester from usser
         /// </summary>
         /// <param name="id">Id of the deleted SemesterPlanner</param>
         /// <returns>integer of success</returns>
         [HttpDelete("{id:Guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
         public async Task<IActionResult> DeleteSemesterPlannerAsync(Guid id)
         {

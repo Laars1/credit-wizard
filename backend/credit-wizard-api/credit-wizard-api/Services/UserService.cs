@@ -83,4 +83,9 @@ public class UserService : IUserService
         };
         return progress;
     }
+
+    public async Task<bool> UserExistsAsync(Guid userId)
+    {
+        return await _dbContext.Users.AnyAsync(x => x.Id == userId);
+    }
 }

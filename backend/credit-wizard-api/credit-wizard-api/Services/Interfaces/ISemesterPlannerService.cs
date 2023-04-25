@@ -18,5 +18,6 @@ namespace credit_wizard_api.Services.Interfaces
         public Task<int> CreateAsync(SemesterPlanner semesterPlanner);
 
         public Task<int> DeleteAsync(Guid id);
+        public Task<int> UpdateAsync(SemesterPlanner semesterPlanner);
     }
 }

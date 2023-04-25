@@ -30,10 +30,11 @@ namespace credit_wizard_api.Services
                 .Include(x => x.SemesterPlannerModuls)
                 .ThenInclude(x => x.Modul)
                 .ThenInclude(x => x.DegreeModuls)
+                .OrderBy(x => x.Semester.Number)
                 .ToListAsync();
         }
 
-        public async Task<SemesterPlanner?> GetByIdAndUserIdAsync(Guid id,Guid userId)
+        public async Task<SemesterPlanner?> GetByIdAndUserIdAsync(Guid id, Guid userId)
         {
             return await _dbContext.SemesterPlanners.FirstOrDefaultAsync(x => id == x.Id && x.UserId == userId);
         }
@@ -49,7 +50,7 @@ namespace credit_wizard_api.Services
                 .ForEach(x => sum += x);
             return sum;
         }
-        
+
         public int GetOpenEctsPointsByUserAsync(List<SemesterPlanner> data)
         {
             if (!data.Any()) return 0;
@@ -60,7 +61,7 @@ namespace credit_wizard_api.Services
                 .ForEach(x => sum += x);
             return sum;
         }
-        
+
         public int GetMissedEctsPointsByUserAsync(List<SemesterPlanner> data)
         {
             if (!data.Any()) return 0;
@@ -72,7 +73,7 @@ namespace credit_wizard_api.Services
                 .ForEach(x => sum += x);
             return sum;
         }
-        
+
         public async Task<int> GetPercentageFinishedRequiredModulsByUserAsync(List<SemesterPlanner> data, Guid degreeId)
         {
             if (!data.Any()) return 0;
@@ -90,13 +91,12 @@ namespace credit_wizard_api.Services
 
         public async Task<int> CreateAsync(SemesterPlanner semesterPlanner)
         {
-            if (await _dbContext.SemesterPlanners.AnyAsync(x =>
-                    x.UserId == semesterPlanner.UserId && x.SemesterId == semesterPlanner.SemesterId))
+            if (await AlreadyBookedSemester(semesterPlanner.UserId, semesterPlanner.SemesterId))
             {
                 throw new ReferenceAlreadyExistsException(nameof(SemesterPlanner), nameof(Semester),
                     semesterPlanner.SemesterId.ToString());
             }
-            
+
             _dbContext.SemesterPlanners.Add(semesterPlanner);
             return await _dbContext.SaveChangesAsync();
         }
@@ -104,10 +104,42 @@ namespace credit_wizard_api.Services
         public async Task<int> DeleteAsync(Guid id)
         {
             var deleted = await _dbContext.SemesterPlanners.Include(x => x.SemesterPlannerModuls).FirstOrDefaultAsync(x => x.Id == id);
-            if(deleted == null) throw new EntityNotFoundException(nameof(SemesterPlanner), nameof(SemesterPlanner.Id), id.ToString());
+            if (deleted == null) throw new EntityNotFoundException(nameof(SemesterPlanner), nameof(SemesterPlanner.Id), id.ToString());
 
             _dbContext.SemesterPlanners.Remove(deleted);
             return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateAsync(SemesterPlanner semesterPlanner)
+        {
+            var current = await GetByIdAndUserIdAsync(semesterPlanner.Id, semesterPlanner.UserId);
+            
+            if (current == null) throw new EntityNotFoundException(nameof(SemesterPlanner), $"{nameof(SemesterPlanner.Id)} & {nameof(SemesterPlanner.UserId)}", $"{semesterPlanner.Id} & {semesterPlanner.UserId}");
+            
+            if (await AlreadyBookedSemester(semesterPlanner.UserId, semesterPlanner.SemesterId))
+            {
+                throw new ReferenceAlreadyExistsException(nameof(SemesterPlanner), nameof(Semester),
+                    semesterPlanner.SemesterId.ToString());
+            }
+            
+            current.Completed = semesterPlanner.Completed;
+            current.SemesterId = semesterPlanner.SemesterId;
+            current.SemesterTimeslotId = semesterPlanner.SemesterTimeslotId;
+
+            _dbContext.SemesterPlanners.Update(current);
+            return await _dbContext.SaveChangesAsync();
+
+        }
+
+        /// <summary>
+        /// Check if there is already the same semester reference in the database
+        /// </summary>
+        /// <param name="userId">id of the current user</param>
+        /// <param name="semesterId">id of the checked semester</param>
+        /// <returns></returns>
+        private async Task<bool> AlreadyBookedSemester(Guid userId, Guid semesterId)
+        {
+            return await _dbContext.SemesterPlanners.AnyAsync(x => x.UserId == userId && x.SemesterId == semesterId);
         }
     }
 }

@@ -29,7 +29,6 @@ export class SemesterplannerContentComponent implements OnInit {
   ngOnInit() {
     this.totalEtcsPoints = this.getTotalEtcs();
     this.currentEtcsPoints = this.getCurrentEtcs();
-    console.log(this.item);
   }
 
   getTotalEtcs() {

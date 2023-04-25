@@ -5,6 +5,7 @@ namespace credit_wizard_api.Services.Interfaces;
 
 public interface IUserService : IBaseService<User>
 {
+    public Task<bool> UserExistsAsync(Guid userId);
     public Task<User?> GetByIdWithDependenciesAsync(Guid id);
     public Task<User?> GetByNameAsync(string username);
     public Task<List<string>> GetRolesFromUserAsync(string username);
