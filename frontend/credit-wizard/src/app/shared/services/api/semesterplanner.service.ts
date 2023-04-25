@@ -5,28 +5,36 @@ import { ISemesterPlannnerDto } from '../../dtos/semesterPlannerDto';
 import { Guid } from 'guid-typescript';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SemesterplannerService {
+  private readonly apiUrl = 'semesterplanner';
+  constructor(private apiService: ApiService) {}
 
-private readonly apiUrl = 'semesterplanner';
-constructor(private apiService: ApiService) {}
+  public get(): Observable<ISemesterPlannnerDto[]> {
+    return this.apiService.get<ISemesterPlannnerDto[]>(this.apiUrl).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
 
-public get(): Observable<ISemesterPlannnerDto[]> {
-  return this.apiService.get<ISemesterPlannnerDto[]>(this.apiUrl).pipe(
-    catchError((err) => {
-      console.error(err);
-      return EMPTY;
-    })
-  );
-}
+  public create(data: ISemesterPlannnerDto) {
+    return this.apiService.post<number>(this.apiUrl, data).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
 
-public delete(id: Guid): Observable<number> {
-  return this.apiService.delete<number>(this.apiUrl+"/"+id).pipe(
-    catchError((err) => {
-      console.error(err);
-      return EMPTY;
-    })
-  );
-}
+  public delete(id: Guid): Observable<number> {
+    return this.apiService.delete<number>(this.apiUrl + '/' + id).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
 }

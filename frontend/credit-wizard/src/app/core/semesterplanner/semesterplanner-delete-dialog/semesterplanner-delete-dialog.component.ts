@@ -8,6 +8,7 @@ import { MessageService } from 'src/app/shared/services/common/message.service';
 @Component({
   selector: 'app-semesterplanner-delete-dialog',
   templateUrl: './semesterplanner-delete-dialog.component.html',
+  styleUrls: ['./semesterplanner-delete-dialog.component.css'],
 })
 export class SemesterplannerDeleteDialogComponent implements OnInit {
   accept = false;
@@ -21,7 +22,6 @@ export class SemesterplannerDeleteDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dialogRef.updateSize('500px', '600px');
   }
 
   checkAccept(accepted: boolean) {

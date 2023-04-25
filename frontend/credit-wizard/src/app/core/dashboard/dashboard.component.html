@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="col-9" [hidden]="spinnerVisible">
-    <app-semesterplanner-overview  [degreeId]="user.degreeId" (loaded)="setLoadedSemesterPlanner($event)"></app-semesterplanner-overview>
+    <app-semesterplanner-overview  [degreeId]="user.degreeId" [userId]="user.id" (loaded)="setLoadedSemesterPlanner($event)"></app-semesterplanner-overview>
   </div>
 
 </div>

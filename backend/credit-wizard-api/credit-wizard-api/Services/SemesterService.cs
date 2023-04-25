@@ -12,7 +12,7 @@ namespace credit_wizard_api.Services
             _dbContext = dbContext;
         }
 
-        public async Task<List<Semester>> GetAsync() => await _dbContext.Semesters.ToListAsync();
+        public async Task<List<Semester>> GetAsync() => await _dbContext.Semesters.OrderBy(x => x.Number).ToListAsync();
 
         public async Task<Semester?> GetByIdAsync(Guid id) => await _dbContext.Semesters.FirstOrDefaultAsync(x => x.Id == id);
     }

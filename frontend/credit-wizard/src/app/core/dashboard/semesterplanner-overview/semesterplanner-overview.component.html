@@ -5,4 +5,9 @@
   <div *ngIf="data.length == 0" class="no-data">
     <app-warning [title]="'Hoppla'" [message]="'Leider wurden keine passenden Daten gefunden! Halb so wild. Plane jetzt dein Studium mit dem CreditWizard, damit auch du dein Studium im Griff hast!'"></app-warning>
   </div>
+  <div>
+    <button mat-raised-button color="primary" (click)="openCreateFormDialog()">
+      <mat-icon>create</mat-icon>Neue Semesterplanung erstellen
+    </button>
+  </div>
 </div>

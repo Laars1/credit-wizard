@@ -13,6 +13,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSelect } from '@angular/material/select';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -31,7 +33,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatExpansionModule,
     MatTooltipModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   exports: [
     MatTableModule,
@@ -46,7 +49,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTooltipModule,
     MatDialogModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

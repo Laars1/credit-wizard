@@ -21,9 +21,9 @@ import { DashboardProgressBarComponent } from './core/dashboard/dashboard-progre
 import { SemesterplannerOverviewComponent } from './core/dashboard/semesterplanner-overview/semesterplanner-overview.component';
 import { SemesterplannerContentComponent } from './core/dashboard/semesterplanner-content/semesterplanner-content.component';
 import { ModulDetailDialogComponent } from './core/modules/modul-detail-dialog/modul-detail-dialog.component';
-import { SemesterplannerEditDialogComponent } from './core/semesterplanner/semesterplanner-edit-dialog/semesterplanner-edit-dialog.component';
 import { SemesterplannerDeleteDialogComponent } from './core/semesterplanner/semesterplanner-delete-dialog/semesterplanner-delete-dialog.component';
 import { InformationsModule } from './shared/components/informations/informations.module';
+import { SemesterPlannerFormDialogComponent } from './core/semesterplanner/semesterplanner-form-dialog/semesterplanner-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,8 @@ import { InformationsModule } from './shared/components/informations/information
     SemesterplannerOverviewComponent,
     SemesterplannerContentComponent,
     ModulDetailDialogComponent,
-    SemesterplannerEditDialogComponent,
     SemesterplannerDeleteDialogComponent,
+    SemesterPlannerFormDialogComponent
   ],
   imports: [
     BrowserModule,

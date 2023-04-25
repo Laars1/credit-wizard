@@ -4,8 +4,8 @@ import { Guid } from 'guid-typescript';
 import { ISemesterPlannnerDto } from 'src/app/shared/dtos/semesterPlannerDto';
 import { ISemesterPlannerModulDto } from 'src/app/shared/dtos/semesterPlannerModulDto';
 import { ModulDetailDialogComponent } from '../../modules/modul-detail-dialog/modul-detail-dialog.component';
-import { SemesterplannerEditDialogComponent } from '../../semesterplanner/semesterplanner-edit-dialog/semesterplanner-edit-dialog.component';
 import { SemesterplannerDeleteDialogComponent } from '../../semesterplanner/semesterplanner-delete-dialog/semesterplanner-delete-dialog.component';
+import { SemesterPlannerFormDialogComponent } from '../../semesterplanner/semesterplanner-form-dialog/semesterplanner-form-dialog.component';
 
 @Component({
   selector: 'app-semesterplanner-content',
@@ -54,8 +54,6 @@ export class SemesterplannerContentComponent implements OnInit {
 
   openModulInformationDialog(modulId: Guid){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
     dialogConfig.data = {modulId: modulId}
 
     this.dialogService.open(ModulDetailDialogComponent, dialogConfig);
@@ -63,17 +61,13 @@ export class SemesterplannerContentComponent implements OnInit {
 
   openEditFormDialog(){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
     dialogConfig.data = this.item;
 
-    this.dialogService.open(SemesterplannerEditDialogComponent, dialogConfig);
+    this.dialogService.open(SemesterPlannerFormDialogComponent, dialogConfig);
   }
 
   openDeleteDialog(){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
     dialogConfig.data = this.item;
 
     this.dialogService.open(SemesterplannerDeleteDialogComponent, dialogConfig);
