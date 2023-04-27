@@ -24,6 +24,7 @@ import { ModulDetailDialogComponent } from './core/modules/modul-detail-dialog/m
 import { SemesterplannerDeleteDialogComponent } from './core/semesterplanner/semesterplanner-delete-dialog/semesterplanner-delete-dialog.component';
 import { InformationsModule } from './shared/components/informations/informations.module';
 import { SemesterPlannerFormDialogComponent } from './core/semesterplanner/semesterplanner-form-dialog/semesterplanner-form-dialog.component';
+import { SemesterplannermodulFormDialogComponent } from './core/semesterplannermodul/semesterplannermodul-form-dialog/semesterplannermodul-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SemesterPlannerFormDialogComponent } from './core/semesterplanner/semes
     SemesterplannerContentComponent,
     ModulDetailDialogComponent,
     SemesterplannerDeleteDialogComponent,
-    SemesterPlannerFormDialogComponent
+    SemesterPlannerFormDialogComponent,
+    SemesterplannermodulFormDialogComponent
   ],
   imports: [
     BrowserModule,

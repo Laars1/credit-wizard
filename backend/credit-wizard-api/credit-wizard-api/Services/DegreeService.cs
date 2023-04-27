@@ -19,6 +19,15 @@ namespace credit_wizard_api.Services
         public async Task<Degree?> GetByIdAsync(Guid id) => await _dbContext.Degrees.FirstOrDefaultAsync(x => x.Id == id);
         public async Task<Degree?> GetByIdWithModulesAsync(Guid id) => await _dbContext.Degrees.Include(x => x.DegreeModuls).ThenInclude(x => x.Modul).FirstOrDefaultAsync(x => x.Id == id);
 
+        public async Task<List<DegreeModul>> GetByIdWithModulesByTimeslotAsync(Guid id, Guid timeslotId)
+        {
+            return await _dbContext.DegreeModuls
+                .Include(x => x.Modul)
+                .ThenInclude(x => x.SemesterTimeSlot)
+                .Where(x => x.DegreeId == id && x.Modul.SemesterTimeSlot.Any(y => y.Id == timeslotId))
+                .ToListAsync();
+        }
+
         public async Task<bool> IsModulPartOfDegreeAsync(Guid modulId)
         {
             return await _dbContext.Degrees.Include(x => x.DegreeModuls).AnyAsync(x => x.DegreeModuls.Select(y => y.ModulId).Contains(modulId));

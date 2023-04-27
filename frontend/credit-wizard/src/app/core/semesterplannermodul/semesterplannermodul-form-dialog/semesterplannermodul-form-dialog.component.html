@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content>
+  <div *ngIf="!loaded">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="loaded">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group col-12">
+        <p>
+          Hier werden nur Module angezeit welche aktuell (FS/HS) angeboten
+          werden.
+        </p>
+        <mat-form-field appearance="fill" class="col-12">
+          <mat-label>Modul</mat-label>
+          <mat-select formControlName="modulId">
+            <mat-optgroup
+              *ngFor="let group of selectDegreeModules"
+              [label]="group.name"
+            >
+              <mat-option
+                *ngFor="let degreeModul of group.degreeModulDto"
+                [value]="degreeModul.modulId"
+              >
+                {{ degreeModul.modulDto.abbreviation }} -
+                {{ degreeModul.modulDto.name }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill" class="col-12">
+          <mat-label>Note</mat-label>
+          <input matInput formControlName="grade" type="number"/>
+          <mat-hint align="end">Note 1-6</mat-hint>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="showError">
+    <app-danger
+      [title]="'Validierung Fehlgeschlagen'"
+      [message]="'Überprüfe bitte deine Eingabe!'"
+    ></app-danger>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions float-right">
+  <button mat-raised-button (click)="close()">Schliessen</button>
+  <button mat-raised-button color="accent" (click)="save()">Erstellen</button>
+</mat-dialog-actions>

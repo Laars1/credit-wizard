@@ -62,14 +62,14 @@
               <td>{{ row.grade }}</td>
               <td class="text-left">
                 <mat-icon
-                  *ngIf="row.grade >= 4"
+                  *ngIf="row.grade != undefined && row.grade >= 4"
                   matTooltip="Ja"
                   matTooltipPosition="right"
                   class="passed"
                   >check_box</mat-icon
                 >
                 <mat-icon
-                  *ngIf="row.grade < 4 && row.grade != undefined"
+                  *ngIf="row.grade != undefined && row.grade < 4"
                   matTooltip="Nein"
                   matTooltipPosition="right"
                   class="failed"
@@ -97,6 +97,9 @@
       *Disclaimer ECTs Punkte
     </div>
     <div class="actions float-right">
+      <button mat-raised-button color="primary" (click)="openModulCreateFormDialog()">
+        <mat-icon>create</mat-icon>Modul hinzufügen
+      </button>
       <button mat-raised-button color="primary" (click)="openEditFormDialog()">
         <mat-icon>edit</mat-icon>Bearbeiten
       </button>

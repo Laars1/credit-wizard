@@ -3,9 +3,9 @@ import { ISemesterPlannnerDto } from "./semesterPlannerDto";
 import { IModulDto } from "./modulsDto";
 
 export interface ISemesterPlannerModulDto {
-    id: Guid,
+    semesterPlannerId: Guid,
     semesterPlannerDto?: ISemesterPlannnerDto,
     modulId: Guid,
     modulDto?: IModulDto,
-    grade: number
+    grade?: number
 }

@@ -14,6 +14,7 @@ namespace credit_wizard_api.Models
 
         public DbSet<Modul> Moduls { get; set; }
         public DbSet<Degree> Degrees { get; set; }
+        public DbSet<DegreeModul> DegreeModuls { get; set; }
         public DbSet<Semester> Semesters { get; set; }
         public DbSet<SemesterPlanner> SemesterPlanners { get; set; }
         public DbSet<SemesterPlannerModul> SemesterPlannerModuls { get; set; }

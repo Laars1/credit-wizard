@@ -6,6 +6,7 @@ import { ISemesterPlannerModulDto } from 'src/app/shared/dtos/semesterPlannerMod
 import { ModulDetailDialogComponent } from '../../modules/modul-detail-dialog/modul-detail-dialog.component';
 import { SemesterplannerDeleteDialogComponent } from '../../semesterplanner/semesterplanner-delete-dialog/semesterplanner-delete-dialog.component';
 import { SemesterPlannerFormDialogComponent } from '../../semesterplanner/semesterplanner-form-dialog/semesterplanner-form-dialog.component';
+import { SemesterplannermodulFormDialogComponent } from '../../semesterplannermodul/semesterplannermodul-form-dialog/semesterplannermodul-form-dialog.component';
 
 @Component({
   selector: 'app-semesterplanner-content',
@@ -44,7 +45,7 @@ export class SemesterplannerContentComponent implements OnInit {
     if(this.item.semesterPlannerModulDtos == null) return 0;
     return this.item.semesterPlannerModulDtos
       .map((x) => {
-        return x.grade >= 4 ? x.modulDto?.etcsPoints ?? 0 : 0;
+        return x.grade ?? 0 >= 4 ? x.modulDto?.etcsPoints ?? 0 : 0;
       })
       .reduce((x, y) => x + Number(y), 0);
   }
@@ -73,5 +74,12 @@ export class SemesterplannerContentComponent implements OnInit {
     dialogConfig.data = this.item;
 
     this.dialogService.open(SemesterplannerDeleteDialogComponent, dialogConfig);
+  }
+  
+  openModulCreateFormDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {semesterPlannerId: this.item.id, semesterTimeSlotId: this.item.semesterTimeSlotId};
+
+    this.dialogService.open(SemesterplannermodulFormDialogComponent, dialogConfig);
   }
 }
