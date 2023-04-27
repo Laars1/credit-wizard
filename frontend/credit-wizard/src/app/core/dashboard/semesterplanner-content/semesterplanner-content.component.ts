@@ -28,6 +28,7 @@ export class SemesterplannerContentComponent implements OnInit {
   constructor(private dialogService: MatDialog) {}
 
   ngOnInit() {
+    console.log(this.item)
     this.totalEtcsPoints = this.getTotalEtcs() ?? 0;
     this.currentEtcsPoints = this.getCurrentEtcs() ?? 0;
   }
@@ -45,7 +46,7 @@ export class SemesterplannerContentComponent implements OnInit {
     if(this.item.semesterPlannerModulDtos == null) return 0;
     return this.item.semesterPlannerModulDtos
       .map((x) => {
-        return x.grade ?? 0 >= 4 ? x.modulDto?.etcsPoints ?? 0 : 0;
+        return (x.grade != null && x.grade >= 4) ? x.modulDto?.etcsPoints ?? 0 : 0;
       })
       .reduce((x, y) => x + Number(y), 0);
   }

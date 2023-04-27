@@ -23,6 +23,7 @@ namespace credit_wizard_api.Services
         public async Task<List<SemesterPlanner>> GetByUserIdAsync(Guid userId)
         {
             return await _dbContext.SemesterPlanners.Where(x => x.UserId == userId)
+                .Include(x => x.SemesterTimeSlot)
                 .Include(x => x.Semester)
                 .Include(x => x.SemesterPlannerModuls)
                 .ThenInclude(x => x.Modul)
