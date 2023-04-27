@@ -27,28 +27,30 @@ export class SemesterplannerContentComponent implements OnInit {
   constructor(private dialogService: MatDialog) {}
 
   ngOnInit() {
-    this.totalEtcsPoints = this.getTotalEtcs();
-    this.currentEtcsPoints = this.getCurrentEtcs();
+    this.totalEtcsPoints = this.getTotalEtcs() ?? 0;
+    this.currentEtcsPoints = this.getCurrentEtcs() ?? 0;
   }
 
   getTotalEtcs() {
+    if(this.item.semesterPlannerModulDtos == null) return 0;
     return this.item.semesterPlannerModulDtos
       .map((x) => {
-        return x.modulDto.etcsPoints;
+        return x.modulDto?.etcsPoints ?? 0;
       })
       .reduce((x, y) => x + Number(y), 0);
   }
 
   getCurrentEtcs() {
+    if(this.item.semesterPlannerModulDtos == null) return 0;
     return this.item.semesterPlannerModulDtos
       .map((x) => {
-        return x.grade >= 4 ? x.modulDto.etcsPoints : 0;
+        return x.grade >= 4 ? x.modulDto?.etcsPoints ?? 0 : 0;
       })
       .reduce((x, y) => x + Number(y), 0);
   }
 
   isModulRequiredForDegree(dto: ISemesterPlannerModulDto) {
-    let entry = dto.modulDto.degreeModulDtos.find(x => x.degreeId == this.degreeId);
+    let entry = dto.modulDto?.degreeModulDtos.find(x => x.degreeId == this.degreeId);
     return entry!.isRequired;
   }
 

@@ -8,12 +8,12 @@ namespace credit_wizard_api.Dtos
         [Required]
         public Guid SemesterPlannerId { get; set; }
 
-        public SemesterPlannerDto SemesterPlannerDto { get; set; }
+        public SemesterPlannerDto? SemesterPlannerDto { get; set; }
 
         [Required]
         public Guid ModulId { get; set; }
 
-        public ModulDto ModulDto { get; set; }
+        public ModulDto? ModulDto { get; set; }
 
         [Range(1, 6)]
         public double? Grade { get; set; }

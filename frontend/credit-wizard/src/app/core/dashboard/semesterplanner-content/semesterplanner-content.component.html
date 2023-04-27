@@ -6,8 +6,8 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Semester {{ item.semesterDto.number }} -
-        {{ item.semesterTimeSlotDto.timeslot }}
+        Semester {{ item.semesterDto?.number }} -
+        {{ item.semesterTimeSlotDto?.timeslot }}
       </mat-panel-title>
       <mat-panel-description class="panel-desc">
         <div class="col-6">
@@ -23,7 +23,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="row">
-      <div class="col-12" *ngIf="item.semesterPlannerModulDtos.length">
+      <div class="col-12" *ngIf="item.semesterPlannerModulDtos?.length">
         <table class="table">
           <thead>
             <tr>
@@ -41,9 +41,9 @@
                 (click)="openModulInformationDialog(row.modulId)"
                 class="name"
               >
-                {{ row.modulDto.name }}
+                {{ row.modulDto?.name }}
               </td>
-              <td>{{ row.modulDto.abbreviation }}</td>
+              <td>{{ row.modulDto?.abbreviation }}</td>
               <td>
                 <mat-icon
                   *ngIf="isModulRequiredForDegree(row)"
@@ -58,7 +58,7 @@
                   >indeterminate_check_box</mat-icon
                 >
               </td>
-              <td>{{ row.modulDto.etcsPoints }}</td>
+              <td>{{ row.modulDto?.etcsPoints }}</td>
               <td>{{ row.grade }}</td>
               <td class="text-left">
                 <mat-icon
@@ -86,7 +86,7 @@
           </tbody>
         </table>
       </div>
-      <div *ngIf="!item.semesterPlannerModulDtos.length">
+      <div *ngIf="!item.semesterPlannerModulDtos?.length">
         <app-warning [title]="'Keine Module erfasst'" [message]="'Für dieses Semester sind keine Module erfasst'"></app-warning>  
       </div>
     </div>

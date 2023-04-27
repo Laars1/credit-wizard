@@ -131,6 +131,11 @@ namespace credit_wizard_api.Services
 
         }
 
+        public async Task<bool> IsUsersPlannedSemester(Guid userId, Guid semesterPlannerId)
+        {
+            return await _dbContext.SemesterPlanners.AnyAsync(x => x.UserId == userId && x.Id == semesterPlannerId);
+        }
+
         /// <summary>
         /// Check if there is already the same semester reference in the database
         /// </summary>

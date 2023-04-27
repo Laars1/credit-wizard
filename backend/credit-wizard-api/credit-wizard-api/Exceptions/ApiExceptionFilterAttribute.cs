@@ -112,6 +112,28 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 exception!));
     }
 
+    private void HandlReferenceNotExistsException(ExceptionContext context)
+    {
+        var exception = context.Exception as ReferenceNotExistsException;
+
+        context.Result = new NotFoundObjectResult(
+            GenerateProblemDetails(
+                "Not Found",
+                StatusCodes.Status404NotFound,
+                exception!));
+    }
+
+    private void HandlEntityAlreadyCompletedException(ExceptionContext context)
+    {
+        var exception = context.Exception as EntityAlreadyCompletedException;
+
+        context.Result = new BadRequestObjectResult(
+            GenerateProblemDetails(
+                "Bad Request",
+                StatusCodes.Status400BadRequest,
+                exception!));
+    }
+
     /// <summary>
     /// Generates problem details for a specific exception.
     /// </summary>

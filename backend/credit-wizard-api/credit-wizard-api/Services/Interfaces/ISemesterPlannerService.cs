@@ -5,6 +5,7 @@ namespace credit_wizard_api.Services.Interfaces
     public interface ISemesterPlannerService
     {
         public Task<List<SemesterPlanner>> GetByUserIdAsync(Guid userId);
+        public Task<bool> IsUsersPlannedSemester(Guid userId, Guid semesterPlannerId);
 
         public Task<SemesterPlanner?> GetByIdAndUserIdAsync(Guid id, Guid userId);
 

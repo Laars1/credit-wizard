@@ -9,5 +9,6 @@ public interface IUserService : IBaseService<User>
     public Task<User?> GetByIdWithDependenciesAsync(Guid id);
     public Task<User?> GetByNameAsync(string username);
     public Task<List<string>> GetRolesFromUserAsync(string username);
+    public Task<Degree?> GetUsersDegreeAsync(Guid userId);
     public Task<DegreeProgressDto> GetCurrentDegreeProgress(Guid userId);
 }

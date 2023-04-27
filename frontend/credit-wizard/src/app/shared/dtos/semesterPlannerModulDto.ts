@@ -4,8 +4,8 @@ import { IModulDto } from "./modulsDto";
 
 export interface ISemesterPlannerModulDto {
     id: Guid,
-    semesterPlannerDto: ISemesterPlannnerDto,
+    semesterPlannerDto?: ISemesterPlannnerDto,
     modulId: Guid,
-    modulDto: IModulDto,
+    modulDto?: IModulDto,
     grade: number
 }
