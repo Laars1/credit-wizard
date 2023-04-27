@@ -21,6 +21,7 @@
               <mat-option
                 *ngFor="let degreeModul of group.degreeModulDto"
                 [value]="degreeModul.modulId"
+                [disabled]="completedModules?.includes(degreeModul.modulId)"
               >
                 {{ degreeModul.modulDto.abbreviation }} -
                 {{ degreeModul.modulDto.name }}

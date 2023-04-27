@@ -31,8 +31,9 @@
               <th class="col-2">Abkürzung</th>
               <th class="col-2">Für Abschluss notwendig</th>
               <th class="col-1">ETCs Punkte</th>
-              <th class="col-2">Note</th>
+              <th class="col-1">Note</th>
               <th class="col-1">Bestanden</th>
+              <th class="col-1">Aktionen</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +82,10 @@
                   matTooltipPosition="right"
                   >check_box_outline_blank</mat-icon
                 >
+              </td>
+              <td class="float-right inline-actions">
+                  <mat-icon (click)="openModulEditFormDialog(row)">create</mat-icon>
+                  <mat-icon>delete</mat-icon>
               </td>
             </tr>
           </tbody>

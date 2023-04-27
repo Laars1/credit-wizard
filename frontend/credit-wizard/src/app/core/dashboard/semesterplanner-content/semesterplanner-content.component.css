@@ -28,3 +28,7 @@
 .panel-desc{
     text-align: right;
 }
+
+.inline-actions{
+    cursor: pointer;
+}

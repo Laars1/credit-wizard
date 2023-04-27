@@ -40,13 +40,22 @@ namespace credit_wizard_api.Controllers
             return Ok(_mapper.Map<List<SemesterPlannerModulDto>>(data));
         }
 
+        [HttpGet("user/current/completed")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Guid>))]
+        public async Task<IActionResult> GetCompletedModulesByUser()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            var completedModules = await _semesterPlannerModulService.GetCompletedModulesByUser(Guid.Parse(userId));
+            return Ok(completedModules.Select(x => x.ModulId).ToList());
+        }
+
         /// <summary>
         /// Get element by it's ids
         /// </summary>
         /// <param name="semesterplannerId">Id of the used SemesterPlanner</param>
         /// <param name="modulid">Id of the used Modul</param>
         /// <returns>Amount of added Objects to the database</returns>
-        [HttpGet("semesterplannerid={semesterplannerId:Guid}&modulid{modulid:Guid}")]
+        [HttpGet("semesterplannerid={semesterplannerId:Guid}&modulid={modulid:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SemesterPlannerModulDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
         public async Task<IActionResult> GetByIdAsync(Guid semesterplannerId, Guid modulid)
@@ -79,7 +88,7 @@ namespace credit_wizard_api.Controllers
         /// <param name="modulid">Id of the used Modul</param>
         /// <param name="dto">Data of Tyoe SemesterplannerModulDto</param>
         /// <returns>Amount of added Objects to the database</returns>
-        [HttpPut("semesterplannerid={semesterplannerId:Guid}&modulid{modulid:Guid}")]
+        [HttpPut("semesterplannerid={semesterplannerId:Guid}&modulid={modulid:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         public async Task<IActionResult> UpdateSemesterPlannerAsync(Guid semesterplannerId, Guid modulid, SemesterPlannerModulDto dto)
         {
@@ -96,7 +105,7 @@ namespace credit_wizard_api.Controllers
         /// <param name="semesterplannerId">Id of the used SemesterPlanner</param>
         /// <param name="modulid">Id of the used Modul</param>
         /// <returns>Amount of deleted Objects to the database</returns>
-        [HttpDelete("semesterplannerid={semesterplannerId:Guid}&modulid{modulid:Guid}")]
+        [HttpDelete("semesterplannerid={semesterplannerId:Guid}&modulid={modulid:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         public async Task<IActionResult> DeleteSemesterPlannerAsync(Guid semesterplannerId, Guid modulid)
         {

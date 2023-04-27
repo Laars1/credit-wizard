@@ -82,4 +82,11 @@ export class SemesterplannerContentComponent implements OnInit {
 
     this.dialogService.open(SemesterplannermodulFormDialogComponent, dialogConfig);
   }
+
+  openModulEditFormDialog(data: ISemesterPlannerModulDto){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {semesterPlannerId: this.item.id, semesterTimeSlotId: this.item.semesterTimeSlotId, item: data};
+
+    this.dialogService.open(SemesterplannermodulFormDialogComponent, dialogConfig);
+  }
 }

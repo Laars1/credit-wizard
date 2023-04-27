@@ -11,6 +11,6 @@ namespace credit_wizard_api.Services.Interfaces
         public Task<int> DeleteAsync(Guid modulId, Guid semesterPlannerId, Guid userId);
 
         public Task<bool> ExistsAsync(Guid modulId, Guid semesterPlannerId);
-
+        public Task<List<SemesterPlannerModul>> GetCompletedModulesByUser(Guid userId);
     }
 }

@@ -128,5 +128,10 @@ namespace credit_wizard_api.Services
             _dbContext.SemesterPlannerModuls.Remove(deleted);
             return await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<SemesterPlannerModul>> GetCompletedModulesByUser(Guid userId)
+        {
+            return await _dbContext.SemesterPlannerModuls.Include(x => x.SemesterPlanner).Where(x => x.SemesterPlanner.UserId == userId && x.Grade >= 4).ToListAsync() ?? new List<SemesterPlannerModul>();
+        }
     }
 }
