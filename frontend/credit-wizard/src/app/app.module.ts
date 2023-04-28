@@ -13,7 +13,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SemesterListComponent } from './core/semester/semester-list/semester-list.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { ModulesListComponent } from './core/modules/modules-list/modules-list-component';
+import { ModulListComponent } from './core/modul/modul-list/modul-list-component';
+import { DegreeListComponent } from './core/degree/degree-list/degree-list-component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModulesListComponent } from './core/modules/modules-list/modules-list-c
     NavigationBarComponent,
     SigninComponent,
     FooterComponent,
-    ModulesListComponent
+    ModulListComponent,
+    DegreeListComponent
   ],
   imports: [
     BrowserModule,
