@@ -93,6 +93,6 @@ public class UserService : IUserService
 
     public async Task<Degree?> GetUsersDegreeAsync(Guid userId)
     {
-        return await _dbContext.Users.Include(x => x.Degree).Select(x => x.Degree).FirstOrDefaultAsync(x => x.Id == userId);
+        return (await _dbContext.Users.Include(x => x.Degree).FirstOrDefaultAsync(x => x.Id == userId))?.Degree;
     }
 }

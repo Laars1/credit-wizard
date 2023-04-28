@@ -126,6 +126,7 @@
         mat-raised-button
         color="primary"
         (click)="openModulCreateFormDialog()"
+        [disabled]="item.completed"
       >
         <mat-icon>create</mat-icon>Modul hinzufügen
       </button>
