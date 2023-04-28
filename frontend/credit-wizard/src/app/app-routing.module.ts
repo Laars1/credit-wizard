@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: 'login', component: SigninComponent },
   { path: 'semester', component: SemesterListComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
   { path: 'modules', component: ModulListComponent, canActivate: [AuthGuard] },
   { path: 'degree', component: DegreeListComponent, canActivate: [AuthGuard] },
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({

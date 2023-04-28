@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IModulDto } from 'src/app/shared/dtos/modulDto';
-import { ModulService} from 'src/app/shared/services/api/module.service';
+import { ModulService} from 'src/app/shared/services/api/modul.service';
 
 @Component({
   selector: 'app-modules-list',

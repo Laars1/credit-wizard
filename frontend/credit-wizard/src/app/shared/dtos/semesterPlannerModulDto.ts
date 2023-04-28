@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 import { ISemesterPlannnerDto } from "./semesterPlannerDto";
-import { IModulDto } from "./modulsDto";
+import { IModulDto } from "./modulDto";
 
 export interface ISemesterPlannerModulDto {
     id: Guid,

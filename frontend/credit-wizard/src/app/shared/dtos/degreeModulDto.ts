@@ -1,6 +1,6 @@
-import { IModulDto } from 'src/app/shared/dtos/modulsDto';
 import { Guid } from "guid-typescript";
 import { IDegreeDto } from './degreeDto';
+import { IModulDto } from "./modulDto";
 
 export interface IDegreeModulDto {
     modulId: Guid,
