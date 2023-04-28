@@ -7,11 +7,11 @@ import { ISemesterTimeSlotDto } from "./semesterTimeSlotDto";
 export interface ISemesterPlannnerDto{
     id: Guid,
     userId: Guid,
-    user: IUserDto,
+    user?: IUserDto,
     completed: boolean,
     semesterId: boolean,
-    semesterDto: ISemesterDto,
-    semesterPlannerModulDtos: ISemesterPlannerModulDto[],
+    semesterDto?: ISemesterDto,
+    semesterPlannerModulDtos?: ISemesterPlannerModulDto[],
     semesterTimeSlotId: Guid,
-    semesterTimeSlotDto: ISemesterTimeSlotDto
+    semesterTimeSlotDto?: ISemesterTimeSlotDto
 }

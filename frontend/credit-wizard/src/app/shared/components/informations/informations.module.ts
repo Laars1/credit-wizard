@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DangerComponent } from './danger/danger.component';
 import { WarningComponent } from './warning/warning.component';
+import { InformationComponent } from './information/information.component';
 
 @NgModule({
   imports: [
@@ -9,11 +10,13 @@ import { WarningComponent } from './warning/warning.component';
   ],
   declarations: [
     DangerComponent,
-    WarningComponent
+    WarningComponent,
+    InformationComponent
   ],
   exports: [
     DangerComponent,
-    WarningComponent
+    WarningComponent,
+    InformationComponent
   ],
 })
 export class InformationsModule { }

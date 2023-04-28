@@ -1,10 +1,12 @@
-import { IDegreeDto } from 'src/app/shared/dtos/degreeDto';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/api/base/api.service';
+import { IDegreeDto } from '../../dtos/degreeDto';
+import { EMPTY, Observable, catchError } from 'rxjs';
+import { Guid } from 'guid-typescript';
+import { IDegreeModulDto } from '../../dtos/degreeModulDto';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DegreeService {
   private readonly apiUrl = 'degree';
@@ -12,6 +14,24 @@ export class DegreeService {
 
   public get(): Observable<IDegreeDto[]> {
     return this.apiService.get<IDegreeDto[]>(this.apiUrl).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
+  
+  public getWithModules(): Observable<IDegreeDto> {
+    return this.apiService.get<IDegreeDto>(this.apiUrl+"/user/current/degreemodules").pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    );
+  }
+
+  public getWithModulesBySemesterTimeSlotid(id: Guid): Observable<IDegreeModulDto[]> {
+    return this.apiService.get<IDegreeModulDto[]>(this.apiUrl+"/user/current/degreemodules/timeslot/"+id).pipe(
       catchError((err) => {
         console.error(err);
         return EMPTY;

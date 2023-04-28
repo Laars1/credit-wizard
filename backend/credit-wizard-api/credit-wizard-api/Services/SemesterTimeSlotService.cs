@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace credit_wizard_api.Services
 {
+    /// <summary>
+    /// Business logic for SemesterTimeSlot, method comments are placed in its interface
+    /// </summary>
     public class SemesterTimeSlotService : ISemesterTimeSlotService
     {
         private readonly ApplicationDbContext _dbContext;

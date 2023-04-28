@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using credit_wizard_api.Models;
 
@@ -11,9 +12,11 @@ using credit_wizard_api.Models;
 namespace credit_wizard_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230427162823_AddedDegreeModuls")]
+    partial class AddedDegreeModuls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,11 +238,6 @@ namespace credit_wizard_api.Migrations
                         new
                         {
                             ModulId = new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"),
-                            SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
-                        },
-                        new
-                        {
-                            ModulId = new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"),
                             SemesterTimeSlotId = new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658")
                         });
                 });
@@ -829,7 +827,7 @@ namespace credit_wizard_api.Migrations
                         {
                             Id = new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae7d2af2-651c-4d24-a583-1cb7f9ee7e06",
+                            ConcurrencyStamp = "ccda6eff-6907-4d67-9899-51389199b96d",
                             DegreeId = new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"),
                             Email = "hans.mustermann@email.ch",
                             EmailConfirmed = true,
@@ -838,7 +836,7 @@ namespace credit_wizard_api.Migrations
                             MatriculationNumber = "11-111-11",
                             NormalizedEmail = "HANS.MUSTERMANN@EMAIL.CH",
                             NormalizedUserName = "HANS.MUSTERMANN@EMAIL.CH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOcpumm47V5kvrxaHfj/FzMImM5J6oyol9gaQOmTRJs30wAuF7G55ZROMKMJssZx/w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMCxFXc2do61v66bqP+gjz661/ztbeT41bdTWLa+28rPJqkXCyTOJ35CiVToD8fsLg==",
                             PhoneNumberConfirmed = true,
                             Prename = "Hans",
                             TwoFactorEnabled = false,

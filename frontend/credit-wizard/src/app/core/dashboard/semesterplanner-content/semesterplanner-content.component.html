@@ -6,13 +6,15 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Semester {{ item.semesterDto.number }} -
+        Semester {{ item.semesterDto?.number }} -
         {{ item.semesterTimeSlotDto?.timeslot }}
       </mat-panel-title>
       <mat-panel-description class="panel-desc">
         <div class="col-6">
           <p class="d-inline">Semester Abgeschlossen:</p>
-          <mat-icon *ngIf="item.completed" matTooltip="Ja" class="middle">check_box</mat-icon>
+          <mat-icon *ngIf="item.completed" matTooltip="Ja" class="middle"
+            >check_box</mat-icon
+          >
           <mat-icon *ngIf="!item.completed" matTooltip="Nein" class="middle"
             >indeterminate_check_box</mat-icon
           >
@@ -23,16 +25,18 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="row">
-      <div class="col-12" *ngIf="item.semesterPlannerModulDtos.length">
+      <div class="col-12" *ngIf="item.semesterPlannerModulDtos?.length">
+        <app-warning *ngIf="item.completed" [title]="'Abgeschlossene Semester können nicht mehr bearbeitet werden'"></app-warning>
         <table class="table">
           <thead>
             <tr>
-              <th class="col-4">Modul</th>
+              <th class="col-3">Modul</th>
               <th class="col-2">Abkürzung</th>
               <th class="col-2">Für Abschluss notwendig</th>
               <th class="col-1">ETCs Punkte</th>
-              <th class="col-2">Note</th>
+              <th class="col-1">Note</th>
               <th class="col-1">Bestanden</th>
+              <th class="col-2">Aktionen</th>
             </tr>
           </thead>
           <tbody>
@@ -41,9 +45,9 @@
                 (click)="openModulInformationDialog(row.modulId)"
                 class="name"
               >
-                {{ row.modulDto.name }}
+                {{ row.modulDto?.name }}
               </td>
-              <td>{{ row.modulDto.abbreviation }}</td>
+              <td>{{ row.modulDto?.abbreviation }}</td>
               <td>
                 <mat-icon
                   *ngIf="isModulRequiredForDegree(row)"
@@ -58,18 +62,18 @@
                   >indeterminate_check_box</mat-icon
                 >
               </td>
-              <td>{{ row.modulDto.etcsPoints }}</td>
+              <td>{{ row.modulDto?.etcsPoints }}</td>
               <td>{{ row.grade }}</td>
               <td class="text-left">
                 <mat-icon
-                  *ngIf="row.grade >= 4"
+                  *ngIf="row.grade != undefined && row.grade >= 4"
                   matTooltip="Ja"
                   matTooltipPosition="right"
                   class="passed"
                   >check_box</mat-icon
                 >
                 <mat-icon
-                  *ngIf="row.grade < 4 && row.grade != undefined"
+                  *ngIf="row.grade != undefined && row.grade < 4"
                   matTooltip="Nein"
                   matTooltipPosition="right"
                   class="failed"
@@ -82,12 +86,33 @@
                   >check_box_outline_blank</mat-icon
                 >
               </td>
+              <td class="float-right inline-actions">
+                <button
+                  mat-button
+                  [disabled]="item.completed"
+                  (click)="openModulEditFormDialog(row)"
+                  class="p-0"
+                >
+                  <mat-icon>create</mat-icon>
+                </button>
+                <button
+                  mat-button
+                  [disabled]="item.completed"
+                  (click)="openModulEditFormDialog(row)"
+                  class="p-0"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div *ngIf="!item.semesterPlannerModulDtos.length">
-        <app-warning [title]="'Keine Module erfasst'" [message]="'Für dieses Semester sind keine Module erfasst'"></app-warning>  
+      <div *ngIf="!item.semesterPlannerModulDtos?.length">
+        <app-warning
+          [title]="'Keine Module erfasst'"
+          [message]="'Für dieses Semester sind keine Module erfasst'"
+        ></app-warning>
       </div>
     </div>
     <div
@@ -97,6 +122,14 @@
       *Disclaimer ECTs Punkte
     </div>
     <div class="actions float-right">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openModulCreateFormDialog()"
+        [disabled]="item.completed"
+      >
+        <mat-icon>create</mat-icon>Modul hinzufügen
+      </button>
       <button mat-raised-button color="primary" (click)="openEditFormDialog()">
         <mat-icon>edit</mat-icon>Bearbeiten
       </button>

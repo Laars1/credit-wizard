@@ -6,9 +6,9 @@
       <dt>Persönliches Semester Id</dt>
       <dd>{{ data.id }}</dd>
       <dt>Name</dt>
-      <dd>Semester {{ data.semesterDto.number }}</dd>
+      <dd>Semester {{ data.semesterDto?.number }}</dd>
       <dt>Semester Zeitslot</dt>
-      <dd>{{ data.semesterTimeSlotDto.timeslot }}</dd>
+      <dd>{{ data.semesterTimeSlotDto?.timeslot }}</dd>
       <dt>Selektierte Module</dt>
       <dd>
         <table class="table">
@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of data.semesterPlannerModulDtos">
-              <td>{{ item.modulDto.name }}</td>
+              <td>{{ item.modulDto?.name }}</td>
               <td>{{ item.grade }}</td>
             </tr>
           </tbody>

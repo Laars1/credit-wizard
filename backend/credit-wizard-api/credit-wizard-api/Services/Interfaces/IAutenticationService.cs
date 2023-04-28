@@ -14,6 +14,12 @@ namespace credit_wizard_api.Services.Interfaces
         /// <returns>The generated Jwt token</returns>
         public JwtSecurityToken GenerateToken(Guid userId, List<string> userRoles);
 
+        /// <summary>
+        /// Check if password is matched with the data record
+        /// </summary>
+        /// <param name="user">object of the user which wants to log in</param>
+        /// <param name="password">passed password</param>
+        /// <returns>true if password machtes</returns>
         public Task<bool> CheckPasswordAsync(User user, string password);
     }
 }

@@ -22,6 +22,7 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
   semesterTimeSlots: ISemesterTimeSlotDto[] | undefined;
   form!: FormGroup;
   showError = false;
+  loaded = false;
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +51,7 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
       .subscribe((x: ISemesterTimeSlotDto[]) => {
         this.semesterTimeSlots = x;
       });
+      this.loaded = true;
   }
 
   initForm() {
