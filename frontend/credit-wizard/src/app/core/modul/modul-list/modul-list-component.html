@@ -1,9 +1,10 @@
-<div class="col-12">
-    <h1>Modulübersicht</h1>
-    <p>Hier werden die möglichen Module angezeigt</p>
-</div>
-<div class="col-12" *ngIf="modules">
-    <table mat-table [dataSource]="modules" class="mat-elevation-z8 col-12">
+<div class="m-5">
+    <div class="col-12">
+        <h1>Modulübersicht</h1>
+        <p>Hier werden die möglichen Module angezeigt</p>
+    </div>
+    <div class="col-12" *ngIf="moduls">
+        <table mat-table [dataSource]="moduls" class="mat-elevation-z8 col-12">
 
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
