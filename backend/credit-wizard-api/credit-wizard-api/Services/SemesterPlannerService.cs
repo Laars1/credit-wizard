@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace credit_wizard_api.Services
 {
+    /// <summary>
+    /// Business logic for SemesterPlanner, method comments are placed in its interface
+    /// </summary>
     public class SemesterPlannerService : ISemesterPlannerService
     {
         private readonly UserManager<User> _userManager;
@@ -82,6 +85,7 @@ namespace credit_wizard_api.Services
 
             if (degree == null)
                 throw new EntityNotFoundException(nameof(Degree), nameof(Degree.Id), degreeId.ToString());
+
             var requiredModulIds = degree.DegreeModuls.Where(x => x.IsRequired).Select(x => x.Modul.Id).ToList();
             var finishedSemesterPlannerModuls = data.Where(x => x.Completed).SelectMany(x => x.SemesterPlannerModuls).ToList();
             var finishedModulesId = finishedSemesterPlannerModuls.Where(x => x.Grade >= 4).Select(x => x.ModulId);
@@ -142,11 +146,10 @@ namespace credit_wizard_api.Services
         /// </summary>
         /// <param name="userId">id of the current user</param>
         /// <param name="semesterId">id of the checked semester</param>
-        /// <returns></returns>
+        /// <returns>true if semester is already booked, otherwise else is returned</returns>
         private async Task<bool> AlreadyBookedSemester(Guid userId, Guid semesterId, Guid? id = null)
         {
-            var x = await _dbContext.SemesterPlanners.Where(x => x.UserId == userId && x.SemesterId == semesterId && x.Id != id).ToListAsync();
-            return x.Any();
+            return await _dbContext.SemesterPlanners.Where(x => x.UserId == userId && x.SemesterId == semesterId && x.Id != id).AnyAsync();
         }
     }
 }

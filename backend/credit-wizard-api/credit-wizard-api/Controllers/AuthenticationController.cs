@@ -34,7 +34,6 @@ namespace credit_wizard_api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             var user = await _userService.GetByNameAsync(model.Username);
-
             if (user != null && await _autenticationService.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userService.GetRolesFromUserAsync(user.UserName);
@@ -45,6 +44,7 @@ namespace credit_wizard_api.Controllers
                     ExpirationDate = token.ValidTo
                 });
             }
+
             return Unauthorized(new ErrorResultDto()
             {
                 ErrorType = nameof(Unauthorized),

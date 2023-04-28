@@ -9,6 +9,9 @@ using Microsoft.Identity.Client;
 
 namespace credit_wizard_api.Services;
 
+/// <summary>
+/// Business logic for user, method comments are placed in its interface
+/// </summary>
 public class UserService : IUserService
 {
     private readonly ApplicationDbContext _dbContext;
@@ -69,7 +72,11 @@ public class UserService : IUserService
         if (currentUser == null) throw new EntityNotFoundException("User", "Id", userId.ToString());
 
         var total = currentUser.Degree.TotalEtcsPoints;
+
+        // How many points have been archieved
         var reached = _semesterPlannerService.GetCompletedEctsPointsByUserAsync(currentUser.SemesterPlanners.ToList());
+
+        // How many points are left, to archieve the degree
         var open = _semesterPlannerService.GetOpenEctsPointsByUserAsync(currentUser.SemesterPlanners.ToList());
         var progress = new DegreeProgressDto
         {
@@ -82,11 +89,6 @@ public class UserService : IUserService
             PercentageFinishedRequiredModuls = await _semesterPlannerService.GetPercentageFinishedRequiredModulsByUserAsync(currentUser.SemesterPlanners.ToList(), currentUser.DegreeId)
         };
         return progress;
-    }
-
-    public async Task<bool> UserExistsAsync(Guid userId)
-    {
-        return await _dbContext.Users.AnyAsync(x => x.Id == userId);
     }
 
     public async Task<Degree?> GetUsersDegreeAsync(Guid userId)

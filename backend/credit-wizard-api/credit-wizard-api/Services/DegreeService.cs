@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace credit_wizard_api.Services
 {
+    /// <summary>
+    /// Business logic for degree, method comments are placed in its interface
+    /// </summary>
     public class DegreeService : IDegreeService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -12,7 +15,6 @@ namespace credit_wizard_api.Services
         {
             _dbContext = dbContext;
         }
-
 
         public async Task<List<Degree>> GetAsync() => await _dbContext.Degrees.Include(x => x.DegreeModuls).ThenInclude(x => x.Modul).ToListAsync();
 
@@ -28,9 +30,9 @@ namespace credit_wizard_api.Services
                 .ToListAsync();
         }
 
-        public async Task<bool> IsModulPartOfDegreeAsync(Guid modulId)
+        public async Task<bool> IsModulPartOfDegreeAsync(Guid modulId, Guid degreeId)
         {
-            return await _dbContext.Degrees.Include(x => x.DegreeModuls).AnyAsync(x => x.DegreeModuls.Select(y => y.ModulId).Contains(modulId));
+            return await _dbContext.Degrees.Include(x => x.DegreeModuls).AnyAsync(x => x.Id == degreeId && x.DegreeModuls.Select(y => y.ModulId).Contains(modulId));
         }
     }
 }

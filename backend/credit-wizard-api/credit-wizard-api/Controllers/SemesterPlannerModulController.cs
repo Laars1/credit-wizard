@@ -40,6 +40,10 @@ namespace credit_wizard_api.Controllers
             return Ok(_mapper.Map<List<SemesterPlannerModulDto>>(data));
         }
 
+        /// <summary>
+        /// Get all completed modules for user
+        /// </summary>
+        /// <returns>List of guids</returns>
         [HttpGet("user/current/completed")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Guid>))]
         public async Task<IActionResult> GetCompletedModulesByUser()

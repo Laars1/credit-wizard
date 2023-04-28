@@ -34,8 +34,12 @@ public class UserController : Controller
         return Ok(_mapper.Map<UserDto>(await _userService.GetByIdAsync(Guid.Parse(userId))));
     }
     
+    /// <summary>
+    /// Get current progress for logged in user
+    /// </summary>
+    /// <returns>object with type DegreeProgressDto</returns>
     [HttpGet("current/degreeprogress")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DegreeProgressDto))]
     public async Task<IActionResult> GetCurrentDegreeProgress()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace credit_wizard_api.Services
 {
+    /// <summary>
+    /// Business logic for SemesterPlannerModul, public method comments are placed in its interface
+    /// </summary>
     public class SemesterPlannerModulService : ISemesterPlannerModulService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -32,17 +35,6 @@ namespace credit_wizard_api.Services
             return await _dbContext.SemesterPlannerModuls.Include(x => x.SemesterPlanner).Where(x => x.SemesterPlanner.UserId == userId).ToListAsync();
         }
 
-        private async Task<bool> AlreadyCompletedModul(Guid userId, Guid modulId, Guid semesterPlannerId)
-        {
-            return await _dbContext.SemesterPlannerModuls
-                .Include(x => x.SemesterPlanner)
-                .AnyAsync(x => 
-                    x.SemesterPlanner.UserId == userId &&
-                    x.ModulId == modulId &&
-                    x.SemesterPlannerId != semesterPlannerId &&
-                    x.Grade >= 4);
-        }
-
         public async Task<bool> ExistsAsync(Guid modulId, Guid semesterPlannerId)
         {
             return await _dbContext.SemesterPlannerModuls.AnyAsync(x => x.ModulId == modulId && x.SemesterPlannerId == semesterPlannerId);
@@ -55,7 +47,8 @@ namespace credit_wizard_api.Services
                 throw new EntityNotFoundException($"User with Id {userId} has no matching planned semester with Id {semesterPlannerModul.SemesterPlannerId}");
             }
 
-            if (!await _degreeService.IsModulPartOfDegreeAsync(semesterPlannerModul.ModulId))
+            var degree = await _userService.GetUsersDegreeAsync(userId);
+            if (!await _degreeService.IsModulPartOfDegreeAsync(semesterPlannerModul.ModulId, degree.Id))
             {
                 if (semesterPlannerModul.Modul == null)
                 {
@@ -72,8 +65,7 @@ namespace credit_wizard_api.Services
 
             if (await AlreadyCompletedModul(userId, semesterPlannerModul.ModulId, semesterPlannerModul.SemesterPlannerId))
             {
-                var degree = await _userService.GetUsersDegreeAsync(userId);
-                throw new EntityAlreadyCompletedException(nameof(SemesterPlannerModul), degree!.Name);
+                throw new EntityAlreadyCompletedException(nameof(SemesterPlannerModul), degree.Name);
             }
 
             _dbContext.SemesterPlannerModuls.Add(semesterPlannerModul);
@@ -87,7 +79,8 @@ namespace credit_wizard_api.Services
                 throw new EntityNotFoundException($"User with Id {userId} has no matching planned semester with Id {semesterPlannerModul.SemesterPlannerId}");
             }
 
-            if (!await _degreeService.IsModulPartOfDegreeAsync(semesterPlannerModul.ModulId))
+            var degree = await _userService.GetUsersDegreeAsync(userId);
+            if (!await _degreeService.IsModulPartOfDegreeAsync(semesterPlannerModul.ModulId, degree.Id))
             {
                 if (semesterPlannerModul.Modul == null)
                 {
@@ -97,15 +90,12 @@ namespace credit_wizard_api.Services
                 throw new ReferenceNotExistsException(nameof(Degree), nameof(Modul), semesterPlannerModul.Modul!.Name);
             }
 
-
             if (await AlreadyCompletedModul(userId, semesterPlannerModul.ModulId, semesterPlannerModul.SemesterPlannerId))
             {
-                var degree = await _userService.GetUsersDegreeAsync(userId);
                 throw new EntityAlreadyCompletedException(nameof(SemesterPlannerModul), degree!.Name);
             }
 
             var item = await GetByIdAsync(semesterPlannerModul.ModulId, semesterPlannerModul.SemesterPlannerId);
-
             if(item == null) throw new EntityNotFoundException($"No SemesterPlannerModul found with SemesterPlannerId {semesterPlannerModul.SemesterPlanner} & ModulId {semesterPlannerModul.ModulId}");
 
 
@@ -132,6 +122,24 @@ namespace credit_wizard_api.Services
         public async Task<List<SemesterPlannerModul>> GetCompletedModulesByUser(Guid userId)
         {
             return await _dbContext.SemesterPlannerModuls.Include(x => x.SemesterPlanner).Where(x => x.SemesterPlanner.UserId == userId && x.Grade >= 4).ToListAsync() ?? new List<SemesterPlannerModul>();
+        }
+
+        /// <summary>
+        /// Check if modul is already completed
+        /// </summary>
+        /// <param name="userId">id of the checked user</param>
+        /// <param name="modulId">id of the checked modul</param>
+        /// <param name="semesterPlannerId">id of the checked semesterplanner</param>
+        /// <returns></returns>
+        private async Task<bool> AlreadyCompletedModul(Guid userId, Guid modulId, Guid semesterPlannerId)
+        {
+            return await _dbContext.SemesterPlannerModuls
+                .Include(x => x.SemesterPlanner)
+                .AnyAsync(x =>
+                    x.SemesterPlanner.UserId == userId &&
+                    x.ModulId == modulId &&
+                    x.SemesterPlannerId != semesterPlannerId &&
+                    x.Grade >= 4);
         }
     }
 }

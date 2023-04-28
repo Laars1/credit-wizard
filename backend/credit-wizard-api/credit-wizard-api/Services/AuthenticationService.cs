@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace credit_wizard_api.Services
 {
+    /// <summary>
+    /// Business logic for authentication, method comments are placed in its interface
+    /// </summary>
     public class AuthenticationService : IAutenticationService
     {
         private readonly JwtSettings _jwtSettings;
@@ -25,6 +28,7 @@ namespace credit_wizard_api.Services
 
         public JwtSecurityToken GenerateToken(Guid userId, List<string> userRoles)
         {
+            // Prepare users claims, which will be stored into the token
             var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
@@ -35,6 +39,7 @@ namespace credit_wizard_api.Services
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.JwtSecret));
             
+            // Generate JWT-Token
             return new JwtSecurityToken(
                 issuer: _jwtSettings.ValidIssuer,
                 audience: _jwtSettings.ValidAudience,
