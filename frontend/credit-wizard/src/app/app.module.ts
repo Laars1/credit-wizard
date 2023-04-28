@@ -24,7 +24,7 @@ import { InformationsModule } from './shared/components/informations/information
 import { SemesterPlannerFormDialogComponent } from './core/semesterplanner/semesterplanner-form-dialog/semesterplanner-form-dialog.component';
 import { ModulListComponent } from './core/modul/modul-list/modul-list-component';
 import { DegreeListComponent } from './core/degree/degree-list/degree-list-component';
-import { ModulDetailDialogComponent } from './core/modules/modul-detail-dialog/modul-detail-dialog.component';
+import { ModulDetailDialogComponent } from './core/modul/modul-detail-dialog/modul-detail-dialog.component';
 import { SemesterplannermodulFormDialogComponent } from './core/semesterplannermodul/semesterplannermodul-form-dialog/semesterplannermodul-form-dialog.component';
 
 @NgModule({
