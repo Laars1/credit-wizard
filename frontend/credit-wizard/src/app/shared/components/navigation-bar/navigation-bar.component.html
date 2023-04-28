@@ -1,25 +1,52 @@
 <mat-toolbar color="primary">
-    <div class="col-2">
-        <img src="../../../../assets/images/Navigation_Logo.png" alt="Logo Zauberer Navigation" class="navigation-img">
-        <a routerLink="/" class="p-3 header-title">CreditWizard</a>
-    </div>
-    <div class="navigation-items-div col-9">
-        <ul class="navigation-items" *ngIf="this.authService.isLoggedIn">
-            <li>
-                <a routerLink="/semester" routerLinkActive="active" class="p-3">Semester</a>
-            </li>
-            <li>
-                <a routerLink="/modules" routerLinkActive="active" class="p-3">Modules</a>
-            </li>
-            <li>
-                <a routerLink="/degree" routerLinkActive="active" class="p-3">Degree</a>
-            </li>
-        </ul>
-    </div>
-    <div class="navigation-user-div col-1">
-            <button mat-raised-button color="accent" routerLink="/login" *ngIf="!this.authService.isLoggedIn"
-            type="button">Login</button>
-        <button mat-raised-button color="accent" (click)="logout()" *ngIf="this.authService.isLoggedIn"
-            type="button">Logout</button>
-    </div>
+  <div class="col-2">
+    <img
+      src="../../../../assets/images/Navigation_Logo.png"
+      alt="Logo Zauberer Navigation"
+      class="navigation-img"
+    />
+    <a routerLink="/" class="p-3 header-title">CreditWizard</a>
+  </div>
+  <div class="navigation-items-div col-9">
+    <ul class="navigation-items" *ngIf="this.authService.isLoggedIn">
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active" class="p-3"
+          >Dashboard</a
+        >
+      </li>
+      <li>
+        <a routerLink="/semester" routerLinkActive="active" class="p-3"
+          >Semester</a
+        >
+      </li>
+      <li>
+        <a routerLink="/modules" routerLinkActive="active" class="p-3"
+          >Modules</a
+        >
+      </li>
+      <li>
+        <a routerLink="/degree" routerLinkActive="active" class="p-3">Degree</a>
+      </li>
+    </ul>
+  </div>
+  <div class="navigation-user-div col-1">
+    <button
+      mat-raised-button
+      color="accent"
+      routerLink="/login"
+      *ngIf="!this.authService.isLoggedIn"
+      type="button"
+    >
+      Login
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="logout()"
+      *ngIf="this.authService.isLoggedIn"
+      type="button"
+    >
+      Logout
+    </button>
+  </div>
 </mat-toolbar>

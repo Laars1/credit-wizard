@@ -1,5 +1,4 @@
-﻿using credit_wizard_api.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace credit_wizard_api.Dtos
 {

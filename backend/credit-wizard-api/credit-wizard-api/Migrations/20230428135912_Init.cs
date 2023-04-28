@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -33,7 +32,8 @@ namespace credit_wizard_api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    TotalEtcsPoints = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,24 +136,24 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DegreeModul",
+                name: "DegreeModuls",
                 columns: table => new
                 {
                     ModulId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsRequried = table.Column<bool>(type: "bit", nullable: false)
+                    IsRequired = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DegreeModul", x => new { x.ModulId, x.DegreeId });
+                    table.PrimaryKey("PK_DegreeModuls", x => new { x.ModulId, x.DegreeId });
                     table.ForeignKey(
-                        name: "FK_DegreeModul_Degrees_DegreeId",
+                        name: "FK_DegreeModuls_Degrees_DegreeId",
                         column: x => x.DegreeId,
                         principalTable: "Degrees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DegreeModul_Moduls_ModulId",
+                        name: "FK_DegreeModuls_Moduls_ModulId",
                         column: x => x.ModulId,
                         principalTable: "Moduls",
                         principalColumn: "Id",
@@ -275,8 +275,9 @@ namespace credit_wizard_api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Completed = table.Column<bool>(type: "bit", nullable: false),
                     SemesterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SemesterTimeslotId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SemesterTimeSlotId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -288,8 +289,8 @@ namespace credit_wizard_api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SemesterPlanners_SemesterTimeSlots_SemesterTimeslotId",
-                        column: x => x.SemesterTimeslotId,
+                        name: "FK_SemesterPlanners_SemesterTimeSlots_SemesterTimeSlotId",
+                        column: x => x.SemesterTimeSlotId,
                         principalTable: "SemesterTimeSlots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -302,7 +303,7 @@ namespace credit_wizard_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SemesterPlannerModul",
+                name: "SemesterPlannerModuls",
                 columns: table => new
                 {
                     SemesterPlannerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -311,15 +312,15 @@ namespace credit_wizard_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SemesterPlannerModul", x => new { x.SemesterPlannerId, x.ModulId });
+                    table.PrimaryKey("PK_SemesterPlannerModuls", x => new { x.SemesterPlannerId, x.ModulId });
                     table.ForeignKey(
-                        name: "FK_SemesterPlannerModul_Moduls_ModulId",
+                        name: "FK_SemesterPlannerModuls_Moduls_ModulId",
                         column: x => x.ModulId,
                         principalTable: "Moduls",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SemesterPlannerModul_SemesterPlanners_SemesterPlannerId",
+                        name: "FK_SemesterPlannerModuls_SemesterPlanners_SemesterPlannerId",
                         column: x => x.SemesterPlannerId,
                         principalTable: "SemesterPlanners",
                         principalColumn: "Id",
@@ -337,8 +338,8 @@ namespace credit_wizard_api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Degrees",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[] { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "This degree program is designed to equip students with a blend of business and IT skills, focusing on areas such as business strategy, data analysis, and software development. Graduates are prepared for careers in a variety of industries where technology plays a critical role in business operations.", "Bachelor of Science in Business Information Technology" });
+                columns: new[] { "Id", "Description", "Name", "TotalEtcsPoints" },
+                values: new object[] { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "This degree program is designed to equip students with a blend of business and IT skills, focusing on areas such as business strategy, data analysis, and software development. Graduates are prepared for careers in a variety of industries where technology plays a critical role in business operations.", "Bachelor of Science in Business Information Technology", 180 });
 
             migrationBuilder.InsertData(
                 table: "Moduls",
@@ -387,11 +388,11 @@ namespace credit_wizard_api.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DegreeId", "Email", "EmailConfirmed", "Lastname", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Prename", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "45a87b70-c0ca-4b53-8016-00b5b72ceb6e", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEEqotivY3CCo6h0f3USxHvr7i/o9iwt1BWkrDQ//AuB0Ff4z/t4iaGAj6/75Pdyphw==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
+                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "65a3026f-60f7-4fd1-aa78-ba126c954d98", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEPpeLxbCxsngunxqReQNLTzfQhbWvnMfKWJhCcFuaK4SrlyPm79TbozFIoN0RcAWoA==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
 
             migrationBuilder.InsertData(
-                table: "DegreeModul",
-                columns: new[] { "DegreeId", "ModulId", "IsRequried" },
+                table: "DegreeModuls",
+                columns: new[] { "DegreeId", "ModulId", "IsRequired" },
                 values: new object[,]
                 {
                     { new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"), false },
@@ -426,6 +427,7 @@ namespace credit_wizard_api.Migrations
                     { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
                     { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
                     { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
+                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
                     { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
                     { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
                     { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
@@ -441,14 +443,22 @@ namespace credit_wizard_api.Migrations
 
             migrationBuilder.InsertData(
                 table: "SemesterPlanners",
-                columns: new[] { "Id", "SemesterId", "SemesterTimeslotId", "UserId" },
-                values: new object[] { new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") });
+                columns: new[] { "Id", "Completed", "SemesterId", "SemesterTimeSlotId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("ee8cdf72-5bea-43c2-a905-3c80192782d1"), false, new Guid("26082676-ac5f-4a34-bfea-cebba3889b1f"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") },
+                    { new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), false, new Guid("7879d617-ca43-482e-9377-fbd55e2976fa"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835"), new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5") }
+                });
 
             migrationBuilder.InsertData(
-                table: "SemesterPlannerModul",
+                table: "SemesterPlannerModuls",
                 columns: new[] { "ModulId", "SemesterPlannerId", "Grade" },
                 values: new object[,]
                 {
+                    { new Guid("19b1c514-fb71-414a-8e0a-1f708e1e136e"), new Guid("ee8cdf72-5bea-43c2-a905-3c80192782d1"), null },
+                    { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), new Guid("ee8cdf72-5bea-43c2-a905-3c80192782d1"), null },
+                    { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("ee8cdf72-5bea-43c2-a905-3c80192782d1"), null },
+                    { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("ee8cdf72-5bea-43c2-a905-3c80192782d1"), null },
                     { new Guid("686e6a0c-7f51-4c9d-b968-f6ba201df221"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null },
                     { new Guid("6c381c6f-9d9a-4b69-aa13-33a8a94a1277"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null },
                     { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), new Guid("efc28c5e-8908-492e-a6f5-1c7396ab6f02"), null }
@@ -499,8 +509,8 @@ namespace credit_wizard_api.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DegreeModul_DegreeId",
-                table: "DegreeModul",
+                name: "IX_DegreeModuls_DegreeId",
+                table: "DegreeModuls",
                 column: "DegreeId");
 
             migrationBuilder.CreateIndex(
@@ -515,8 +525,8 @@ namespace credit_wizard_api.Migrations
                 column: "SemesterTimeSlotId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SemesterPlannerModul_ModulId",
-                table: "SemesterPlannerModul",
+                name: "IX_SemesterPlannerModuls_ModulId",
+                table: "SemesterPlannerModuls",
                 column: "ModulId");
 
             migrationBuilder.CreateIndex(
@@ -525,9 +535,9 @@ namespace credit_wizard_api.Migrations
                 column: "SemesterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SemesterPlanners_SemesterTimeslotId",
+                name: "IX_SemesterPlanners_SemesterTimeSlotId",
                 table: "SemesterPlanners",
-                column: "SemesterTimeslotId");
+                column: "SemesterTimeSlotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SemesterPlanners_UserId_SemesterId",
@@ -555,13 +565,13 @@ namespace credit_wizard_api.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DegreeModul");
+                name: "DegreeModuls");
 
             migrationBuilder.DropTable(
                 name: "ModulSemesterTimeSlot");
 
             migrationBuilder.DropTable(
-                name: "SemesterPlannerModul");
+                name: "SemesterPlannerModuls");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

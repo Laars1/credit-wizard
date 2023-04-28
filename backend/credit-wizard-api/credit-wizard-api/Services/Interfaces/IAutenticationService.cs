@@ -1,5 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using credit_wizard_api.Models;
+﻿using credit_wizard_api.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace credit_wizard_api.Services.Interfaces
 {

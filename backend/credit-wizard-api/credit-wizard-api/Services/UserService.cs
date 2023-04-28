@@ -1,11 +1,9 @@
-﻿using System.Net.Mime;
-using credit_wizard_api.Dtos;
+﻿using credit_wizard_api.Dtos;
 using credit_wizard_api.Exceptions;
 using credit_wizard_api.Models;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace credit_wizard_api.Services;
 
@@ -24,7 +22,7 @@ public class UserService : IUserService
         _userManager = userManager;
         _semesterPlannerService = semesterPlannerService;
     }
-    
+
     public async Task<List<User>> GetAsync()
     {
         return await _dbContext.Users.ToListAsync();
@@ -37,7 +35,7 @@ public class UserService : IUserService
             .FirstOrDefaultAsync(x => x.Id == id);
 
     }
-    
+
     public async Task<User?> GetByIdWithDependenciesAsync(Guid id)
     {
         return await _dbContext.Users

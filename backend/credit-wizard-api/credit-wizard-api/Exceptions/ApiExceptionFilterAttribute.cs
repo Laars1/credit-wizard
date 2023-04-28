@@ -55,7 +55,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     private void HandleUnknownException(ExceptionContext context)
     {
         var statusCode = StatusCodes.Status500InternalServerError;
-        
+
         context.Result = new ObjectResult(new ErrorResultDto()
         {
             ErrorType = "Internal Server Error",
@@ -84,7 +84,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 StatusCodes.Status404NotFound,
                 exception!));
     }
-    
+
     /// <summary>
     /// Handles the <see cref="EntityAlreadyExistsException"/>.
     /// Returns a bad request (400) error response
@@ -100,7 +100,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 StatusCodes.Status400BadRequest,
                 exception!));
     }
-    
+
     private void HandlReferenceAlreadyExistsException(ExceptionContext context)
     {
         var exception = context.Exception as ReferenceAlreadyExistsException;
@@ -140,7 +140,7 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     /// <param name="statusCode">Status code of response.</param>
     /// <param name="exception">Thrown exception for message and generation of data object.</param>
     /// <returns>ProblemDetails object with all details specified.</returns>
-    private ErrorResultDto GenerateProblemDetails(string errorName,int statusCode, Exception exception)
+    private ErrorResultDto GenerateProblemDetails(string errorName, int statusCode, Exception exception)
     {
         return new ErrorResultDto()
         {

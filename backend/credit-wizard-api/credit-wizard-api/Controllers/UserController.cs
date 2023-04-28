@@ -1,10 +1,9 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using credit_wizard_api.Dtos;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Security.Claims;
 
 namespace credit_wizard_api.Controllers;
 
@@ -21,7 +20,7 @@ public class UserController : Controller
         _userService = userService;
         _mapper = mapper;
     }
-    
+
     /// <summary>
     /// Get all required data from logged in user
     /// </summary>
@@ -33,7 +32,7 @@ public class UserController : Controller
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         return Ok(_mapper.Map<UserDto>(await _userService.GetByIdAsync(Guid.Parse(userId))));
     }
-    
+
     /// <summary>
     /// Get current progress for logged in user
     /// </summary>

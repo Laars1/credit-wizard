@@ -96,7 +96,7 @@ namespace credit_wizard_api.Services
             }
 
             var item = await GetByIdAsync(semesterPlannerModul.ModulId, semesterPlannerModul.SemesterPlannerId);
-            if(item == null) throw new EntityNotFoundException($"No SemesterPlannerModul found with SemesterPlannerId {semesterPlannerModul.SemesterPlanner} & ModulId {semesterPlannerModul.ModulId}");
+            if (item == null) throw new EntityNotFoundException($"No SemesterPlannerModul found with SemesterPlannerId {semesterPlannerModul.SemesterPlanner} & ModulId {semesterPlannerModul.ModulId}");
 
 
             item.Grade = semesterPlannerModul.Grade;

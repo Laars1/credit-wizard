@@ -3,7 +3,6 @@ using credit_wizard_api.Dtos;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace credit_wizard_api.Controllers
 {

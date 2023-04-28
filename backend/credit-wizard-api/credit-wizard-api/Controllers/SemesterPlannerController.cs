@@ -68,7 +68,7 @@ namespace credit_wizard_api.Controllers
         public async Task<IActionResult> UpdateSemesterPlannerAsync(Guid id, SemesterPlannerDto dto)
         {
             if (id != dto.Id) return BadRequest(new ErrorResultDto { ErrorType = nameof(BadRequest), Message = "One of the parsed id does not match with de id from the request body", StatusCode = 400 });
-            
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             if (dto.UserId != Guid.Parse(userId)) return BadRequest(new ErrorResultDto { ErrorType = nameof(BadRequest), StatusCode = 400, Message = "Parsed UserId does not match with the logged in user" });
 

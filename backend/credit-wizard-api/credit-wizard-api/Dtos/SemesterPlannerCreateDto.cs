@@ -23,6 +23,6 @@ namespace credit_wizard_api.Dtos
         [Required]
         public Guid SemesterTimeslotId { get; set; }
 
-        public ICollection<SemesterTimeSlotDto> SemesterTimeSlotDtos { get; set; } = new List<SemesterTimeSlotDto>();   
+        public ICollection<SemesterTimeSlotDto> SemesterTimeSlotDtos { get; set; } = new List<SemesterTimeSlotDto>();
     }
 }

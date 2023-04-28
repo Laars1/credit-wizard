@@ -118,15 +118,15 @@ namespace credit_wizard_api.Services
         public async Task<int> UpdateAsync(SemesterPlanner semesterPlanner)
         {
             var current = await GetByIdAndUserIdAsync(semesterPlanner.Id, semesterPlanner.UserId);
-            
+
             if (current == null) throw new EntityNotFoundException(nameof(SemesterPlanner), $"{nameof(SemesterPlanner.Id)} & {nameof(SemesterPlanner.UserId)}", $"{semesterPlanner.Id} & {semesterPlanner.UserId}");
-            
+
             if (await AlreadyBookedSemester(semesterPlanner.UserId, semesterPlanner.SemesterId, semesterPlanner.Id))
             {
                 throw new ReferenceAlreadyExistsException(nameof(SemesterPlanner), nameof(Semester),
                     semesterPlanner.SemesterId.ToString());
             }
-            
+
             current.Completed = semesterPlanner.Completed;
             current.SemesterId = semesterPlanner.SemesterId;
             current.SemesterTimeSlotId = semesterPlanner.SemesterTimeSlotId;

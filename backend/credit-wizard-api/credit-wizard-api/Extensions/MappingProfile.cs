@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using credit_wizard_api.Dtos;
 using credit_wizard_api.Models;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace credit_wizard_api.Extensions
 {
@@ -21,7 +20,7 @@ namespace credit_wizard_api.Extensions
                 .ForMember(dest => dest.DegreeDto, act => act.MapFrom(src => src.Degree))
                 .ForMember(dest => dest.ModulDto, act => act.MapFrom(src => src.Modul))
                 .ReverseMap();
-            
+
             CreateMap<Modul, ModulDto>()
                 .ForMember(dest => dest.SemesterTimeSlotDtos, act => act.MapFrom(src => src.SemesterTimeSlot))
                 .ForMember(dest => dest.DegreeModulDtos, act => act.MapFrom(src => src.DegreeModuls))

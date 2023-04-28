@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using credit_wizard_api.Dtos;
 using credit_wizard_api.Models;
-using credit_wizard_api.Services;
 using credit_wizard_api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

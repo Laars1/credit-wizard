@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using credit_wizard_api.Models;
+﻿using credit_wizard_api.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace credit_wizard_api.Dtos
 {
@@ -8,13 +8,13 @@ namespace credit_wizard_api.Dtos
         public Guid Id { get; set; }
 
         public string Email { get; set; }
-        
+
         [Required, StringLength(50)]
         public string Prename { get; set; }
-        
+
         [Required, StringLength(100)]
         public string Lastname { get; set; }
-        
+
         [Required, StringLength(20)]
         public string MatriculationNumber { get; set; }
 

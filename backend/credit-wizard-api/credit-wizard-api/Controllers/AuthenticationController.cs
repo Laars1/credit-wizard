@@ -1,7 +1,5 @@
 ﻿using credit_wizard_api.Dtos;
-using credit_wizard_api.Models;
 using credit_wizard_api.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 

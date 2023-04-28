@@ -15,11 +15,11 @@ namespace credit_wizard_api.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength (1000)]
+        [StringLength(1000)]
         public string Description { get; set; }
 
         [Required]
-        [Range(1,15)]
+        [Range(1, 15)]
         public int EtcsPoints { get; set; }
 
         public List<DegreeModul> DegreeModuls { get; set; } = new List<DegreeModul>();
