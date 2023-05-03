@@ -286,7 +286,7 @@ namespace credit_wizard_api.Models
                 // BBCS -> Only Spring Semester
                 new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("19b1c514-fb71-414a-8e0a-1f708e1e136e") },
                 // WGWI -> Only Autumn Semester
-                new { SemesterTimeSlotId = Guid.Parse("49de8d00-7b44-4180-ac26-3e919bbeb658"), ModulId = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864") },
+                new { SemesterTimeSlotId = Guid.Parse("fae91ab6-7b25-4c5d-bd40-16a79036c835"), ModulId = Guid.Parse("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864") },
             });
 
             builder.Entity<DegreeModul>().HasData(new List<DegreeModul>()
