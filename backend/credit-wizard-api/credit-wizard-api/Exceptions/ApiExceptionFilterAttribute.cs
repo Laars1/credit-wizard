@@ -15,6 +15,9 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         {
             { typeof(EntityNotFoundException), HandleEntityNotFoundException },
             { typeof(EntityAlreadyExistsException), HandleEntityAlreadyExistsException },
+            { typeof (ReferenceAlreadyExistsException), HandleReferenceAlreadyExistsException },
+            { typeof (ReferenceNotExistsException), HandlReferenceNotExistsException },
+            { typeof (EntityAlreadyCompletedException), HandlEntityAlreadyCompletedException }
         };
     }
 
@@ -101,7 +104,12 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 exception!));
     }
 
-    private void HandlReferenceAlreadyExistsException(ExceptionContext context)
+    /// <summary>
+    /// Handles all exceptions which refer to a reference already exists exception
+    /// Returns an conflict (409) error response.
+    /// </summary>
+    /// <param name="context">Context with thrown exception.</param>
+    private void HandleReferenceAlreadyExistsException(ExceptionContext context)
     {
         var exception = context.Exception as ReferenceAlreadyExistsException;
 
@@ -112,6 +120,11 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 exception!));
     }
 
+    /// <summary>
+    /// Handles all exceptions which refer to a reference not exists exception
+    /// Returns an not found (404) error response.
+    /// </summary>
+    /// <param name="context"></param>
     private void HandlReferenceNotExistsException(ExceptionContext context)
     {
         var exception = context.Exception as ReferenceNotExistsException;
@@ -122,7 +135,12 @@ public sealed class ApiExceptionFilterAttribute : ExceptionFilterAttribute
                 StatusCodes.Status404NotFound,
                 exception!));
     }
-
+    
+    /// <summary>
+    /// Handles all exceptions which refer to a entity already completed exception
+    /// Returns a bad-request (400) error response
+    /// </summary>
+    /// <param name="context"></param>
     private void HandlEntityAlreadyCompletedException(ExceptionContext context)
     {
         var exception = context.Exception as EntityAlreadyCompletedException;
