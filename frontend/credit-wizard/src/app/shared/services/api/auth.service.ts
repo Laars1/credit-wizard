@@ -5,6 +5,9 @@ import { LocalStorageService } from '../common/local-storage.service';
 import { ITokenDto } from '../../dtos/tokenDto';
 import { Router } from '@angular/router';
 
+/**
+ * API Service for handling authentication requests
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -16,8 +19,13 @@ export class AuthService {
     public router: Router
   ) {}
 
+  /**
+   * Send loginDto to API by HTTP Post Request
+   * After successful login the returned token is set to the local storage
+   * @param user data which should be sent to the API
+   */
   signIn(user: ILoginDto) {
-    return this.apiService
+    this.apiService
       .post<ITokenDto, ILoginDto>(this.apiUrl + '/login', user)
       .subscribe((res: any) => {
         this.localStorageService.set('access_token', res.token);
@@ -25,6 +33,10 @@ export class AuthService {
       });
   }
 
+  /**
+   * Logout the user from the Application
+   * token is removed from localstorage
+   */
   logout() {
     let removeToken = localStorage.removeItem('access_token');
     if (removeToken == null) {
@@ -32,10 +44,17 @@ export class AuthService {
     }
   }
 
+  /**
+   * Get token from localstorage
+   * @returns token from local storage
+   */
   getToken() {
     return localStorage.getItem('access_token');
   }
 
+  /**
+   * bool property which indicates if user has a token or not
+   */
   get isLoggedIn(): boolean {
     let authToken = this.localStorageService.get('access_token');
     return authToken !== null ? true : false;
