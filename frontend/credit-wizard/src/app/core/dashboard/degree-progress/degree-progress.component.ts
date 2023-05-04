@@ -23,6 +23,10 @@ export class DegreeProgressComponent implements OnInit {
     });
   }
 
+  /**
+   * Get currenct progress of degree as number 0-100
+   * @returns numer of the completion percentage of the degree 
+   */
   getProgress(){
     return Math.round(100/this.data.totalDegreeEtcsPoints*(this.data.reachedEtcsPoints + this.data.openEtcsPoints))
   }
