@@ -16,7 +16,7 @@ export class SemesterService {
 
   /**
    * Get all possible semester from the API
-   * @returns Observable with all semesters as array
+   * @returns {Observable<ISemesterDto[]>} Observable with all semesters as array
    */
   public get(): Observable<ISemesterDto[]> {
     return this.apiService.get<ISemesterDto[]>(this.apiUrl).pipe(

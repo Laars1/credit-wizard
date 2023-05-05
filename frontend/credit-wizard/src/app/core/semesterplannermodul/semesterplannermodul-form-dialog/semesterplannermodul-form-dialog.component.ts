@@ -12,6 +12,9 @@ import { SemesterplannermodulService } from 'src/app/shared/services/api/semeste
 import { Guid } from 'guid-typescript';
 import { FormType } from 'src/app/shared/enums/formType.enum';
 
+/**
+ * Component for a dialog that allows creating, editing, or deleting a module in a semester planner.
+ */
 @Component({
   selector: 'app-semesterplannermodul-form-dialog',
   templateUrl: './semesterplannermodul-form-dialog.component.html',
@@ -48,6 +51,9 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
     this.initForm();
   }
 
+  /**
+   * Loads the data needed for the component.
+   */
   loadData() {
     this.semesterPlannerModulService
       .getCompletedByUser()
@@ -72,6 +78,9 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
       });
   }
 
+  /**
+   * Initializes the form for the dialog.
+   */
   initForm() {
     this.form = this.fb.group({
       modulId: ['', Validators.required],
@@ -101,6 +110,11 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Validates the form and saves the data based on the formType.
+   * if the form is valid or disabled, it saves the data and navigates to the homepage.
+   * If the form is invalid, it sets the showError flag to true.
+   */
   save() {
     if (this.form.valid || this.form.disabled) {
       this.showError = false;
@@ -109,7 +123,7 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
         semesterPlannerId: this.data.semesterPlannerId,
         grade: this.form.get('grade')?.value,
       };
-  
+
       switch (this.data.formType) {
         case FormType.Create:
           this.createItem(data);
@@ -126,6 +140,11 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Calls the semesterPlannerModulService to create a new item with the given data.
+   * after a successful creation, it navigates to the homepage and displays a success message.
+   * @param data The data to create the item with.
+   */
   createItem(data: ISemesterPlannerModulDto) {
     this.semesterPlannerModulService.create(data).subscribe((x: number) => {
       this.messageService.success(
@@ -141,6 +160,11 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Calls the semesterPlannerModulService to edit an existing item with the given data.
+   * After a successful edit, it navigates to the homepage and displays a success message.
+   * @param data The data to edit the item with.
+   */
   editItem(data: ISemesterPlannerModulDto) {
     this.semesterPlannerModulService
       .edit(data.semesterPlannerId, data.modulId, data)
@@ -158,6 +182,11 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
       });
   }
 
+  /**
+   * Calls the semesterPlannerModulService to delete an existing item with the given data.
+   * after a successful deletion, it navigates to the homepage and displays a success message.
+   * @param data The data to delete the item with.
+   */
   deleteItem(data: ISemesterPlannerModulDto) {
     this.semesterPlannerModulService
       .delete(data.semesterPlannerId, data.modulId)
@@ -175,6 +204,9 @@ export class SemesterplannermodulFormDialogComponent implements OnInit {
       });
   }
 
+  /**
+   * Closes the current dialog
+   */
   close() {
     this.dialogRef.close();
   }

@@ -16,7 +16,7 @@ export class ModulService {
 
   /**
    * Get all modules from the API
-   * @returns Observable with all modules as array
+   * @returns {Observable<IModulDto[]>} Observable with all modules as array
    */
   public get(): Observable<IModulDto[]> {
     return this.apiService.get<IModulDto[]>(this.apiUrl).pipe(
@@ -30,7 +30,7 @@ export class ModulService {
   /**
    * Get a modul by its id from the API
    * @param id of the modul which should be selected
-   * @returns Observable with the returned modul
+   * @returns {Observable<IModulDto>} Observable with the returned modul
    */
   public getById(id: Guid): Observable<IModulDto> {
     return this.apiService.get<IModulDto>(this.apiUrl+"/"+id).pipe(

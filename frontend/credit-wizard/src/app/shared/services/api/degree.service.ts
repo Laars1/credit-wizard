@@ -17,7 +17,7 @@ export class DegreeService {
 
   /**
    * Get all degrees from the API
-   * @returns an Observable with the degrees
+   * @returns {Observable<IDegreeDto[]>} an Observable with the degrees
    */
   public get(): Observable<IDegreeDto[]> {
     return this.apiService.get<IDegreeDto[]>(this.apiUrl).pipe(
@@ -30,7 +30,7 @@ export class DegreeService {
 
   /**
    * Get all degrees with their included modules from the API
-   * @returns an Observable with the degrees
+   * @returns {Observable<IDegreeDto>} an Observable with the degrees
    */
   public getWithModules(): Observable<IDegreeDto> {
     return this.apiService
@@ -46,7 +46,7 @@ export class DegreeService {
   /**
    * Get all modules from one degree by their semestertimeslot id
    * @param id id of the selected semestertimeslot
-   * @returns Observable with the degrees with alle modules from degree
+   * @returns {Observable<IDegreeDto[]>} Observable with the degrees with alle modules from degree
    */
   public getWithModulesBySemesterTimeSlotid(
     id: Guid

@@ -10,6 +10,11 @@ import { SemesterplannerService } from 'src/app/shared/services/api/semesterplan
 import { MessageService } from 'src/app/shared/services/common/message.service';
 import { Router } from '@angular/router';
 
+/**
+ * This component is responsible for handling the form dialog to create or edit a Semester Planner
+ * It displays a form with fields for semester, semester time slot, and completion status
+ * It also loads data from the API for the semester and semester time slot dropdowns
+ */
 @Component({
   selector: 'app-semester-form-dialog',
   templateUrl: './semesterplanner-form-dialog.component.html',
@@ -42,6 +47,9 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
     this.initForm();
   }
 
+  /**
+   * Load data from the API for the semester and semester time slot dropdowns
+   */
   loadData() {
     this.semesterService.get().subscribe((x: ISemesterDto[]) => {
       this.semesters = x;
@@ -51,9 +59,13 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
       .subscribe((x: ISemesterTimeSlotDto[]) => {
         this.semesterTimeSlots = x;
       });
-      this.loaded = true;
+    this.loaded = true;
   }
-
+  /**
+   * Initializes the form group and its controls
+   * If isCreating is false, the 'completed' control is set to be required and the form is patched with the data passed in this.data.
+   * Otherwise, the 'completed' control is disabled.
+   */
   initForm() {
     this.form = this.fb.group({
       semesterId: ['', Validators.required],
@@ -74,6 +86,11 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Saves the form data if it's valid, otherwise sets showError to true.
+   * If isCreating is true, calls createItem with the form data.
+   * If isCreating is false, calls editItem with the form data.
+   */
   save() {
     console.log(this.form);
     if (this.form.valid) {
@@ -86,18 +103,22 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
         completed: this.form.get('completed')?.value,
       } as ISemesterPlannnerDto;
 
-      if(this.isCreating){
-        this.createItem(data)
-      }
-      else{
-        this.editItem(data)
+      if (this.isCreating) {
+        this.createItem(data);
+      } else {
+        this.editItem(data);
       }
     } else {
       this.showError = true;
     }
   }
 
-  createItem(data: ISemesterPlannnerDto){
+  /**
+   * Creates an item using the given data and displays a success message.
+   * Navigates to the homepage and closes the dialog after the creation is successful.
+   * @param data The data used to create the item.
+   */
+  createItem(data: ISemesterPlannnerDto) {
     this.semesterPlannerService.create(data).subscribe((x: number) => {
       this.messageService.success(
         'Ihr geplantes Semester wurde erstellt. Insgesamt wurden ' +
@@ -112,7 +133,12 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
     });
   }
 
-  editItem(data: ISemesterPlannnerDto){
+  /**
+   * Edits an item with the given id and data and displays a success message.
+   * Navigates to the homepage and closes the dialog after the edit is successful
+   * @param data - The data used to edit the item.
+   */
+  editItem(data: ISemesterPlannnerDto) {
     this.semesterPlannerService.edit(data.id, data).subscribe((x: number) => {
       this.messageService.success(
         'Ihr geplantes Semester wurde editiert. Insgesamt wurden ' +
@@ -127,6 +153,9 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Closes the current dialog.
+   */
   close() {
     this.dialogRef.close();
   }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { IUserDto } from 'src/app/shared/dtos/userDto';
-import { ApiService } from 'src/app/shared/services/api/base/api.service';
 import { UserService } from 'src/app/shared/services/api/user.service';
 
 @Component({
@@ -21,29 +19,38 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.userService.getCurrentUser().subscribe((u: IUserDto) => {
       this.user = u;
-    })
+    });
     this.userInformationLoaded = true;
   }
 
-  setLoadedDegreeProgress(loaded: boolean){
+  /**
+   * Sets the loaded state for the degree progress.
+   * @param loaded A boolean value indicating whether the degree progress is loaded or not.
+   */
+  setLoadedDegreeProgress(loaded: boolean) {
     this.userProgressLoaded = loaded;
     this.checkSpinner();
   }
 
-  setLoadedSemesterPlanner(loaded: boolean){
+  /**
+   * Sets the loaded state for the semester planner.
+   * @param loaded A boolean value indicating whether the semester planner is loaded or not.
+   */
+  setLoadedSemesterPlanner(loaded: boolean) {
     this.semesterPlannerInformationLoaded = loaded;
     this.checkSpinner();
   }
 
+  /**
+   * Checks the spinner visibility based on the loaded states.
+   * If all information (user information, degree progress, and semester planner) is loaded, the spinner is hidden.
+   * Otherwise, the spinner is shown.
+   */
   checkSpinner() {
-    if(this.userInformationLoaded && this.userProgressLoaded && this.semesterPlannerInformationLoaded){
+    if (this.userInformationLoaded && this.userProgressLoaded && this.semesterPlannerInformationLoaded) {
       this.spinnerVisible = false;
-    }
-    else{
+    } else {
       this.spinnerVisible = true;
     }
   }
-
 }
-
-

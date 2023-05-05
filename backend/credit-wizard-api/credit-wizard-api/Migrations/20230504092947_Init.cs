@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -388,7 +389,7 @@ namespace credit_wizard_api.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DegreeId", "Email", "EmailConfirmed", "Lastname", "LockoutEnabled", "LockoutEnd", "MatriculationNumber", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Prename", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "65a3026f-60f7-4fd1-aa78-ba126c954d98", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEPpeLxbCxsngunxqReQNLTzfQhbWvnMfKWJhCcFuaK4SrlyPm79TbozFIoN0RcAWoA==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
+                values: new object[] { new Guid("88fb78eb-7c6e-4d97-a8f9-8300cad558c5"), 0, "513137db-6285-4ba3-8195-8769db54ee37", new Guid("4b6feabb-8f23-4c91-83d2-1c9b8df465ce"), "hans.mustermann@email.ch", true, "Mustermann", false, null, "11-111-11", "HANS.MUSTERMANN@EMAIL.CH", "HANS.MUSTERMANN@EMAIL.CH", "AQAAAAIAAYagAAAAEKweGONNMVi/EXF0g+xiMJGKFjv3bIsKFFnWFh8qMwE5Xzfg+UriCyP+hzR2eOuC/Q==", null, true, "Hans", null, false, "hans.mustermann@email.ch" });
 
             migrationBuilder.InsertData(
                 table: "DegreeModuls",
@@ -427,7 +428,7 @@ namespace credit_wizard_api.Migrations
                     { new Guid("8f0680b7-68c2-4157-aafc-78c72f63a16f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
                     { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
                     { new Guid("b5ed5a5d-21c3-43de-8fb9-9d3a3b99a30f"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
-                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
+                    { new Guid("b7d16d9e-7a6a-4c11-bcca-4a4c3d4ec864"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
                     { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },
                     { new Guid("e0a6f205-64b7-42ab-bce3-39f0b3841c71"), new Guid("fae91ab6-7b25-4c5d-bd40-16a79036c835") },
                     { new Guid("eb2dbecc-d0d6-44ef-82eb-34284633ef19"), new Guid("49de8d00-7b44-4180-ac26-3e919bbeb658") },

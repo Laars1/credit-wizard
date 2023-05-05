@@ -46,7 +46,7 @@ export class AuthService {
 
   /**
    * Get token from localstorage
-   * @returns token from local storage
+   * @returns {sting | null} token from local storage
    */
   getToken() {
     return localStorage.getItem('access_token');

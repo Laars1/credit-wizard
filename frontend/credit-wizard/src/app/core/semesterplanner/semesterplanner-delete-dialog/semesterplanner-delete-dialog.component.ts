@@ -5,6 +5,9 @@ import { ISemesterPlannnerDto } from 'src/app/shared/dtos/semesterPlannerDto';
 import { SemesterplannerService } from 'src/app/shared/services/api/semesterplanner.service';
 import { MessageService } from 'src/app/shared/services/common/message.service';
 
+/**
+ * Component to display a confirmation dialog for deleting a semester planner
+ */
 @Component({
   selector: 'app-semesterplanner-delete-dialog',
   templateUrl: './semesterplanner-delete-dialog.component.html',
@@ -24,10 +27,17 @@ export class SemesterplannerDeleteDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Check if the deletion has been accepted
+   * @param accepted value
+   */
   checkAccept(accepted: boolean) {
     this.accept = accepted;
   }
 
+  /**
+   * Delete the selected semester planner and display a success message
+   */
   delete() {
     this.semesterPlannerService.delete(this.data.id).subscribe((x: number) => {
       this.messageService.success(
@@ -43,6 +53,9 @@ export class SemesterplannerDeleteDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * Close the dialog
+   */
   close() {
     this.dialogRef.close();
   }

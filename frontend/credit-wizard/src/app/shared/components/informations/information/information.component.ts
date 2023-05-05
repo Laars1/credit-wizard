@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+/**
+ * Component to display a information message
+ */
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
