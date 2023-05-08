@@ -8,6 +8,6 @@
     <dt>Email</dt>
     <dd>{{item.email}}</dd>
     <dt>Studiengang</dt>
-    <dd>{{item.degreeDto.name}}</dd>
+    <dd (click)="openDegreeInformationDialog()" class="name">{{item.degreeDto.name}}</dd>
   </dl>
 </div>

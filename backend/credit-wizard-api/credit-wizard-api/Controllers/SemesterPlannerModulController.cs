@@ -77,7 +77,7 @@ namespace credit_wizard_api.Controllers
         /// <returns>Amount of added Objects to the database</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public async Task<IActionResult> CreateSemesterPlannerAsync(SemesterPlannerModulDto dto)
+        public async Task<IActionResult> CreateSemesterPlannerModulAsync(SemesterPlannerModulDto dto)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var created = await _semesterPlannerModulService.CreateAsync(_mapper.Map<SemesterPlannerModul>(dto), Guid.Parse(userId));
@@ -93,7 +93,7 @@ namespace credit_wizard_api.Controllers
         /// <returns>Amount of added Objects to the database</returns>
         [HttpPut("semesterplannerid={semesterplannerId:Guid}&modulid={modulid:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public async Task<IActionResult> UpdateSemesterPlannerAsync(Guid semesterplannerId, Guid modulid, SemesterPlannerModulDto dto)
+        public async Task<IActionResult> UpdateSemesterPlannerModulAsync(Guid semesterplannerId, Guid modulid, SemesterPlannerModulDto dto)
         {
             if (semesterplannerId != dto.SemesterPlannerId || modulid != dto.ModulId) return BadRequest(new ErrorResultDto { ErrorType = nameof(BadRequest), Message = "One of the parsed id does not match with de id from the request body", StatusCode = 400 });
 
@@ -110,7 +110,7 @@ namespace credit_wizard_api.Controllers
         /// <returns>Amount of deleted Objects to the database</returns>
         [HttpDelete("semesterplannerid={semesterplannerId:Guid}&modulid={modulid:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        public async Task<IActionResult> DeleteSemesterPlannerAsync(Guid semesterplannerId, Guid modulid)
+        public async Task<IActionResult> DeleteSemesterPlannerModulAsync(Guid semesterplannerId, Guid modulid)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var delete = await _semesterPlannerModulService.DeleteAsync(modulid, semesterplannerId, Guid.Parse(userId));

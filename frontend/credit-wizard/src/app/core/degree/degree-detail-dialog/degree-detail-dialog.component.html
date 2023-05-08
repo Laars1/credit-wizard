@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Studiengang Details</h2>
+
+<mat-dialog-content>
+  <div *ngIf="!loaded">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="loaded">
+    <dl>
+      <dt>Id</dt>
+      <dd>{{item.id}}</dd>
+      <dt>Name</dt>
+      <dd>{{item.name}}</dd>
+      <dt>Beschreibung</dt>
+      <dd>{{item.description}}</dd>
+      <dt>Workload ETCS Punkte</dt>
+      <dd>{{item.totalEtcsPoints}}</dd>
+      <dt>Angebotene Module im Studiengang</dt>
+      <dd>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Wann durchführungszeitraum</th>
+              <th>Für abschluss notwendig</th>
+              <th>ETCS Punkte</th>
+              <th>Abgeschlossen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let modul of item.degreeModulDtos">
+              <td class="name" (click)="openModulInformationDialog(modul.modulId)">{{ modul.modulDto.name }}</td>
+              <td>
+                <p class="d-inline" *ngFor="let timeslot of modul.modulDto?.semesterTimeSlotDtos">
+                  {{timeslot.timeslot}}
+                  {{modul.modulDto.semesterTimeSlotDtos.indexOf(timeslot) != (modul.modulDto.semesterTimeSlotDtos.length -1) ? " & " : ""}}
+                </p>
+              </td>
+              <td>{{ modul.isRequired ? "Ja" : "Nein" }}</td>
+              <td>{{ modul.modulDto.etcsPoints}}</td>
+              <td>
+                <mat-icon
+                  *ngIf="completedModules.includes(modul.modulId)"
+                  matTooltip="Ja"
+                  matTooltipPosition="right"
+                  >check_box</mat-icon
+                >
+                <mat-icon
+                  *ngIf="!completedModules.includes(modul.modulId)"
+                  matTooltip="Noch nicht abgeschlossen"
+                  matTooltipPosition="right"
+                  >check_box_outline_blank</mat-icon
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </dd>
+    </dl>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="actions float-right">
+  <button mat-raised-button (click)="close()">Schliessen</button>
+</mat-dialog-actions>

@@ -51,9 +51,8 @@ namespace credit_wizard_api.Controllers
         }
 
         /// <summary>
-        /// Get specific Degree by its id
+        /// Get degree with its modules by current users study
         /// </summary>
-        /// <param name="id">Id of the searched Degree</param>
         /// <returns>A Degree in form of a DegreeDto</returns>
         [HttpGet("user/current/degreemodules")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DegreeDto))]
@@ -66,9 +65,9 @@ namespace credit_wizard_api.Controllers
         }
 
         /// <summary>
-        /// Get specific Degree by its id
+        /// Get degree with its modules by current users study by timeslot
         /// </summary>
-        /// <param name="id">Id of the searched Degree</param>
+        /// <param name="timeslotId">Id of the searched Degree</param>
         /// <returns>A Degree in form of a DegreeDto</returns>
         [HttpGet("user/current/degreemodules/timeslot/{timeslotId:Guid}")]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResultDto))]
