@@ -20,13 +20,7 @@ export class SemesterplannermodulService {
    */
   public getCompletedByUser(): Observable<Guid[]> {
     return this.apiService
-      .get<Guid[]>(this.apiUrl + '/user/current/completed')
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
-      );
+      .get<Guid[]>(this.apiUrl + '/user/current/completed');
   }
 
   /**
@@ -35,12 +29,7 @@ export class SemesterplannermodulService {
    * @returns a number of the amount of the created items
    */
   public create(data: ISemesterPlannerModulDto) {
-    return this.apiService.post<number>(this.apiUrl, data).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.post<number>(this.apiUrl, data);
   }
 
   /**
@@ -63,12 +52,6 @@ export class SemesterplannermodulService {
           '&modulid=' +
           modulId,
         data
-      )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
       );
   }
 
@@ -86,12 +69,6 @@ export class SemesterplannermodulService {
           semesterPlannerId +
           '&modulid=' +
           modulId
-      )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
       );
   }
 }

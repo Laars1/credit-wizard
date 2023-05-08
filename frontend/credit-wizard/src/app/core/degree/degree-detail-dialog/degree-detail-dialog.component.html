@@ -32,24 +32,17 @@
               <td>
                 <p class="d-inline" *ngFor="let timeslot of modul.modulDto?.semesterTimeSlotDtos">
                   {{timeslot.timeslot}}
-                  {{modul.modulDto.semesterTimeSlotDtos.indexOf(timeslot) != (modul.modulDto.semesterTimeSlotDtos.length -1) ? " & " : ""}}
+                  {{modul.modulDto.semesterTimeSlotDtos.indexOf(timeslot) != (modul.modulDto.semesterTimeSlotDtos.length
+                  -1) ? " & " : ""}}
                 </p>
               </td>
               <td>{{ modul.isRequired ? "Ja" : "Nein" }}</td>
               <td>{{ modul.modulDto.etcsPoints}}</td>
               <td>
-                <mat-icon
-                  *ngIf="completedModules.includes(modul.modulId)"
-                  matTooltip="Ja"
-                  matTooltipPosition="right"
-                  >check_box</mat-icon
-                >
-                <mat-icon
-                  *ngIf="!completedModules.includes(modul.modulId)"
-                  matTooltip="Noch nicht abgeschlossen"
-                  matTooltipPosition="right"
-                  >check_box_outline_blank</mat-icon
-                >
+                <mat-icon *ngIf="completedModules.includes(modul.modulId)" matTooltip="Ja"
+                  matTooltipPosition="right">check_box</mat-icon>
+                <mat-icon *ngIf="!completedModules.includes(modul.modulId)" matTooltip="Noch nicht abgeschlossen"
+                  matTooltipPosition="right">check_box_outline_blank</mat-icon>
               </td>
             </tr>
           </tbody>

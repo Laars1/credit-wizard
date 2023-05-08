@@ -19,12 +19,7 @@ export class SemesterplannerService {
    * @returns Observable of all planned semester as array
    */
   public get(): Observable<ISemesterPlannnerDto[]> {
-    return this.apiService.get<ISemesterPlannnerDto[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<ISemesterPlannnerDto[]>(this.apiUrl);
   }
 
   /**
@@ -33,12 +28,7 @@ export class SemesterplannerService {
    * @returns {number} a number of the amount of the created items
    */
   public create(data: ISemesterPlannnerDto) {
-    return this.apiService.post<number>(this.apiUrl, data).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.post<number>(this.apiUrl, data);
   }
 
   /**
@@ -48,12 +38,7 @@ export class SemesterplannerService {
    * @returns {number} a number of the amount of the edited items
    */
   public edit(id: Guid, data: ISemesterPlannnerDto) {
-    return this.apiService.put<number>(this.apiUrl + '/' + id, data).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.put<number>(this.apiUrl + '/' + id, data);
   }
 
   /**
@@ -62,11 +47,6 @@ export class SemesterplannerService {
    * @returns {number} a number of the amount of the deleted items
    */
   public delete(id: Guid): Observable<number> {
-    return this.apiService.delete<number>(this.apiUrl + '/' + id).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.delete<number>(this.apiUrl + '/' + id);
   }
 }

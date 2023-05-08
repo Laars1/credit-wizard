@@ -2,10 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { IDegreeDto } from 'src/app/shared/dtos/degreeDto';
 import { DegreeService } from 'src/app/shared/services/api/degree.service';
 import { ModulDetailDialogComponent } from '../../modul/modul-detail-dialog/modul-detail-dialog.component';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { SemesterplannermodulService } from 'src/app/shared/services/api/semesterplannermodul.service';
 import { Guid } from 'guid-typescript';
 
+/**
+ * Dialog component for all details of a degree. Degree is shown which is referenced to current user
+ */
 @Component({
   selector: 'app-degree-detail-dialog',
   templateUrl: './degree-detail-dialog.component.html',

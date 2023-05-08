@@ -20,12 +20,7 @@ export class DegreeService {
    * @returns {Observable<IDegreeDto[]>} an Observable with the degrees
    */
   public get(): Observable<IDegreeDto[]> {
-    return this.apiService.get<IDegreeDto[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<IDegreeDto[]>(this.apiUrl);
   }
 
   /**
@@ -33,14 +28,9 @@ export class DegreeService {
    * @returns {Observable<IDegreeDto>} an Observable with the degrees
    */
   public getWithModules(): Observable<IDegreeDto> {
-    return this.apiService
-      .get<IDegreeDto>(this.apiUrl + '/user/current/degreemodules')
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
-      );
+    return this.apiService.get<IDegreeDto>(
+      this.apiUrl + '/user/current/degreemodules'
+    );
   }
 
   /**
@@ -51,15 +41,8 @@ export class DegreeService {
   public getWithModulesBySemesterTimeSlotid(
     id: Guid
   ): Observable<IDegreeModulDto[]> {
-    return this.apiService
-      .get<IDegreeModulDto[]>(
-        this.apiUrl + '/user/current/degreemodules/timeslot/' + id
-      )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          return EMPTY;
-        })
-      );
+    return this.apiService.get<IDegreeModulDto[]>(
+      this.apiUrl + '/user/current/degreemodules/timeslot/' + id
+    );
   }
 }

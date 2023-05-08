@@ -35,12 +35,6 @@ export class UserService {
    * @returns observable with all informations about the progress of the degree
    */
   public getCurrentUserDegreeProgress(): Observable<IDegreeProgressDto> {
-    return this.apiService.get<IDegreeProgressDto>(this.apiUrl + "/current/degreeprogress").pipe(
-      map((x: IDegreeProgressDto) => x as IDegreeProgressDto),
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<IDegreeProgressDto>(this.apiUrl + "/current/degreeprogress");
   }
 }

@@ -35,7 +35,6 @@ export class SemesterplannerContentComponent implements OnInit {
   constructor(private dialogService: MatDialog) {}
 
   ngOnInit() {
-    console.log(this.item);
     this.totalEtcsPoints = this.getTotalEtcs() ?? 0;
     this.currentEtcsPoints = this.getCurrentEtcs() ?? 0;
   }

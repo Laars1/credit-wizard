@@ -92,7 +92,6 @@ export class SemesterPlannerFormDialogComponent implements OnInit {
    * If isCreating is false, calls editItem with the form data.
    */
   save() {
-    console.log(this.form);
     if (this.form.valid) {
       this.showError = false;
       let data = {

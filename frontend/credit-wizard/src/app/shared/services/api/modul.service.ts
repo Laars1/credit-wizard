@@ -19,12 +19,7 @@ export class ModulService {
    * @returns {Observable<IModulDto[]>} Observable with all modules as array
    */
   public get(): Observable<IModulDto[]> {
-    return this.apiService.get<IModulDto[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<IModulDto[]>(this.apiUrl);
   }
 
   /**
@@ -33,11 +28,6 @@ export class ModulService {
    * @returns {Observable<IModulDto>} Observable with the returned modul
    */
   public getById(id: Guid): Observable<IModulDto> {
-    return this.apiService.get<IModulDto>(this.apiUrl+"/"+id).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<IModulDto>(this.apiUrl + '/' + id);
   }
 }

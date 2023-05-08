@@ -19,11 +19,6 @@ export class SemesterService {
    * @returns {Observable<ISemesterDto[]>} Observable with all semesters as array
    */
   public get(): Observable<ISemesterDto[]> {
-    return this.apiService.get<ISemesterDto[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<ISemesterDto[]>(this.apiUrl);
   }
 }

@@ -18,11 +18,6 @@ export class SemestertimeslotService {
    * @returns a array of all semestertimeslot as observable
    */
   public get(): Observable<ISemesterTimeSlotDto[]> {
-    return this.apiService.get<ISemesterTimeSlotDto[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error(err);
-        return EMPTY;
-      })
-    );
+    return this.apiService.get<ISemesterTimeSlotDto[]>(this.apiUrl);
   }
 }
