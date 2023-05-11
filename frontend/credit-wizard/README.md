@@ -1,27 +1,16 @@
-# CreditWizard
+# Frontend
+Kopie des Initialen Read.me des Repositories
+## Prerequisite
+- [Node.js](https://nodejs.org/en)
+- NPM (Installation kann im CMD mit folgendem Command überprüft werden: ```npm -v```)
+- Angular (Installation kann im CMD mit folgendem Command überprüft werden: ```ng version```)
+- [Visual Studio Code](https://code.visualstudio.com/Download) installieren.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+## How to setup the frontend Application
+1. Öffne das Projekt in Visual Studio Code: Visual Studio Code öffnen -> File -> Open Folder -> Ordner des geklonten Projektes öffnen und zum Ordner ```\4p-sansibar\frontend\credit-wizard``` 
+2. Öffne ein neues Terminal Fenster in Visual Studio Code: Terminal -> New Terminal
+3. Installiere die notwendigen Packages: Führe den Befehl ```npm install```. Dieser Command kann bis zu 60 Sekunden dauern.
+4. Amschliessend kann der Command ```ng serve --open``` ausgeführt werden.
+5. Nun sollte sich das Frontend in einem neuen Browser-Tab öffnen. Dies sollte dann etwa folgendermassen aussehen:
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ![alt text](./docs/pictures/Sign-in-component.png "Frontend")
