@@ -1,92 +1,99 @@
 # 4p-Sansibar
+## Local Setup
+Unser Projekt basiert einerseits auf der .Net Web Api und einen Angular Frontend.
+In diesem Kapitel wird beschrieben wie die beinen Applikationen lokal aufgesetzt und gestartet werden können.
+**Wichtig**: Diese Dokumentation dient für das Setup auf einem Windows Gerät. Grundsätzlich sollte das Programm jedoch auch für andere Bertriebssysteme ausführbar sein, dort weicht die Installation und das Setup jedoch ein wenig ab.
+
+### Projekt Klonen
+#### Prerequisite 
+- [git](https://git-scm.com/) muss installiert sein
+
+#### How to clone the project
+Als ersten muss das Projekt lokal geklont werden. in dieser Anleitung wird der vorgang mit via CMD Vorgenommen.
+1. CMD öffnen
+2. In Directory wechseln wo das Projekt abgespeichert werden soll (z.B. "```cd C:\Users\larsb\source\repos\```")
+3. Projekt von Gitlab klonen "```git clone https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar.git```"
+4. Anschliessend Credentials eingeben
+5. Nun sollte das Projekt in dem angegebenen Ordner geklont worden sein.
+
+### Backend
+#### Prerequisite
+- [Visual Studio Community 2022](https://visualstudio.microsoft.com/de/downloads/) installieren. Dabei muss beachtet werden dass das Paket "ASP.NET und Webentwicklung mitinstalliert wird. Ansonsten kann das Projekt nicht gestartet werden.
+
+#### How to setup the backend Application
+Anschliessend müsseen folgende Schritte durchgefüht werden:
+1. Solution in Visual Studio 2022 öffen: Visual Studio öffnen -> "Open a project or a solution" -> Ordner des geklonten Projektes öffnen und zum Ordner  "```\4p-sansibar\backend\credit-wizard-api``` navigieren -> File ```credit-wizard-api.sln``` öffnen
+2. Warten bis die Solution geladen ist.
+3. "Package Manager Console" öffnen -> View -> Other Windows -> Package Manager Console
+4. In der Package Manager Console folgenden Command eingeben: ```Update-Database```. Was macht dieser Command? Dieser Command erstellt die lokale SQL-Server Datenbank anhand der hinterlegten Migrationen in der Solution. Dieser Command kann bis zu 30 Sekunden dauern.
+5. (Optional) Prüfen ob die Datenbank erstellt wurde: 
+    - "SQL Server Obejct Explorer" öffnen: View -> SQL Server Obejct Explorer
+    - Navigiere: "(localdb)\MSSQLLocalDB" -> Databases
+    - Dort sollte nun die Datenbank "CreditWizard" sichbar sein. Siehe Screenshot:
+    
+        ![alt text](./docs/pictures/SqlServerObjectExplorer.png "SQL Server Obejct Explorer")
+6. Launchsettings auf "ISS Express setzten" siehe Screenshot unten:
+
+    ![alt text](./docs/pictures/ISSExpress.png "ISS Express")
+7. Anschliessend kann das Projekt gestartet werden -> Ctrl+F5
+9. Es kann sein dass noch pop-up bezüglich des Zertifikats der Webseite öffnen. Diese können beide akzeptiert werden. Diese pop-ups sehen folgendermassen aus:
+
+    ![alt text](./docs/pictures/TrustSllCertificate.png "TrustSllCertificate")
+    ![alt text](./docs/pictures/SafetyWarning.png "SafetyWarning")
+
+8. Nun sollte sich die API in einem neuen Browser-Tab öffnen. Dies sollte dann etwa folgendermassen aussehen:
+
+    ![alt text](./docs/pictures/Api.png "Preview API")
+
+
+### Frontend
+#### Prerequisite
+- [Node.js](https://nodejs.org/en)
+- NPM (Installation kann im CMD mit folgendem Command überprüft werden: ```npm -v```)
+- Angular (Installation kann im CMD mit folgendem Command überprüft werden: ```ng version```)
+- [Visual Studio Code](https://code.visualstudio.com/Download) installieren.
+
+#### How to setup the frontend Application
+1. Öffne das Projekt in Visual Studio Code: Visual Studio Code öffnen -> File -> Open Folder -> Ordner des geklonten Projektes öffnen und zum Ordner ```\4p-sansibar\frontend\credit-wizard``` 
+2. Öffne ein neues Terminal Fenster in Visual Studio Code: Terminal -> New Terminal
+3. Installiere die notwendigen Packages: Führe den Befehl ```npm install```. Dieser Command kann bis zu 60 Sekunden dauern.
+4. Amschliessend kann der Command ```ng serve --open``` ausgeführt werden.
+5. Nun sollte sich das Frontend in einem neuen Browser-Tab öffnen. Dies sollte dann etwa folgendermassen aussehen:
+
+    ![alt text](./docs/pictures/Sign-in-component.png "Frontend")
+
+## Initaildaten
+Damit die Applikation brauchbar ist, sind Standardmässig bereits Daten in den Tabellen vorhanden. Diese umfassen:
+- 1x Abschluss
+- 13x Module welche zum Abschluss gehören
+- 8x Semester welche zur Auswahl dienen
+- 2x Semesterzeitslot (FS / HS)
+- 2x Benutzerrollen (Aktuell wird nur die Rolle "User" verwendet)
+- 1x User
+- 2x Geplante Semester mit einigen Modulen
+- Daten in den Zwischentabellen
+
+Genau sind die erstellten Daten in dem File [ApplicationDbContext](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Models/ApplicationDbContext.cs) ersichtlich.
+
+## Useage
+Nachdem beide Projekte gestartet wurden, ist die Applikation lauffähig.
+Bevor die einzelnen Funktionalitäten zur Verfügung stehen muss sich der Benutzer auf der Applikation (Frontend) einloggen.
+
+Folgdene Anmeldedaten können verwendet werden (diese sind standardmässig in der Datenbank abgespeichert):
+    
+    E-Mail Adresse: hans.mustermann@email.ch
+    Passwort: Welcome$23
+
+ **Funktionalität**            | **URL**    | **Beschreibung**                                                                                                                                           
+-------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Login                         | /login     | Authentifizierung des Benutzers, damit er die Applikation bedienen kann                                                                                    
+ Übersicht Module              | /modules   | Alle Module welche in der Datenbank abgelegt sind (Diese sind theoretisch Studiengangübergreifend, es sind jedoch keinen weiteren Studiengänge hinterlegt) 
+ Übersicht Studiengänge        | /degree    | Alle hinterlegten Studiengänge in der Datenbank                                                                                                            
+ Übersicht verfügbare Semester | /semester  | Welche Semester können ausgewählt werdem                                                                                                                   
+ Dashboard                     | /dashboard | Herzstück der Applikation                                                                                                                                  
 
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
