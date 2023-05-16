@@ -28,3 +28,40 @@ Bereits vor dem Start der Realisierung haben wir als Team entschieden dass wir k
 Weiter wurde unsere Vision auch nicht verfolgt, Studiengänge von anderen Schulen anzubieten.
 
 Auch hier haben wir vor der Realisierung entschieden, dass standardmässig keine Studiengänge inkl. deren Modulen erfasst werden können. Diese sind direkt auf der Datenbank abgelegt. Dies wurde aufgrund des Zeitaufwandes so entschieden. Diese Entscheidung hat sich als passend erwiesen, da so viele weitere Komonenten wie auch API Schnittstellen nötig gewesen wären, was den Rahmen des Projektes einddeutig gesprängt hätte.
+
+# Arbeitsaufteilung
+In diesem Kapitel ist niedergeschrieben, wer bis jetzt welche Tätigkeiten übernommen hat. Dies kann sich im Verlauf des Projektes natürlich noch ändern.
+
+| Aufgabe                                     | Verantwortlich                        |
+| ------------------------------------------- | ------------------------------------- |
+| Präsentation                                | Lars / Niels                          |
+| Entwicklung Frontend                        | Lars / Roman                          |
+| Entwicklung Backend                         | Lars / Roman                          |
+| Datenmodell                                 | Lars / Roman                          |
+| Nutzeranalyse                               | Mikael / Janik / Niels                |
+| Problemanalyse / Erfassen der Anforderungen | Mikael / Janik / Niels                |
+| Analyse Ist-Zustand                         | Mikael / Janik / Niels                |
+| Organisation der Arbeiten                   | Mikael / Janik / Niels / Lars / Roman |
+|                                             |                                       |
+
+Während der Sprint gab es oft nur kurze Wartezeiten. Unsere Gruppe teilte sich die Arbeit Modulübergreifend auf, sodass die Verantwortungen über die verschiedenen Module in diesem Semster aufgeteilt sind. So konnten wir unsere Stärken optimal ausspielen.
+
+Durch die Arbeitsaufteilung arbeiteten nur selten mehr als 2-3 Personen direkt für dieses Modul. So konnen Überschneidungen und Wartezeiten minimiert werden. Teilweise musste für die Sprint Reviews Content noch spontan angepasst werden, da noch ein Feature kurzfristig fertiggestellt wurde.
+
+# Lessons Learned
+Dieses Modul basiert auf einer erfolgreichen Teamzusammenarbeit. Alles in allem können wir voraussichtlich alle unsere Ziele für die Applikation erreichen. Dennoch haben wir einige Dinge welche wir das nächste Mal anders machen würden. Diese sind in diesem Kapitel aufgeführt.
+
+## Technologieauswahl
+Wir haben uns als Gruppe entschieden im Backend nicht aus Strapi sondern auf eine .Net Web API zu setzten. Dies aus dem Grund das Lars bereits mehrjährige Erfahrungen im .Net umfeld sammeln konnte. Daher war auch er im Lead für die Entwicklung der API.
+
+So hatten wir den Vorteil dass wir eine API genau nach unseren Wünschen und Anforderungen entwickeln können. Diese erleichtere uns das Handling mit den Daten und der Businesslogik um ein vielfaches.
+
+Dennoch würden wir beim nächsten Mal auf die empfohlenen Technologien setzen, denn uns wurde erst bei der Realisierung klar wurde, dass wir einen viel grösseren Mehraufwand betreiben müssen. Denn gemäss Aufgabestellung müssen wir lediglich ein Frontent & eine Stapi Api erstellen und konnfigurieren. Stattdessen haben wir zwei verschiedene Systeme welche geplant und entwickelt werden mussten. Zudem musste noch eine Datenbank geplant und erstellt werden, damit die Daten effizient und konsistent abgespeichert werden können. 
+
+Dennoch haben wir die Entwicklung im Erfolgreich gemeistert. Dies ist jeodch ein wichtiges Learning für kommende Projekte.
+
+## Adaptierung der Erwartungen
+Zu Beginn waren wir sehr euphorisch, dass wir eine neue innovative Applikation realisieren können, mit welcher wir unser Studium einfach und effiziert planen und überwachen können. Nachdem uns jedoch klar wurde was für einen Aufwand damit verbunden war, merkten wir schnell dass wir dies nicht alles neben allen anderen Modulen einfach so realisieren konnten. Wir wurden auf den Boden der Tatsachen zurückgeholt.
+
+Unser Learing: Zum Beginn nicht in einen Tunnelblick verfallen, sondern auch andere Einflussfaktoren wie Aufwände in anderen Modulen, Arbeiten vom Betrieb aus, etc. müssen bei der Planung von praktischen Projekten einberechnet werden. Ansonsten dort auf Berg von Arbeit welcher nur schwer beweltigt werden kann.
+Dennoch sind wir uns auch für Zukunft sicher dass wir uns ambitieuse Ziele setzen wollen, damit auch in Zukunft spannende und innovative Projekte entstehen.
