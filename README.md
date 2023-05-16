@@ -1,4 +1,7 @@
 # 4p-Sansibar
+## Verwendungszweck
+Durch den modularen Aufbau des CreditWizards soll jede*r Student*in sein/ihr Studium selbstständig planen und jederzeit einsehen können.
+
 ## Local Setup
 Unser Projekt basiert einerseits auf der .Net Web Api und einen Angular Frontend.
 In diesem Kapitel wird beschrieben wie die beinen Applikationen lokal aufgesetzt und gestartet werden können.
