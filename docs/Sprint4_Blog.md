@@ -1,3 +1,6 @@
+# Teamarbeit
+Wir haben uns in unserer Gruppe schnell zurecht gefunden, da wir bereits in anderen Modulen in ähnlicher konstellation gearbeitet haben. Über die vergangenen 10-12 Wochen haben wir uns ein abitioniertes Ziel gesetzt. In diesem Blogeintrag sprechen wir über unsere Zusammenarbeit, die Zeilerreichung und was wir nächstes Mal anders machen würden.
+
 # Zielerreichung
 Zu Beginn des Projektes wurden diverse Ziele definiert, welche für einen erfolgreichen Abschluss des Projektes erfüllt werden müssen. Diese sind im Dokument [Sprint1.docx](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/docs/Sprint1.docx) detailliert beschrieben.
 Untenstehend sind diese nochmals Aufgeführt. Zusätzlich ist mittels der Checkbox angegeben ob das Ziel Abgeschlossen ist oder nicht:
@@ -10,7 +13,7 @@ Zusätzlich wurden noch ein weiteres Ziel betreffend der Code Qualität hinzugef
 - [ ] Im Frontend enhält jede Komponente und jede Klasse inkl. dernen Methoden (ausgenommen OnInit()) welche zusätzlich erstellt wurden einen Kommentar über deren Verwendungszweck.
 - [x] Im .net Backend ist jede REST Schnittstelle, jeder Service und Erweiterungsklassen und Methoden im Code dokumentiert. 
 
-## Stellungsnahme
+## Stellungnahme
 Auf den ersten Blick sind aktuell fast alle Ziele bereits erreicht. Nur noch offen ist die Code Dokumenation im Frontend, welche noch nicht ganz zufriedenstellend ist. Ansonsten sind wir sehr zufrieden mit dem Ergebnis unserer Appliakation. Die Applikation ist einfach zu bedienen und ist viel besser herausgekommen als erwartet. Daher sind wir zuversichtlich das auch noch das letzte Ziel vor dem Final Pitch abgeschlossen werden kann.
 
 # Vorgenommene Anpassungen
