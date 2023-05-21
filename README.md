@@ -2,14 +2,13 @@
 Durch den modularen Aufbau des CreditWizards soll jede*r Student*in sein/ihr Studium selbstständig planen und jederzeit einsehen können.
 
 # Local Setup
-Unser Projekt basiert einerseits auf der .Net Web Api und einen Angular Frontend.
-In diesem Kapitel wird beschrieben wie die beinen Applikationen lokal aufgesetzt und gestartet werden können.
-**Wichtig**: Diese Dokumentation dient für das Setup auf einem Windows Gerät. Grundsätzlich sollte das Programm jedoch auch für andere Bertriebssysteme ausführbar sein, dort weicht die Installation und das Setup jedoch ein wenig ab.
+Unser Projekt basiert einerseits auf der .Net Web Api und einem Angular Frontend. In diesem Kapitel wird beschrieben wie die beiden Applikationen lokal aufgesetzt und gestartet werden können.
+
+**Wichtig**: Diese Dokumentation dient für das Setup auf einem Windows-Gerät. Grundsätzlich sollte das Programm jedoch auch für andere Betriebssysteme ausführbar sein, dort weicht die Installation und das Setup jedoch ein wenig ab.
 
 ## Projekt Klonen
 ### Prerequisite 
-- [git](https://git-scm.com/) muss installiert sein
-
+- [git](https://git-scm.com/) muss installiert sein.
 ### How to clone the project
 Als ersten muss das Projekt lokal geklont werden. in dieser Anleitung wird der vorgang mit via CMD Vorgenommen.
 1. CMD öffnen
@@ -20,7 +19,7 @@ Als ersten muss das Projekt lokal geklont werden. in dieser Anleitung wird der v
 
 ## Backend
 ### Prerequisite
-- [Visual Studio Community 2022](https://visualstudio.microsoft.com/de/downloads/) installieren. Dabei muss beachtet werden dass das Paket "ASP.NET und Webentwicklung mitinstalliert wird. Ansonsten kann das Projekt nicht gestartet werden.
+- [Visual Studio Community 2022](https://visualstudio.microsoft.com/de/downloads/) installieren. Dabei muss beachtet werden, dass das Paket "ASP.NET und Webentwicklung mitinstalliert wird. Ansonsten kann das Projekt nicht gestartet werden.
 
 ### How to setup the backend Application
 Anschliessend müsseen folgende Schritte durchgefüht werden:
@@ -31,14 +30,14 @@ Anschliessend müsseen folgende Schritte durchgefüht werden:
 5. (Optional) Prüfen ob die Datenbank erstellt wurde: 
     - "SQL Server Obejct Explorer" öffnen: View -> SQL Server Obejct Explorer
     - Navigiere: "(localdb)\MSSQLLocalDB" -> Databases
-    - Dort sollte nun die Datenbank "CreditWizard" sichbar sein. Siehe Screenshot:
+    - Dort sollte nun die Datenbank "CreditWizard" sichtbar sein. Siehe Screenshot:
     
         ![alt text](./docs/pictures/SqlServerObjectExplorer.png "SQL Server Obejct Explorer")
-6. Launchsettings auf "ISS Express setzten" siehe Screenshot unten:
+6. Launch Settings auf "ISS Express setzen" siehe Screenshot unten:
 
     ![alt text](./docs/pictures/ISSExpress.png "ISS Express")
 7. Anschliessend kann das Projekt gestartet werden -> Ctrl+F5
-9. Es kann sein dass noch pop-up bezüglich des Zertifikats der Webseite öffnen. Diese können beide akzeptiert werden. Diese pop-ups sehen folgendermassen aus:
+9. Es kann sein, dass noch pop-ups bezüglich des Zertifikats der Webseite öffnen. Diese können beide akzeptiert werden. Diese pop-ups sehen folgendermassen aus:
 
     ![alt text](./docs/pictures/TrustSllCertificate.png "TrustSllCertificate")
     ![alt text](./docs/pictures/SafetyWarning.png "SafetyWarning")
@@ -56,16 +55,16 @@ Anschliessend müsseen folgende Schritte durchgefüht werden:
 - [Visual Studio Code](https://code.visualstudio.com/Download) installieren.
 
 ### How to setup the frontend Application
-1. Öffne das Projekt in Visual Studio Code: Visual Studio Code öffnen -> File -> Open Folder -> Ordner des geklonten Projektes öffnen und zum Ordner ```\4p-sansibar\frontend\credit-wizard``` 
+1. Öffne das Projekt in Visual Studio Code: Visual Studio Code öffnen -> File -> Open Folder -> Ordner des geklonten Projektes öffnen und zum Ordner ```\4p-sansibar\frontend\credit-wizard``` navigieren.
 2. Öffne ein neues Terminal Fenster in Visual Studio Code: Terminal -> New Terminal
-3. Installiere die notwendigen Packages: Führe den Befehl ```npm install```. Dieser Command kann bis zu 60 Sekunden dauern.
-4. Amschliessend kann der Command ```ng serve --open``` ausgeführt werden.
+3. Installiere die notwendigen Packages: Führe den Befehl ```npm install``` aus. Dieser Command kann bis zu 60 Sekunden dauern.
+4. Anschliessend kann der Command ```ng serve --open``` ausgeführt werden.
 5. Nun sollte sich das Frontend in einem neuen Browser-Tab öffnen. Dies sollte dann etwa folgendermassen aussehen:
 
     ![alt text](./docs/pictures/Sign-in-component.png "Frontend")
 
 # Initaildaten
-Damit die Applikation brauchbar ist, sind Standardmässig bereits Daten in den Tabellen vorhanden. Diese umfassen:
+Damit die Applikation brauchbar ist, sind standardmässig bereits Daten in den Tabellen vorhanden. Diese umfassen:
 - 1x Abschluss
 - 13x Module welche zum Abschluss gehören
 - 8x Semester welche zur Auswahl dienen
@@ -78,28 +77,26 @@ Damit die Applikation brauchbar ist, sind Standardmässig bereits Daten in den T
 Genau sind die erstellten Daten in dem File [ApplicationDbContext](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/backend/credit-wizard-api/credit-wizard-api/Models/ApplicationDbContext.cs) ersichtlich.
 
 # Useage
-Nachdem beide Projekte gestartet wurden, ist die Applikation lauffähig.
-Bevor die einzelnen Funktionalitäten zur Verfügung stehen muss sich der Benutzer auf der Applikation (Frontend) einloggen.
+Nachdem beide Projekte gestartet wurden, ist die Applikation lauffähig. Bevor die einzelnen Funktionalitäten zur Verfügung stehen muss sich der Benutzer auf der Applikation (Frontend) einloggen.
 
-Folgdene Anmeldedaten können verwendet werden (diese sind standardmässig in der Datenbank abgespeichert):
-    
+Folgende Anmeldedaten können verwendet werden (diese sind standardmässig in der Datenbank abgespeichert):
+
     E-Mail Adresse: hans.mustermann@email.ch
     Passwort: Welcome$23
 
  **Funktionalität**            | **URL**    | **Beschreibung**                                                                                                                                           
 -------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------
  Login                         | /login     | Authentifizierung des Benutzers, damit er die Applikation bedienen kann                                                                                    
- Übersicht Module              | /modules   | Alle Module welche in der Datenbank abgelegt sind (Diese sind theoretisch Studiengangübergreifend, es sind jedoch keinen weiteren Studiengänge hinterlegt) 
+ Übersicht Module              | /modules   | Alle Module welche in der Datenbank abgelegt sind (Diese sind theoretisch studiengangübergreifend, es sind jedoch keinen weiteren Studiengänge hinterlegt)
  Übersicht Studiengänge        | /degree    | Alle hinterlegten Studiengänge in der Datenbank                                                                                                            
  Übersicht verfügbare Semester | /semester  | Welche Semester können ausgewählt werdem                                                                                                                   
  Dashboard                     | /dashboard | Herzstück der Applikation                                                                                                                                  
 
 
 # 3rd-Party Libraries
-Sowohl im Angular Frontend wie auch im Backend wurden diverse Thrid-Party-Libraries verwendet. Diese sind in diesem Kapital dokumentiert.
+Sowohl im Angular Frontend wie auch im Backend wurden diverse Third-Party-Libraries verwendet. Diese sind in diesem Kapital dokumentiert.
 
-Wird ein neues Projekt generiert so sind viele der Packages bereits automatisch installiert. Damit die Liste vollständig ist, wurden auch diese hier aufgeführt, da die definition einer Thrid-Party-Library von Unternehmen zu unternehmen unterschiedlich sein kann.
-Die Manuell hinzugefügten Libraries sind dabei **Fett** markiert
+Wird ein neues Projekt generiert so sind viele der Packages bereits automatisch installiert. Damit die Liste vollständig ist, wurden auch diese hier aufgeführt, da die Definition einer Third-Party-Library von Unternehmen zu Unternehmen unterschiedlich sein kann. Die manuell hinzugefügten Libraries sind dabei **Fett** markiert.
 ## .Net Api
 
 - **[AutoMapper](https://www.nuget.org/packages/AutoMapper)**
