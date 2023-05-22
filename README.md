@@ -19,7 +19,7 @@ Als ersten muss das Projekt lokal geklont werden. in dieser Anleitung wird der v
 
 ## Backend
 ### Prerequisite
-- [Visual Studio Community 2022](https://visualstudio.microsoft.com/de/downloads/) installieren. Dabei muss beachtet werden, dass das Paket "ASP.NET und Webentwicklung mitinstalliert wird. Ansonsten kann das Projekt nicht gestartet werden.
+- [Visual Studio Community 2022](https://visualstudio.microsoft.com/de/downloads/) installieren. Dabei muss beachtet werden, dass das Paket "ASP.NET und Webentwicklung" & ".Net desktop development" mitinstalliert wird. Die Installationsgrösse beträgt ca. 9GB. Ansonsten kann das Projekt nicht gestartet werden.
 
 ### How to setup the backend Application
 Anschliessend müsseen folgende Schritte durchgefüht werden:
@@ -36,7 +36,7 @@ Anschliessend müsseen folgende Schritte durchgefüht werden:
 6. Launch Settings auf "ISS Express setzen" siehe Screenshot unten:
 
     ![alt text](./docs/pictures/ISSExpress.png "ISS Express")
-7. Anschliessend kann das Projekt gestartet werden -> Ctrl+F5
+7. Anschliessend kann das Projekt gestartet werden -> Ctrl+F5 (Ohne Debugger starten)
 9. Es kann sein, dass noch pop-ups bezüglich des Zertifikats der Webseite öffnen. Diese können beide akzeptiert werden. Diese pop-ups sehen folgendermassen aus:
 
     ![alt text](./docs/pictures/TrustSllCertificate.png "TrustSllCertificate")
@@ -51,7 +51,7 @@ Anschliessend müsseen folgende Schritte durchgefüht werden:
 ### Prerequisite
 - [Node.js](https://nodejs.org/en)
 - NPM (Installation kann im CMD mit folgendem Command überprüft werden: ```npm -v```)
-- Angular (Installation kann im CMD mit folgendem Command überprüft werden: ```ng version```)
+- Angular (Installation kann im CMD mit folgendem Command überprüft werden: ```ng version```, ansonsten [siehe](https://angular.io/guide/setup-local#install-the-angular-cli))
 - [Visual Studio Code](https://code.visualstudio.com/Download) installieren.
 
 ### How to setup the frontend Application
@@ -132,6 +132,8 @@ Wird ein neues Projekt generiert so sind viele der Packages bereits automatisch 
 - [zone.js](https://www.npmjs.com/package/zone.js)
 
 # Fehlerbehandlung
+## Zertifikatsfehler beim Starten der API
+Dies kann mehrere Ursachen haben. Um das Problem zu beheben, kann entweder das Zertifikat importiert werden. Oder der aktuell verwendete Browser ist nicht aktuell.
 ## Verwendete BaseUrl im Frontend
 Bei unserer Installation vom .Net Backend läuft die Applikation auf folgende Localhost adresse: "https://localhost:44379".
 Falls das Backend jedoch unter einem anderen Port gestartet wird, muss im Frontend im File [environments.ts](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/environments/environment.ts) die baseUrl dementsprechend angepasst werden.
