@@ -130,3 +130,8 @@ Wird ein neues Projekt generiert so sind viele der Packages bereits automatisch 
 - **[rxjs](https://www.npmjs.com/package/rxjs)**
 - [tslib](https://www.npmjs.com/package/tslib)
 - [zone.js](https://www.npmjs.com/package/zone.js)
+
+# Fehlerbehandlung
+## Verwendete BaseUrl im Frontend
+Bei unserer Installation vom .Net Backend läuft die Applikation auf folgende Localhost adresse: "https://localhost:44379".
+Falls das Backend jedoch unter einem anderen Port gestartet wird, muss im Frontend im File [environments.ts](https://gitlab.ti.bfh.ch/dsl-student-projects/wseg-23-fs/4p-sansibar/-/blob/main/frontend/credit-wizard/src/environments/environment.ts) die baseUrl dementsprechend angepasst werden.
