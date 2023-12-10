@@ -2,6 +2,10 @@
 
 public class EntityNotFoundException : Exception
 {
+    public EntityNotFoundException()
+    {
+        
+    }
     public EntityNotFoundException(string entityName, string property, string key) : base($"{entityName} with {property} '{key}' not found")
     {
     }

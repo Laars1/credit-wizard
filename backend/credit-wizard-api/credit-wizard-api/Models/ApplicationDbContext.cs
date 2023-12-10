@@ -6,19 +6,23 @@ namespace credit_wizard_api.Models
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
+        public ApplicationDbContext()
+        {
+            
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
 
-        public DbSet<Modul> Moduls { get; set; }
-        public DbSet<Degree> Degrees { get; set; }
-        public DbSet<DegreeModul> DegreeModuls { get; set; }
-        public DbSet<Semester> Semesters { get; set; }
-        public DbSet<SemesterPlanner> SemesterPlanners { get; set; }
-        public DbSet<SemesterPlannerModul> SemesterPlannerModuls { get; set; }
-        public DbSet<SemesterTimeSlot> SemesterTimeSlots { get; set; }
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<Modul> Moduls { get; set; }
+        public virtual DbSet<Degree> Degrees { get; set; }
+        public virtual DbSet<DegreeModul> DegreeModuls { get; set; }
+        public virtual DbSet<Semester> Semesters { get; set; }
+        public virtual DbSet<SemesterPlanner> SemesterPlanners { get; set; }
+        public virtual DbSet<SemesterPlannerModul> SemesterPlannerModuls { get; set; }
+        public virtual DbSet<SemesterTimeSlot> SemesterTimeSlots { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -83,7 +87,7 @@ namespace credit_wizard_api.Models
             };
 
             var passwordHasher = new PasswordHasher<User>();
-            user.PasswordHash = passwordHasher.HashPassword(user, "Welcome$23");
+            user.PasswordHash = passwordHasher.HashPassword(user, "Welcome23");
             builder.Entity<User>().HasData(user);
 
             builder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
