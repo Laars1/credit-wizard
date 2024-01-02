@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "credit-wizard-api", "credit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A930491F-557E-444C-8A57-0DB7EF79BF5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "credit-wizard-api.Tests.Component", "tests\credit-wizard-api.Tests.Component\credit-wizard-api.Tests.Component.csproj", "{4E69D21B-D6D7-46CA-A170-9EB6E2BC4D21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "credit-wizard-api.Tests.Component", "tests\credit-wizard-api.Tests.Component\credit-wizard-api.Tests.Component.csproj", "{4E69D21B-D6D7-46CA-A170-9EB6E2BC4D21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

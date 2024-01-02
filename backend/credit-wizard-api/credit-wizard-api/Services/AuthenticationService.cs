@@ -48,7 +48,8 @@ namespace credit_wizard_api.Services
 
         public async Task<bool> CheckPasswordAsync(User user, string password)
         {
-            return await _userManager.CheckPasswordAsync(user, password);
+            var result =  await _userManager.CheckPasswordAsync(user, password);
+            return result;
         }
     }
 }

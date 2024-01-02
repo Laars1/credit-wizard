@@ -23,6 +23,7 @@
     </PackageReference>
     <PackageReference Include="NUnitTestAdapter" Version="2.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="xunit" Version="2.6.4" />
   </ItemGroup>
 
 </Project>
